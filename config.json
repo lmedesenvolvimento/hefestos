@@ -1,0 +1,29 @@
+{
+    "nome": "Aula I Hefestos",
+    "tema":"css/tema.css",
+    "academico":{
+        "disciplina":"Nome da Disciplina",
+        "professor": "Lobato Pipe"
+    },
+    "topicos": [
+        {
+            "nome": "Tópico I Hefestos",
+            "data": "01.html"
+        },
+        {
+            "nome": "Tópico II Hefestos",
+            "data": "02.html"
+        },
+        {
+            "nome": "Tópico III Hefestos",
+            "data": "03.html"
+        },
+        {
+            "nome": "Tópico IV Hefestos",
+            "data": "04.html"
+        }
+    ],
+    "imported_styles":[
+        "custom.css"
+    ]
+}
