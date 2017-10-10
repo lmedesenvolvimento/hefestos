@@ -1,0 +1,3 @@
+var GLOBAL = {
+    manifest: null
+}

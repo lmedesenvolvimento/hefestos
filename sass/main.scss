@@ -1,0 +1,62 @@
+$grid-columns: 4;
+
+@import "../node_modules/flexboxgrid-sass/flexboxgrid.scss";
+@import "base/base";
+
+// Layout
+body{
+  padding: 100px 0px;
+  margin: 0px;
+  line-height: $line-height;
+}
+
+main{
+  display: block;
+  margin: 0;
+  padding: 0;
+  &.ng-enter {
+      /* transition on enter for .5s */
+      transition: .5s;
+
+      /* start with opacity 0 (invisible) */
+      opacity: 0;
+  }
+
+  /* end 'enter' transition */
+  &.ng-enter-active {
+      /* end with opacity 1 (fade in) */
+      opacity: 1;
+  }
+}
+
+.linha{
+  @extend .row;
+}
+
+.container{
+  @extend .wrapper;
+}
+
+
+// Navigation
+nav{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  ul, li{
+    list-style: none;
+    padding-left: 0px;
+  }
+  ul{
+    @extend .row;
+    @extend .middle-xs;
+    @extend .center-xs;
+    width: 100%;
+    height: $navigation-heigth;
+    li{
+      margin: 0px 15px;
+    }
+  }
+}

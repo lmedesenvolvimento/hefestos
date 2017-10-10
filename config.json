@@ -8,19 +8,20 @@
     "topicos": [
         {
             "nome": "Tópico I Hefestos",
-            "data": "01.html"
+            "local": "topicos/01.html",
+            "default": true
         },
         {
             "nome": "Tópico II Hefestos",
-            "data": "02.html"
+            "local": "topicos/02.html"
         },
         {
             "nome": "Tópico III Hefestos",
-            "data": "03.html"
+            "local": "topicos/03.html"
         },
         {
             "nome": "Tópico IV Hefestos",
-            "data": "04.html"
+            "local": "topicos/04.html"
         }
     ],
     "imported_styles":[

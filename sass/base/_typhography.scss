@@ -1,0 +1,16 @@
+body{
+  @include roboto;
+  font-size: 14pt;
+  color: $text-color;
+}
+
+p{
+  @include roboto;
+  margin: 24px 0px;
+}
+
+h1, h2, h3, h4{
+  @include montserrat;
+  color: $text-title-color;
+  margin: 0.8rem 0px;
+}
