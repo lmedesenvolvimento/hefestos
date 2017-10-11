@@ -28,6 +28,7 @@ gulp.task('javascript', () => {
     return gulp.src([
         './scripts/index.js',
         './scripts/components/**/*.js',
+        './scripts/controllers/**/*.js',
     ])
     .pipe(concat('main.js'))
     .pipe(gulp.dest('./js/'));

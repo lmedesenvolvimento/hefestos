@@ -1,0 +1,10 @@
+uab-pagination{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    a.pure-menu-link{
+        &:active, &:hover, &:focus, &:visited{
+            background-color: transparent !important;
+        }
+    }
+}

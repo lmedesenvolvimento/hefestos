@@ -11,6 +11,15 @@ p{
 
 h1, h2, h3, h4{
   @include montserrat;
-  color: $text-title-color;
+  color: $black;
   margin: 0.8rem 0px;
+}
+
+.caption{
+  font-size: 60%;
+  color: $secondary-text;
+}
+
+.roboto{
+  @include roboto;
 }

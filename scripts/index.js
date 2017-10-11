@@ -4,13 +4,12 @@ var ApplicationConfig = function($stateProvider, $urlRouterProvider){
 
 ApplicationConfig.$inject = ['$stateProvider','$urlRouterProvider']
 
-var ApplicationRun = function($rootScope, $templateCache){
+var ApplicationRun = function($rootScope, DrawerMenu){
     $rootScope.$global = GLOBAL
-
-    $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $templateCache));
+    $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $rootScope, DrawerMenu));
 }
 
-ApplicationRun.$inject = ['$rootScope', '$templateCache']
+ApplicationRun.$inject = ['$rootScope', 'DrawerMenu']
 
 angular.module('application', [
   'ngAnimate',

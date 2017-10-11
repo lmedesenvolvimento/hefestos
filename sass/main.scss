@@ -1,7 +1,12 @@
 $grid-columns: 4;
 
 @import "../node_modules/flexboxgrid-sass/flexboxgrid.scss";
+@import "../node_modules/purecss-sass/vendor/assets/stylesheets/purecss";
+
 @import "base/base";
+
+@import "components/uab-drawer-menu";
+@import "components/uab-pagination";
 
 // Layout
 body{
@@ -35,28 +40,4 @@ main{
 
 .container{
   @extend .wrapper;
-}
-
-
-// Navigation
-nav{
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  ul, li{
-    list-style: none;
-    padding-left: 0px;
-  }
-  ul{
-    @extend .row;
-    @extend .middle-xs;
-    @extend .center-xs;
-    width: 100%;
-    height: $navigation-heigth;
-    li{
-      margin: 0px 15px;
-    }
-  }
 }

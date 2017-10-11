@@ -1,6 +1,13 @@
 $navigation-heigth: 52px;
 
-$text-title-color: #000;
-$text-color: #222;
+$bg-color: #F6EDC1;
 
-$line-height: 1.63;
+$black: #000;
+$text-color: #222;
+$secondary-text: transparentize($black, 0.54);
+$disabled-text:  transparentize($black, 0.72);
+
+$white: #fff;
+$ligth-grey: #eee;
+
+$line-height: 1.55;

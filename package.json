@@ -15,6 +15,7 @@
     "flexboxgrid-sass": "^8.0.5",
     "gulp-concat": "^2.6.1",
     "jquery": "^3.2.1",
+    "purecss-sass": "^1.0.0",
     "string": "^3.3.3"
   },
   "devDependencies": {

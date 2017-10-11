@@ -5,8 +5,9 @@ var Loader = {
     onLoadManifest: function(stateProvider, urlRouterProvider, manifest){
         GLOBAL.manifest = manifest;
         
-        manifest.topicos.forEach(function(t){
+        manifest.topicos.forEach(function(t, position){
             t.slug = S(t.nome).slugify().s;
+            t.position = position + 1;
             
             stateProvider.state({
                 name: t.slug,
@@ -26,7 +27,8 @@ var Loader = {
     }
 }
 var Router = {
-    onStateChangeStart: function(templateCache, event, toState, toParams, fromState, fromParams){
-        GLOBAL.current_topic = _.find(GLOBAL.manifest.topicos, {slug: toState.name})
+    onStateChangeStart: function(root, DrawerMenu, event, toState, toParams, fromState, fromParams){
+        GLOBAL.current_topic = _.find(GLOBAL.manifest.topicos, {slug: toState.name})        
+        return DrawerMenu.cancel();
     }
 };
