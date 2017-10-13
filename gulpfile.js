@@ -2,7 +2,8 @@ const gulp = require('gulp');
 const watch = require('gulp-watch');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
-const concat = require('gulp-concat');
+const concat = require('gulp-concat');  
+const webserver = require('gulp-webserver');
 
 gulp.task('vendor', () => {
     return gulp.src([
@@ -63,5 +64,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', () => {
+    gulp.start('sass');
+    gulp.start('scripts');
     gulp.start('watch');
 });

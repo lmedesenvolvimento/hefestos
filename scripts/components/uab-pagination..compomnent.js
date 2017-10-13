@@ -1,21 +1,46 @@
-var uabPaginationCtrl = function($rootScope){
+var uabPaginationCtrl = function($rootScope, $timeout){
     var self = this;
 
 
     self.next = function(){
-        var hasNext = _.indexOf($rootScope.$global.manifest.topicos, ($rootScope.$global.current_topic.position + 1));
-        console.log(hasNext, $rootScope.$global.current_topic, $rootScope.$global.manifest.topicos)
-        if(hasNext <= 0){
-            return false
-        } else{
-            return true;
-        }
+        var currentPosition  = $rootScope.$global.current_topic.position + 1;
+        var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
+        
+        self.nextTopic = hasIndex;
+
+        return angular.isDefined(hasIndex) ? true : false;
     }
+
+    self.prev = function(){
+        var currentPosition  = $rootScope.$global.current_topic.position - 1;
+        var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
+
+        self.prevTopic = hasIndex;
+
+        return angular.isDefined(hasIndex) ? true : false;
+    }
+
+    self.reset = function(){
+        self.nextTopic = null;
+        self.prevTopic = null;
+    }
+
+    self.$onInit = function(){        
+        self.reset();
+        $timeout(angular.bind(this, self.next));
+        $timeout(angular.bind(this, self.prev));
+    }
+    
+    $rootScope.$on("$stateChangeStart", function(event){
+        self.reset();
+        $timeout(angular.bind(this, self.next));
+        $timeout(angular.bind(this, self.prev));
+    });
 
     return self;
 }
 
-uabPaginationCtrl.$inject = ['$rootScope']
+uabPaginationCtrl.$inject = ['$rootScope','$timeout']
 
 angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,

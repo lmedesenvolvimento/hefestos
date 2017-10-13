@@ -1,0 +1,31 @@
+body > header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: $navigation-height;
+    width: 100%;
+    background: $bg-color;    
+    > .container{        
+        height: $navigation-height;
+        box-shadow: 0px 12px 24px -12px transparentize($color: $text-color, $amount: 0.8);
+        nav{
+            display: flex;
+            align-content: center;
+            height: $navigation-height;
+        }
+    }
+    .brand{
+        @extend .dalek;
+        margin: 0px;
+        font-size: 24px;
+        line-height: $navigation-height;
+        color: transparentize($color: $text-color, $amount: 0.5);
+        margin-left: 8px;
+    }
+    .toggle-menu{
+        .icon{
+            font-size: 24px;
+        }
+        color: transparentize($color: $text-color, $amount: 0.15);
+    }
+}

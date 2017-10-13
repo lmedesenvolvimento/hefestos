@@ -19,24 +19,49 @@ angular.module('application', [
     .config(ApplicationConfig)
     .run(ApplicationRun)
 
-var uabPaginationCtrl = function($rootScope){
+var uabPaginationCtrl = function($rootScope, $timeout){
     var self = this;
 
 
     self.next = function(){
-        var hasNext = _.indexOf($rootScope.$global.manifest.topicos, ($rootScope.$global.current_topic.position + 1));
-        console.log(hasNext, $rootScope.$global.current_topic, $rootScope.$global.manifest.topicos)
-        if(hasNext <= 0){
-            return false
-        } else{
-            return true;
-        }
+        var currentPosition  = $rootScope.$global.current_topic.position + 1;
+        var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
+        
+        self.nextTopic = hasIndex;
+
+        return angular.isDefined(hasIndex) ? true : false;
     }
+
+    self.prev = function(){
+        var currentPosition  = $rootScope.$global.current_topic.position - 1;
+        var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
+
+        self.prevTopic = hasIndex;
+
+        return angular.isDefined(hasIndex) ? true : false;
+    }
+
+    self.reset = function(){
+        self.nextTopic = null;
+        self.prevTopic = null;
+    }
+
+    self.$onInit = function(){        
+        self.reset();
+        $timeout(angular.bind(this, self.next));
+        $timeout(angular.bind(this, self.prev));
+    }
+    
+    $rootScope.$on("$stateChangeStart", function(event){
+        self.reset();
+        $timeout(angular.bind(this, self.next));
+        $timeout(angular.bind(this, self.prev));
+    });
 
     return self;
 }
 
-uabPaginationCtrl.$inject = ['$rootScope']
+uabPaginationCtrl.$inject = ['$rootScope','$timeout']
 
 angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
@@ -45,7 +70,7 @@ angular.module("application").component("uabPagination",{
 angular.module('application').component('uabTopico',{
   templateUrl: "templates/uab-topico-component"
 });
-
+  
 var DELAY = 500;
 
 var Backdrop = function($timeout){
@@ -66,16 +91,23 @@ var Backdrop = function($timeout){
         },
         close: function(){
             $timeout(angular.bind(this, this.unmount), DELAY);
-            this.element.removeClass("visible");
+            this.hide();
             return this.onClose();
         },
         bindEvents: function(){
-            this.element.on('click', angular.bind(this, this.close))
+            this.element.on('click', angular.bind(this, this.close));
+        },
+        show: function(){
+            console.log("AQUI", this.element)
+            this.element.addClass('visible');
+        },
+        hide: function(){
+            this.element.removeClass('visible');
         },
         mount: function(){                 
+            $timeout(angular.bind(this, this.show));
             this.element = angular.element(this.template);
             this.body.append(this.element);
-            this.element.delay(100).addClass('visible');
         },
         unmount: function(){
             if(this.element) this.element.remove();

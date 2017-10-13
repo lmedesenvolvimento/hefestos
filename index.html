@@ -8,12 +8,21 @@
     <link rel="stylesheet" href="css/main.css" type="text/css" media="screen"/>
 </head>
 <body ng-controller="ApplicationCtrl as app">
+  <header>
+    <div class="container">
+      <nav class="container-fluid">
+        <button class="pure-button pure-button-light toggle-menu" ng-click="app.toggleMenu()">
+          <i class="icon icon-menu"></i>
+        </button>
+        <h2 class="brand">Hefestos</h2>
+      </nav>
+    </div>
+  </header>
   <div class="container">
     <div class="container-fluid">
       <uab-drawer-menu></uab-drawer-menu>
       <uab-topico></uab-topico>
       <main ui-view></main>
-      <button ng-click="app.toggleMenu()">Toogle</button>
       <uab-pagination></uab-pagination>
     </div>
   </div>

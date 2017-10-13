@@ -18,16 +18,23 @@ var Backdrop = function($timeout){
         },
         close: function(){
             $timeout(angular.bind(this, this.unmount), DELAY);
-            this.element.removeClass("visible");
+            this.hide();
             return this.onClose();
         },
         bindEvents: function(){
-            this.element.on('click', angular.bind(this, this.close))
+            this.element.on('click', angular.bind(this, this.close));
+        },
+        show: function(){
+            console.log("AQUI", this.element)
+            this.element.addClass('visible');
+        },
+        hide: function(){
+            this.element.removeClass('visible');
         },
         mount: function(){                 
+            $timeout(angular.bind(this, this.show));
             this.element = angular.element(this.template);
             this.body.append(this.element);
-            this.element.delay(100).addClass('visible');
         },
         unmount: function(){
             if(this.element) this.element.remove();

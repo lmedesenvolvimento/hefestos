@@ -1,8 +1,16 @@
 <nav>
     <div class="pure-menu pure-menu-horizontal">
         <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link" ng-if="$ctrl.next()">Anterior</a></li>
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Próximo</a></li>
+            <li class="pure-menu-item" ng-if="$ctrl.prevTopic">
+                <a ui-sref="{{$ctrl.prevTopic.slug}}" class="pure-menu-link">
+                    Anterior
+                </a>
+            </li>
+            <li class="pure-menu-item" ng-if="$ctrl.nextTopic">
+                <a ui-sref="{{$ctrl.nextTopic.slug}}" class="pure-menu-link">
+                    Próximo
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

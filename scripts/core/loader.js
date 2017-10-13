@@ -4,7 +4,7 @@ var Loader = {
         
         manifest.topicos.forEach(function(t, position){
             t.slug = S(t.nome).slugify().s;
-            t.position = position + 1;
+            t.position = position;
             
             stateProvider.state({
                 name: t.slug,
