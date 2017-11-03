@@ -2381,16 +2381,30 @@ body {
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 14pt;
-  color: #222; }
+  color: #222;
+  line-height: 1.66; }
 
 p {
   font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
   margin: 24px 0px; }
 
 h1, h2, h3, h4 {
   font-family: 'Montserrat', sans-serif;
   color: #000;
   margin: 0.8rem 0px; }
+
+h1 {
+  font-size: 3rem; }
+
+h2 {
+  font-size: 2rem; }
+
+h3 {
+  font-size: 1.6rem; }
+
+h3 {
+  font-size: 1.4rem; }
 
 .caption {
   font-size: 60%;

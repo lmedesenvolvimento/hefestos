@@ -7,10 +7,12 @@ body{
   @include roboto;
   font-size: 14pt;
   color: $text-color;
+  line-height: 1.66;
 }
 
 p{
   @include roboto;
+  font-size: 1.25rem;
   margin: 24px 0px;
 }
 
@@ -18,6 +20,22 @@ h1, h2, h3, h4{
   @include montserrat;
   color: $black;
   margin: 0.8rem 0px;
+}
+
+h1{
+  font-size: 3rem;
+}
+
+h2{
+  font-size: 2rem;
+}
+
+h3{
+  font-size: 1.6rem;
+}
+
+h3{
+  font-size: 1.4rem;
 }
 
 .caption{
