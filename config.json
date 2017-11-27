@@ -1,29 +1,33 @@
 {
-    "nome": "Aula I Hefestos",
+    "nome": "Aula I",
     "tema":"css/tema.css",
     "academico":{
-        "disciplina":"Nome da Disciplina",
+        "disciplina":"Revolução Russa de 1917",
         "professor": "Lobato Pipe"
     },
     "topicos": [
         {
-            "nome": "Hefestos, Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.",
+            "nome": "Antecedentes",
             "local": "topicos/01.html",
             "default": true
         },
         {
-            "nome": "Hefestos, Cras ultricies ligula sed magna dictum porta.",
+            "nome": "A decadência da monarquia czarista",
             "local": "topicos/02.html"
         },
         {
-            "nome": "Hefestos, Nulla porttitor accumsan tincidunt.",
+            "nome": "O Partido Operário Social-Democrata Russo (POSDR)",
             "local": "topicos/03.html"
         },
         {
-            "nome": "Hefestos, Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "nome": "A Revolta de 1905: o ensaio para a revolução",
             "local": "topicos/04.html"
         }
     ],
+    "tema":{
+      "primario": "cyan",
+      "contraste": "yellow"
+    },
     "imported_styles":[
         "custom.css"
     ]

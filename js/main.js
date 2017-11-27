@@ -1,43 +1,43 @@
-var ApplicationConfig = function($stateProvider, $urlRouterProvider){
-    $.get("config.json").then(angular.bind(this, Loader.onLoadManifest, $stateProvider, $urlRouterProvider))
+var manifest = {};
+
+var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterProvider){
+  Loader.onLoadManifest($stateProvider, $mdThemingProvider, $urlRouterProvider, manifest)
 }
 
-ApplicationConfig.$inject = ['$stateProvider','$urlRouterProvider']
+ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterProvider']
 
-var ApplicationRun = function($rootScope, DrawerMenu){
+var ApplicationRun = function($rootScope){
     $rootScope.$global = GLOBAL
-
-    var speaks = [
-      "Olá,",
-      "qual é o seu nome?",
-      "site chibata",
-      "fabinho developer faz delação premiada, cita bishedson"
-    ]
-
-    var speaks_position = 0
-
-    function onspeakend(){
-      speaks_position++;
-
-      var text = speaks[speaks_position];
-
-      return angular.isDefined(text) ? tts.speak(text, onspeakend) : false
-    }
-
-    tts.speak(speaks[speaks_position], onspeakend);
-
-    $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $rootScope, DrawerMenu));
+    // Limpando fila leitor de aulas
+    tts.clear();
+    // Eventos de Rotas
+    $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $rootScope));
+    $rootScope.$on('$stateChangeSuccess', angular.bind(this, Router.onStateChangeSuccess, $rootScope));
 }
 
-ApplicationRun.$inject = ['$rootScope', 'DrawerMenu']
+ApplicationRun.$inject = ['$rootScope']
 
-angular.module('application', [
+var app = angular.module('application', [
   'ngAnimate',
+  'ngMaterial',
   'ui.router',
   'ui.router.state.events'
 ])
-  .config(ApplicationConfig)
-  .run(ApplicationRun)
+
+app.config(ApplicationConfig).run(ApplicationRun)
+
+$(window).on('load', function(){
+  $.get("config.json").then(function(response){
+    manifest = response;
+    angular.bootstrap(document, ['application']);
+  })
+})
+
+var uabHeader = {
+  templateUrl: "templates/uab-header"
+}
+
+angular.module('application').component('uabHeader', uabHeader)
 
 var uabPaginationCtrl = function($rootScope, $timeout){
     var self = this;
@@ -87,106 +87,15 @@ angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
     templateUrl: "templates/uab-pagination"
 })
-angular.module('application').component('uabTopico',{
-  templateUrl: "templates/uab-topico-component"
-});
-  
-var DELAY = 500;
-
-var Backdrop = function($timeout){
-    return {
-        element: null,
-        body: angular.element(document.body),
-        template: "<div class='uab-dropback'></div>",
-        toggle: function(){
-
-        },
-        open: function(onClose){
-            // bind externals events
-            this.onClose = onClose  
-            //  Create backdrop element
-            this.mount()            
-            // bind envents for backdrop element
-            return this.bindEvents(); 
-        },
-        close: function(){
-            $timeout(angular.bind(this, this.unmount), DELAY);
-            this.hide();
-            return this.onClose();
-        },
-        bindEvents: function(){
-            this.element.on('click', angular.bind(this, this.close));
-        },
-        show: function(){
-            console.log("AQUI", this.element)
-            this.element.addClass('visible');
-        },
-        hide: function(){
-            this.element.removeClass('visible');
-        },
-        mount: function(){                 
-            $timeout(angular.bind(this, this.show));
-            this.element = angular.element(this.template);
-            this.body.append(this.element);
-        },
-        unmount: function(){
-            if(this.element) this.element.remove();
-        },
-        onClose: null
-    };
-};
-
-Backdrop.$inject = ['$timeout']
-
-angular.module("application").factory("Backdrop", Backdrop);
-
-angular.module('application').component('uabDrawerMenu',{
-    templateUrl: "templates/uab-drawer-menu"
-});
-    
-var DrawerMenu = function($rootScope, Backdrop){
-    var self = {};
-
-    self.toggle = function(){
-        $rootScope.$drawerMenuActive = !$rootScope.$drawerMenuActive;
-        return $rootScope.$drawerMenuActive ? Backdrop.open(angular.bind(this, onCloseBackdrop)) : Backdrop.close()
-    }
-
-    self.open = function(){
-        $rootScope.$drawerMenuActive = true;
-        return Backdrop.open(angular.bind(this, onCloseBackdrop))
-    }
-    
-    self.cancel = function(){
-        try{            
-            $rootScope.$drawerMenuActive = false;
-            return Backdrop.close()
-        } catch(e){
-            return false
-        }
-    }
-
-    var onCloseBackdrop = function(){        
-        $rootScope.$drawerMenuActive = false;
-        return $rootScope.$apply()
-    }
-
-    return self;
-}
-
-DrawerMenu.$inject = ['$rootScope', 'Backdrop']
-
-angular.module("application").factory("DrawerMenu",  DrawerMenu)
-var ApplicationCtrl = function(DrawerMenu){
+var ApplicationCtrl = function(){
     var self = this;
 
     self.toggleMenu = function(){
-        DrawerMenu.toggle();
     };
 
     return self;
 };
 
-ApplicationCtrl.$inject = ['DrawerMenu']
+ApplicationCtrl.$inject = []
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);

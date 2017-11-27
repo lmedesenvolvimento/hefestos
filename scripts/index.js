@@ -1,40 +1,34 @@
-var ApplicationConfig = function($stateProvider, $urlRouterProvider){
-    $.get("config.json").then(angular.bind(this, Loader.onLoadManifest, $stateProvider, $urlRouterProvider))
+var manifest = {};
+
+var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterProvider){
+  Loader.onLoadManifest($stateProvider, $mdThemingProvider, $urlRouterProvider, manifest)
 }
 
-ApplicationConfig.$inject = ['$stateProvider','$urlRouterProvider']
+ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterProvider']
 
-var ApplicationRun = function($rootScope, DrawerMenu){
+var ApplicationRun = function($rootScope){
     $rootScope.$global = GLOBAL
-
-    var speaks = [
-      "Olá,",
-      "qual é o seu nome?",
-      "site chibata",
-      "fabinho developer faz delação premiada, cita bishedson"
-    ]
-
-    var speaks_position = 0
-
-    function onspeakend(){
-      speaks_position++;
-
-      var text = speaks[speaks_position];
-
-      return angular.isDefined(text) ? tts.speak(text, onspeakend) : false
-    }
-
-    tts.speak(speaks[speaks_position], onspeakend);
-
-    $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $rootScope, DrawerMenu));
+    // Limpando fila leitor de aulas
+    tts.clear();
+    // Eventos de Rotas
+    $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $rootScope));
+    $rootScope.$on('$stateChangeSuccess', angular.bind(this, Router.onStateChangeSuccess, $rootScope));
 }
 
-ApplicationRun.$inject = ['$rootScope', 'DrawerMenu']
+ApplicationRun.$inject = ['$rootScope']
 
-angular.module('application', [
+var app = angular.module('application', [
   'ngAnimate',
+  'ngMaterial',
   'ui.router',
   'ui.router.state.events'
 ])
-  .config(ApplicationConfig)
-  .run(ApplicationRun)
+
+app.config(ApplicationConfig).run(ApplicationRun)
+
+$(window).on('load', function(){
+  $.get("config.json").then(function(response){
+    manifest = response;
+    angular.bootstrap(document, ['application']);
+  })
+})

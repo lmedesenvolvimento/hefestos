@@ -1,0 +1,35 @@
+<md-toolbar>
+  <uab-header-titles flex>
+    <div class="subtitle">{{$root.$global.manifest.academico.disciplina}}</div>
+    <div class="title">
+      {{$root.$global.manifest.nome}} <br>
+      <small class="caption">{{$root.$global.current_topic.nome}}</small>
+    </div>
+  </uab-header-titles>
+
+  <div class="md-toolbar-tools">
+    <div class="container-fluid" flex>
+      <md-button class="md-icon-button">
+        <md-icon md-font-icon="icon-list"></md-icon>
+      </md-button>
+
+      <uab-pagination></uab-pagination>
+
+      <md-button class="md-icon-button">
+        <md-icon md-font-icon="icon-title"></md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button">
+        <md-icon md-font-icon="icon-title"></md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button">
+        <md-icon md-font-icon="icon-invert_colors"></md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button">
+        <md-icon md-font-icon="icon-invert_print"></md-icon>
+      </md-button>
+    </div>
+  </div>
+</md-toolbar>

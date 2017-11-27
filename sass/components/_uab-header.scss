@@ -1,0 +1,57 @@
+uab-header{
+  uab-header-titles{
+    @extend .container;
+    width: 100%;
+    padding: 24px 16px 24px;
+    color: white;
+    .subtitle, .caption{
+      font-size: 18pt;
+    }
+    .title{
+      font-size: 30pt;
+      line-height: 1.1;
+      small{
+        color: transparentize(white, 0.2) !important;
+      }
+    }
+  }
+  .md-toolbar-tools {
+    background-color: transparentize(white, 0.4);
+    > .container-fluid{
+      width: 100%;
+    }
+    .md-icon-button{
+      font-size: 32px;
+      line-height: 32px;
+      padding: 0px;
+      md-icon{
+        color: $text-color;
+      }
+    }
+  }
+}
+
+uab-header + md-content{
+  background-color: transparent;
+}
+
+
+@media (max-width: $screen-sm) {
+  uab-header {
+    uab-header-titles {
+      padding: 24px;
+    }
+    .md-toolbar-tools {
+      > .container-fluid{
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-left:  0px;
+        margin-right: 0px;
+      }
+      .md-icon-button{
+        font-size: 24px !important;
+        line-height: 24px;
+      }
+    }
+  }
+}

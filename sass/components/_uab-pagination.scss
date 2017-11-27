@@ -1,10 +1,11 @@
 uab-pagination{
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    a.pure-menu-link{
-        &:active, &:hover, &:focus, &:visited{
-            background-color: transparent !important;
-        }
-    }
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  a.md-button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

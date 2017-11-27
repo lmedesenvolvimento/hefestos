@@ -1,13 +1,12 @@
-var ApplicationCtrl = function(DrawerMenu){
+var ApplicationCtrl = function(){
     var self = this;
 
     self.toggleMenu = function(){
-        DrawerMenu.toggle();
     };
 
     return self;
 };
 
-ApplicationCtrl.$inject = ['DrawerMenu']
+ApplicationCtrl.$inject = []
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);
