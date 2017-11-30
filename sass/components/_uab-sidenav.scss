@@ -1,0 +1,39 @@
+$sidenav-max-width: 300px;
+
+uab-sidenav{
+  display: block;
+  md-sidenav{
+    width: $sidenav-max-width;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    ul.navigation{
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+      li{
+        width: 100%;
+        > .md-button {
+          display: flex;
+          text-align: left;
+          width: 100%;
+          border: 0px;
+          margin: 0px;
+          padding: 8px;
+          line-height: 1.70;
+          font-size: 12pt;
+          white-space: normal;
+          text-transform: none;
+          &.active{
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .navigation-header{
+      margin: 16px 4px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}

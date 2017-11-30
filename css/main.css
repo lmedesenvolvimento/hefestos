@@ -20250,7 +20250,7 @@ md-toolbar {
   .hide-print:not(.show-print):not(.show) {
     display: none !important; } }
 
-body {
+html, body {
   background: #f4f4f4; }
 
 .white-paper {
@@ -20262,7 +20262,7 @@ body {
 
 body {
   font-family: 'Roboto', sans-serif;
-  font-size: 14pt;
+  font-size: 18.5px;
   color: #222;
   line-height: 1.66; }
 
@@ -20317,6 +20317,12 @@ h3 {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+
+.icon-decrease:before {
+  content: "\e907"; }
+
+.icon-increase:before {
+  content: "\e910"; }
 
 .icon-3d_rotation:before {
   content: "\e84d"; }
@@ -22911,17 +22917,61 @@ uab-header .md-toolbar-tools {
 uab-header + md-content {
   background-color: transparent; }
 
-@media (max-width: 599px) {
+@media (max-width: 919px) {
   uab-header uab-header-titles {
     padding: 24px; }
-  uab-header .md-toolbar-tools > .container-fluid {
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-left: 0px;
-    margin-right: 0px; }
-  uab-header .md-toolbar-tools .md-icon-button {
-    font-size: 24px !important;
-    line-height: 24px; } }
+    uab-header uab-header-titles .subtitle, uab-header uab-header-titles .caption {
+      font-size: 14pt; }
+    uab-header uab-header-titles .title {
+      font-size: 24pt;
+      line-height: 0.8; }
+      uab-header uab-header-titles .title small {
+        color: rgba(255, 255, 255, 0.8) !important; }
+  uab-header .md-toolbar-tools {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden; }
+    uab-header .md-toolbar-tools > .container-fluid {
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-left: 0px;
+      margin-right: 0px; }
+    uab-header .md-toolbar-tools .md-icon-button {
+      font-size: 24px !important;
+      line-height: 24px; } }
+
+uab-sidenav {
+  display: block; }
+  uab-sidenav md-sidenav {
+    width: 300px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden; }
+    uab-sidenav md-sidenav ul.navigation {
+      width: 100%;
+      margin: 0px;
+      padding: 0px; }
+      uab-sidenav md-sidenav ul.navigation li {
+        width: 100%; }
+        uab-sidenav md-sidenav ul.navigation li > .md-button {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          text-align: left;
+          width: 100%;
+          border: 0px;
+          margin: 0px;
+          padding: 8px;
+          line-height: 1.70;
+          font-size: 12pt;
+          white-space: normal;
+          text-transform: none; }
+          uab-sidenav md-sidenav ul.navigation li > .md-button.active {
+            font-weight: bold; }
+    uab-sidenav md-sidenav .navigation-header {
+      margin: 16px 4px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #ddd; }
 
 uab-pagination {
   display: -webkit-inline-box;
@@ -22944,12 +22994,16 @@ uab-pagination {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center; }
+    uab-pagination a.md-button[disabled] md-icon {
+      color: rgba(0, 0, 0, 0.38) !important;
+      fill: rgba(0, 0, 0, 0.38) !important; }
+      uab-pagination a.md-button[disabled] md-icon:hover {
+        cursor: not-allowed; }
 
 main {
   display: block;
   margin: 0;
-  padding: 0;
-  /* end 'enter' transition */ }
+  padding: 0; }
   main.ng-enter {
     /* transition on enter for .5s */
     -webkit-transition: .5s;

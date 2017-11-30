@@ -11,17 +11,16 @@ main{
   margin: 0;
   padding: 0;
   &.ng-enter {
-      /* transition on enter for .5s */
-      transition: .5s;
+    /* transition on enter for .5s */
+    transition: .5s;
 
-      /* start with opacity 0 (invisible) */
-      opacity: 0;
+    /* start with opacity 0 (invisible) */
+    opacity: 0;
   }
 
-  /* end 'enter' transition */
   &.ng-enter-active {
-      /* end with opacity 1 (fade in) */
-      opacity: 1;
+    /* end with opacity 1 (fade in) */
+    opacity: 1;
   }
 }
 

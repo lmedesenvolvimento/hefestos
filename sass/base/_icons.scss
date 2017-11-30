@@ -24,6 +24,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-decrease:before {
+  content: "\e907";
+}
+.icon-increase:before {
+  content: "\e910";
+}
 .icon-3d_rotation:before {
   content: "\e84d";
 }

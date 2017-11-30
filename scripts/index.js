@@ -1,10 +1,13 @@
 var manifest = {};
 
-var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterProvider){
+var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterProvider, $provide){
+  // Configurando o comportamento das roteador
+  View.configure($provide)
+  // Configurando a aula de acordo com seus meta dados
   Loader.onLoadManifest($stateProvider, $mdThemingProvider, $urlRouterProvider, manifest)
 }
 
-ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterProvider']
+ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterProvider','$provide']
 
 var ApplicationRun = function($rootScope){
     $rootScope.$global = GLOBAL

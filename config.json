@@ -25,8 +25,8 @@
         }
     ],
     "tema":{
-      "primario": "cyan",
-      "contraste": "yellow"
+      "primario": "red",
+      "contraste": "orange"
     },
     "imported_styles":[
         "custom.css"

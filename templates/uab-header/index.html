@@ -9,27 +9,34 @@
 
   <div class="md-toolbar-tools">
     <div class="container-fluid" flex>
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button" ng-click="$ctrl.toggleSidenav()">
+        <md-tooltip>Tópicos</md-tooltip>
         <md-icon md-font-icon="icon-list"></md-icon>
       </md-button>
 
       <uab-pagination></uab-pagination>
 
-      <md-button class="md-icon-button">
-        <md-icon md-font-icon="icon-title"></md-icon>
+      <md-button class="md-icon-button" ng-click="$ctrl.increaseText()">
+        <md-tooltip>Aumentar Fonte</md-tooltip>
+        <md-icon md-font-icon="icon-increase"></md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button" ng-click="$ctrl.decreaseText()">
+        <md-tooltip>Diminuir Fonte</md-tooltip>
+        <md-icon md-font-icon="icon-decrease"></md-icon>
       </md-button>
 
       <md-button class="md-icon-button">
-        <md-icon md-font-icon="icon-title"></md-icon>
-      </md-button>
-
-      <md-button class="md-icon-button">
+        <md-tooltip>Inverter Cores</md-tooltip>
         <md-icon md-font-icon="icon-invert_colors"></md-icon>
       </md-button>
 
       <md-button class="md-icon-button">
-        <md-icon md-font-icon="icon-invert_print"></md-icon>
+        <md-tooltip>Versão Impressa</md-tooltip>
+        <md-icon md-font-icon="icon-print"></md-icon>
       </md-button>
     </div>
   </div>
 </md-toolbar>
+
+<uab-sidenav></uab-sidenav>

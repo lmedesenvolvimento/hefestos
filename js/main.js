@@ -1,10 +1,13 @@
 var manifest = {};
 
-var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterProvider){
+var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterProvider, $provide){
+  // Configurando o comportamento das roteador
+  View.configure($provide)
+  // Configurando a aula de acordo com seus meta dados
   Loader.onLoadManifest($stateProvider, $mdThemingProvider, $urlRouterProvider, manifest)
 }
 
-ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterProvider']
+ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterProvider','$provide']
 
 var ApplicationRun = function($rootScope){
     $rootScope.$global = GLOBAL
@@ -33,7 +36,47 @@ $(window).on('load', function(){
   })
 })
 
+// Constantes
+MAX_FONT_SIZE = 24.5; // 22px
+MIN_FONT_SIZE = 12.5; // 14px
+DEFAULT_FONT_SIZE = 18.5; // 18.5px
+
+var uabHeaderCtrl = function($rootScope, Sidenav){
+  var self = this;
+
+  self.toggleSidenav = function(){
+    Sidenav.open()
+  };
+
+  self.increaseText = function(){
+    var font_size = $("body").css("font-size").replace('px','');
+    var increment = parseFloat(font_size) + 2;
+    increment <= MAX_FONT_SIZE ? $("body, html").css("font-size", floatToPx(increment)) : false
+  }
+
+  self.decreaseText = function(){
+    var font_size = $("body").css("font-size").replace('px','');
+    var increment = parseFloat(font_size) - 2;
+    increment >= MIN_FONT_SIZE ? $("body, html").css("font-size", floatToPx(increment)) : false
+  }
+
+  // @private
+  floatToPx = function(number){
+    console.log(number);
+    return number + "px";
+  }
+
+  $rootScope.$on("$stateChangeSuccess", function(){
+    Sidenav.close()
+  })
+
+  return self;
+}
+
+uabHeaderCtrl.$inject = ['$rootScope','Sidenav']
+
 var uabHeader = {
+  controller: uabHeaderCtrl,
   templateUrl: "templates/uab-header"
 }
 
@@ -87,15 +130,50 @@ angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
     templateUrl: "templates/uab-pagination"
 })
-var ApplicationCtrl = function(){
-    var self = this;
+var Sidenav = function($mdSidenav){
+  return {
+    $id: "uab-sidenav",
+    open: function(){
+      return $mdSidenav(this.$id).open()
+    },
+    close: function(){
+      return $mdSidenav(this.$id).close()
+    },
+    toggle: function(){
+      return $mdSidenav(this.$id).toggle()
+    },
+  }
+}
 
-    self.toggleMenu = function(){
-    };
+Sidenav.$inject = ['$mdSidenav']
+
+angular.module('application').factory('Sidenav', Sidenav)
+
+var uabSidenavCtrl = function(Sidenav){
+  var self = this
+
+  self.close = function(){
+    Sidenav.close()
+  }
+
+  return self
+}
+
+uabSidenavCtrl.$inject = ['Sidenav']
+
+var uabSidenav = {
+  controller: uabSidenavCtrl,
+  templateUrl: "templates/uab-sidenav"
+}
+
+angular.module('application').component('uabSidenav', uabSidenav)
+
+var ApplicationCtrl = function(Sidenav){
+    var self = this;    
 
     return self;
 };
 
-ApplicationCtrl.$inject = []
+ApplicationCtrl.$inject = ['Sidenav']
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);

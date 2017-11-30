@@ -1,18 +1,18 @@
   <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Carregando...</title>
-    <link rel="stylesheet" href="css/main.css" type="text/css" media="screen"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Carregando...</title>
+  <link rel="stylesheet" href="css/main.css" type="text/css" media="screen"/>
 </head>
 <body ng-controller="ApplicationCtrl as app" ng-cloak>
   <div layout="column" layout-fill>
     <uab-header></uab-header>
     <md-content layout-padding>
       <div class="container white-paper">
-        <main ui-view></main>
+        <main ui-view autoscroll='true'></main>
       </div>
     </md-content>
   </div>

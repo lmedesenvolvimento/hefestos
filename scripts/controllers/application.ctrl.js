@@ -1,12 +1,9 @@
-var ApplicationCtrl = function(){
-    var self = this;
-
-    self.toggleMenu = function(){
-    };
+var ApplicationCtrl = function(Sidenav){
+    var self = this;    
 
     return self;
 };
 
-ApplicationCtrl.$inject = []
+ApplicationCtrl.$inject = ['Sidenav']
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);

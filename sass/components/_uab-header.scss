@@ -19,7 +19,7 @@ uab-header{
     background-color: transparentize(white, 0.4);
     > .container-fluid{
       width: 100%;
-    }
+    }    
     .md-icon-button{
       font-size: 32px;
       line-height: 32px;
@@ -36,12 +36,25 @@ uab-header + md-content{
 }
 
 
-@media (max-width: $screen-sm) {
+@media (max-width: $screen-md) {
   uab-header {
     uab-header-titles {
       padding: 24px;
+      .subtitle, .caption{
+        font-size: 14pt;
+      }
+      .title{
+        font-size: 24pt;
+        line-height: 0.8;
+        small{
+          color: transparentize(white, 0.2) !important;
+        }
+      }
     }
     .md-toolbar-tools {
+      white-space: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
       > .container-fluid{
         padding-right: 0px;
         padding-left: 0px;

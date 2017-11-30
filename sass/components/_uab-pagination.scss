@@ -7,5 +7,12 @@ uab-pagination{
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    &[disabled] md-icon{
+      color: transparentize(black, 0.62) !important;
+      fill: transparentize(black, 0.62) !important;
+      &:hover{
+        cursor: not-allowed;
+      }
+    }
   }
 }
