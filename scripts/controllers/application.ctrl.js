@@ -1,5 +1,5 @@
 var ApplicationCtrl = function(Sidenav){
-    var self = this;    
+    var self = this;
 
     return self;
 };

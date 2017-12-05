@@ -1,7 +1,7 @@
 // Constantes
-MAX_FONT_SIZE = 24.5; // 22px
-MIN_FONT_SIZE = 12.5; // 14px
-DEFAULT_FONT_SIZE = 18.5; // 18.5px
+MAX_FONT_SIZE = 20.5; // 22px
+MIN_FONT_SIZE = 8.5; // 14px
+DEFAULT_FONT_SIZE = 12.5; // 18.5px
 
 var uabHeaderCtrl = function($rootScope, Sidenav){
   var self = this;

@@ -32,14 +32,31 @@ app.config(ApplicationConfig).run(ApplicationRun)
 $(window).on('load', function(){
   $.get("config.json").then(function(response){
     manifest = response;
-    angular.bootstrap(document, ['application']);
+    angular.bootstrap(document.body, ['application']);
   })
 })
 
+var lazyImgDirective = function(){
+  return {
+    restrict: "A",
+    link: function(scope, element, attrs){
+      var img = element.get(0)
+
+      img.setAttribute('src', img.getAttribute('data-src'));
+
+      img.onload = function() {
+        img.removeAttribute('data-src');
+      };
+    }
+  }
+}
+
+angular.module("application").directive("lazyImg", lazyImgDirective)
+
 // Constantes
-MAX_FONT_SIZE = 24.5; // 22px
-MIN_FONT_SIZE = 12.5; // 14px
-DEFAULT_FONT_SIZE = 18.5; // 18.5px
+MAX_FONT_SIZE = 20.5; // 22px
+MIN_FONT_SIZE = 8.5; // 14px
+DEFAULT_FONT_SIZE = 12.5; // 18.5px
 
 var uabHeaderCtrl = function($rootScope, Sidenav){
   var self = this;
@@ -130,6 +147,31 @@ angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
     templateUrl: "templates/uab-pagination"
 })
+var SanfonadoCtrl = function($element){
+  var self = this
+
+  self.$onInit = function(){
+    self.element = $element
+
+    $(self.element).find('[uab-sanfonado-toggle]').on('click', self.toggle)
+  }
+
+  self.toggle = function(){
+    $(self.element).toggleClass('active')
+    $(self.element).find('.uab-sanfonado-wrap').toggleClass('active')
+  }
+
+  return self
+}
+
+SanfonadoCtrl.$inject = ['$element']
+
+var SanfonadoComponent = {
+  controller: SanfonadoCtrl
+}
+
+angular.module('application').component('uabSanfonado', SanfonadoComponent)
+
 var Sidenav = function($mdSidenav){
   return {
     $id: "uab-sidenav",
@@ -169,7 +211,7 @@ var uabSidenav = {
 angular.module('application').component('uabSidenav', uabSidenav)
 
 var ApplicationCtrl = function(Sidenav){
-    var self = this;    
+    var self = this;
 
     return self;
 };

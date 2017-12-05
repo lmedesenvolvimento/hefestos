@@ -3,10 +3,13 @@
   src: url(../fonts/dalek.ttf);
 }
 
+html, body{
+  font-size: 12.5px;
+}
+
 body{
   @include roboto;
-  font-size: 18.5px;
-  color: $text-color;
+  color: $text-color-lighter;
   line-height: 1.66;
 }
 
@@ -22,22 +25,6 @@ h1, h2, h3, h4{
   margin: 0.8rem 0px;
 }
 
-h1{
-  font-size: 3rem;
-}
-
-h2{
-  font-size: 2rem;
-}
-
-h3{
-  font-size: 1.6rem;
-}
-
-h3{
-  font-size: 1.4rem;
-}
-
 .caption{
   font-size: 60%;
   color: $secondary-text;
@@ -49,4 +36,52 @@ h3{
 
 .dalek{
   font-family: "Dalek", sans-serif;
+}
+
+// Headings
+
+.h1 {
+  font-size: $display-3-font-size-base;
+}
+
+.h2 {
+  font-size: $display-2-font-size-base;
+}
+
+.h3 {
+  font-size: $display-1-font-size-base;
+}
+
+.h4 {
+  font-size: $display-0-font-size-base;
+}
+
+h1{
+  @extend .h1;
+}
+
+h2{
+  @extend .h2;
+}
+
+h3{
+  @extend .h3;
+}
+
+h4{
+  @extend .h4;
+}
+
+.cabecalho{
+  margin-bottom: 1.6rem;
+  padding-bottom: 8px;
+  border-bottom: 1px solid $border-color;
+}
+
+
+// Destaques
+.destaque{
+  background-color: $ligth-grey;
+  border: 1px solid $border-color;
+  padding: $box-padding;
 }

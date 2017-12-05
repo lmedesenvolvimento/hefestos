@@ -1,0 +1,13 @@
+img {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+img[data-src]{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+  min-height: 68px;
+  opacity: 0.2;
+}

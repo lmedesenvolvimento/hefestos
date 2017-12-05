@@ -32,6 +32,6 @@ app.config(ApplicationConfig).run(ApplicationRun)
 $(window).on('load', function(){
   $.get("config.json").then(function(response){
     manifest = response;
-    angular.bootstrap(document, ['application']);
+    angular.bootstrap(document.body, ['application']);
   })
 })

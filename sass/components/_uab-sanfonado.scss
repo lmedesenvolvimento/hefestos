@@ -1,0 +1,39 @@
+uab-sanfonado{
+  .uab-sanfonado-wrap{
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition-property: max-height, opacity;
+    transition-timing-function: $easing-in-out;
+    transition-duration: 0.6s;
+    padding: 0px;
+    max-height: 600px;
+  }
+
+  &.active md-card-title .md-icon-button{
+    transform: rotate(180deg);
+  }
+
+  md-card-title .md-icon-button{
+    transition: transform 0.2s $easing-in-out;
+  }
+
+  .uab-sanfonado-wrap:not(.active){
+    overflow: hidden;
+    max-height: 0px;
+    transition-timing-function: $easing-in-out;
+    transition-duration: 0.3s;
+  }
+
+  [uab-sanfonado-toggle]:hover{
+    cursor: pointer;
+  }
+
+  md-card-title-text{
+    user-select: none;
+  }
+
+  .uab-sanfonado-content{
+    border-top: 1px solid $border-color;
+    padding: 8px 24px;
+  }
+}

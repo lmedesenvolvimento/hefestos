@@ -20250,6 +20250,14 @@ md-toolbar {
   .hide-print:not(.show-print):not(.show) {
     display: none !important; } }
 
+.invisible {
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0px;
+  min-height: 0px;
+  padding: 0px; }
+
 html, body {
   background: #f4f4f4; }
 
@@ -20260,10 +20268,12 @@ html, body {
   font-family: "Dalek";
   src: url(../fonts/dalek.ttf); }
 
+html, body {
+  font-size: 12.5px; }
+
 body {
   font-family: 'Roboto', sans-serif;
-  font-size: 18.5px;
-  color: #222;
+  color: rgba(0, 0, 0, 0.78);
   line-height: 1.66; }
 
 p {
@@ -20276,18 +20286,6 @@ h1, h2, h3, h4 {
   color: #000;
   margin: 0.8rem 0px; }
 
-h1 {
-  font-size: 3rem; }
-
-h2 {
-  font-size: 2rem; }
-
-h3 {
-  font-size: 1.6rem; }
-
-h3 {
-  font-size: 1.4rem; }
-
 .caption {
   font-size: 60%;
   color: rgba(0, 0, 0, 0.46); }
@@ -20297,6 +20295,28 @@ h3 {
 
 .dalek, body > header .brand {
   font-family: "Dalek", sans-serif; }
+
+.h1, h1 {
+  font-size: 3.6rem; }
+
+.h2, h2 {
+  font-size: 2.5rem; }
+
+.h3, h3 {
+  font-size: 2rem; }
+
+.h4, h4 {
+  font-size: 1.4rem; }
+
+.cabecalho {
+  margin-bottom: 1.6rem;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd; }
+
+.destaque {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  padding: 24px; }
 
 @font-face {
   font-family: 'icomoon';
@@ -22888,8 +22908,43 @@ body > header {
     body > header .toggle-menu .icon {
       font-size: 24px; }
 
-.pure-button-light {
-  background-color: transparent; }
+*[ng-click]:hover {
+  cursor: pointer; }
+
+md-card {
+  font-size: 1.25rem; }
+  md-card md-card-title {
+    padding: 16px; }
+    md-card md-card-title .md-icon-button {
+      font-size: 24px; }
+  md-card md-card-title-text {
+    font-family: 'Montserrat', sans-serif;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.78); }
+  md-card md-card-content legend {
+    text-align: center; }
+
+img {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s; }
+
+img[data-src] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #eee;
+  min-height: 68px;
+  opacity: 0.2; }
 
 uab-header uab-header-titles {
   width: 100%;
@@ -22906,6 +22961,9 @@ uab-header uab-header-titles {
 uab-header .md-toolbar-tools {
   background-color: rgba(255, 255, 255, 0.6); }
   uab-header .md-toolbar-tools > .container-fluid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     width: 100%; }
   uab-header .md-toolbar-tools .md-icon-button {
     font-size: 32px;
@@ -22913,6 +22971,8 @@ uab-header .md-toolbar-tools {
     padding: 0px; }
     uab-header .md-toolbar-tools .md-icon-button md-icon {
       color: #222; }
+  uab-header .md-toolbar-tools .md-toolbar-tools-text {
+    color: #222; }
 
 uab-header + md-content {
   background-color: transparent; }
@@ -22999,6 +23059,49 @@ uab-pagination {
       fill: rgba(0, 0, 0, 0.38) !important; }
       uab-pagination a.md-button[disabled] md-icon:hover {
         cursor: not-allowed; }
+
+uab-sanfonado .uab-sanfonado-wrap {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-transition-property: max-height, opacity;
+  transition-property: max-height, opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  transition-timing-function: cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  -webkit-transition-duration: 0.6s;
+  transition-duration: 0.6s;
+  padding: 0px;
+  max-height: 600px; }
+
+uab-sanfonado.active md-card-title .md-icon-button {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+uab-sanfonado md-card-title .md-icon-button {
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  transition: -webkit-transform 0.2s cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  transition: transform 0.2s cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  transition: transform 0.2s cubic-bezier(0.67, 0.35, 0.04, 0.93), -webkit-transform 0.2s cubic-bezier(0.67, 0.35, 0.04, 0.93); }
+
+uab-sanfonado .uab-sanfonado-wrap:not(.active) {
+  overflow: hidden;
+  max-height: 0px;
+  -webkit-transition-timing-function: cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  transition-timing-function: cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s; }
+
+uab-sanfonado [uab-sanfonado-toggle]:hover {
+  cursor: pointer; }
+
+uab-sanfonado md-card-title-text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+uab-sanfonado .uab-sanfonado-content {
+  border-top: 1px solid #ddd;
+  padding: 8px 24px; }
 
 main {
   display: block;

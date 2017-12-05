@@ -1,19 +1,29 @@
 // Layout
 $navigation-height: 52px;
-
 $line-height: 1.55;
+$box-padding: 24px;
 
 // Colors
 $bg-color: #f4f4f4;
 
 $black: #000;
 $text-color: #222;
+$text-color-lighter: transparentize($black, 0.22);
 $secondary-text: transparentize($black, 0.54);
 $disabled-text:  transparentize($black, 0.72);
 
 $white: #fff;
 $ligth-grey: #eee;
+$border-color: #ddd;
 
 $screen-xs: 599px;
 $screen-sm: 799px;
 $screen-md: 919px;
+
+$display-3-font-size-base: 3.600rem;
+$display-2-font-size-base: 2.500rem;
+$display-1-font-size-base: 2.000rem;
+$display-0-font-size-base: 1.400rem;
+
+$easing-in-out: cubic-bezier(.67,.35,.04,.93);
+// $easing-in-out: cubic-bezier(.17,.67,.83,.67);

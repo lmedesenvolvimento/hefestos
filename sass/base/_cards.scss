@@ -1,0 +1,20 @@
+md-card{
+  font-size: 1.25rem;
+  md-card-title{
+    padding: 16px;
+    .md-icon-button{
+      font-size: 24px;
+    }
+  }
+  md-card-title-text{
+    @include montserrat;
+    justify-content: center;
+    text-transform: uppercase;
+    color: $text-color-lighter;
+  }
+  md-card-content{
+    legend{
+      text-align: center;
+    }
+  }
+}

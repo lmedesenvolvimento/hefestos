@@ -18,8 +18,9 @@ uab-header{
   .md-toolbar-tools {
     background-color: transparentize(white, 0.4);
     > .container-fluid{
+      display: flex;
       width: 100%;
-    }    
+    }
     .md-icon-button{
       font-size: 32px;
       line-height: 32px;
@@ -27,6 +28,9 @@ uab-header{
       md-icon{
         color: $text-color;
       }
+    }
+    .md-toolbar-tools-text{
+      color: $text-color;
     }
   }
 }
