@@ -16,7 +16,7 @@ uab-header{
     }
   }
   .md-toolbar-tools {
-    background-color: transparentize(white, 0.4);
+    background-color: transparentize(black, 0.8);
     > .container-fluid{
       display: flex;
       width: 100%;
@@ -60,6 +60,7 @@ uab-header + md-content{
       overflow-x: auto;
       overflow-y: hidden;
       > .container-fluid{
+        display: block;
         padding-right: 0px;
         padding-left: 0px;
         margin-left:  0px;

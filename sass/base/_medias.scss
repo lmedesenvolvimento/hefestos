@@ -9,5 +9,6 @@ img[data-src]{
   justify-content: center;
   background-color: #eee;
   min-height: 68px;
-  opacity: 0.2;
+  max-height: 68px;
+  opacity: 0;
 }

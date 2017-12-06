@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:700");
 @import url("https://fonts.googleapis.com/css?family=Roboto");
-.wrapper, .container, uab-header uab-header-titles {
+.wrapper, .container, uab-header uab-header-titles, .white-paper {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 1200px;
@@ -243,7 +243,7 @@
   order: 1; }
 
 @media only screen and (min-width: 48em) {
-  .container, uab-header uab-header-titles {
+  .container, uab-header uab-header-titles, .white-paper {
     width: 46rem; }
   .col-sm {
     -webkit-box-sizing: border-box;
@@ -422,7 +422,7 @@
     order: 1; } }
 
 @media only screen and (min-width: 62em) {
-  .container, uab-header uab-header-titles {
+  .container, uab-header uab-header-titles, .white-paper {
     width: 61rem; }
   .col-md {
     -webkit-box-sizing: border-box;
@@ -601,7 +601,7 @@
     order: 1; } }
 
 @media only screen and (min-width: 75em) {
-  .container, uab-header uab-header-titles {
+  .container, uab-header uab-header-titles, .white-paper {
     width: 71rem; }
   .col-lg {
     -webkit-box-sizing: border-box;
@@ -22886,11 +22886,11 @@ body > header {
   height: 52px;
   width: 100%;
   background: #f4f4f4; }
-  body > header > .container, uab-header body > header > uab-header-titles {
+  body > header > .container, uab-header body > header > uab-header-titles, body > header > .white-paper {
     height: 52px;
     -webkit-box-shadow: 0px 12px 24px -12px rgba(34, 34, 34, 0.2);
     box-shadow: 0px 12px 24px -12px rgba(34, 34, 34, 0.2); }
-    body > header > .container nav, uab-header body > header > uab-header-titles nav {
+    body > header > .container nav, uab-header body > header > uab-header-titles nav, body > header > .white-paper nav {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -22944,7 +22944,8 @@ img[data-src] {
   justify-content: center;
   background-color: #eee;
   min-height: 68px;
-  opacity: 0.2; }
+  max-height: 68px;
+  opacity: 0; }
 
 uab-header uab-header-titles {
   width: 100%;
@@ -22959,7 +22960,7 @@ uab-header uab-header-titles {
       color: rgba(255, 255, 255, 0.8) !important; }
 
 uab-header .md-toolbar-tools {
-  background-color: rgba(255, 255, 255, 0.6); }
+  background-color: rgba(0, 0, 0, 0.2); }
   uab-header .md-toolbar-tools > .container-fluid {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -22992,6 +22993,7 @@ uab-header + md-content {
     overflow-x: auto;
     overflow-y: hidden; }
     uab-header .md-toolbar-tools > .container-fluid {
+      display: block;
       padding-right: 0px;
       padding-left: 0px;
       margin-left: 0px;
@@ -23120,4 +23122,6 @@ main {
 .white-paper {
   padding: 32px 24px 64px;
   margin-top: 32px;
-  margin-bottom: 32px; }
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: 1148px; }
