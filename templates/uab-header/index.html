@@ -37,6 +37,11 @@
       </md-button>
       <span flex></span>
       <span class="md-toolbar-tools-text">{{($root.$global.current_topic.position + 1)}} de {{ $root.$global.manifest.topicos.length }} páginas</span>
+      <span flex="5"></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.toggleAnnotations()">
+        <md-tooltip>Minhas Anotações</md-tooltip>
+        <md-icon md-font-icon="icon-chat"></md-icon>
+      </md-button>
     </div>
   </div>
 </md-toolbar>

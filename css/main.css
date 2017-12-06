@@ -22911,6 +22911,9 @@ body > header {
 *[ng-click]:hover {
   cursor: pointer; }
 
+md-icon.icon-24 {
+  font-size: 24px; }
+
 md-card {
   font-size: 1.25rem; }
   md-card md-card-title {
@@ -22947,33 +22950,37 @@ img[data-src] {
   max-height: 68px;
   opacity: 0; }
 
-uab-header uab-header-titles {
-  width: 100%;
-  padding: 24px 16px 24px;
-  color: white; }
-  uab-header uab-header-titles .subtitle, uab-header uab-header-titles .caption {
-    font-size: 18pt; }
-  uab-header uab-header-titles .title {
-    font-size: 30pt;
-    line-height: 1.1; }
-    uab-header uab-header-titles .title small {
-      color: rgba(255, 255, 255, 0.8) !important; }
-
-uab-header .md-toolbar-tools {
-  background-color: rgba(0, 0, 0, 0.2); }
-  uab-header .md-toolbar-tools > .container-fluid {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%; }
-  uab-header .md-toolbar-tools .md-icon-button {
-    font-size: 32px;
-    line-height: 32px;
-    padding: 0px; }
-    uab-header .md-toolbar-tools .md-icon-button md-icon {
-      color: #222; }
-  uab-header .md-toolbar-tools .md-toolbar-tools-text {
-    color: #222; }
+uab-header {
+  height: 240px;
+  max-height: 240px; }
+  uab-header uab-header-titles {
+    width: 100%;
+    padding: 24px 16px 24px;
+    color: white; }
+    uab-header uab-header-titles .subtitle, uab-header uab-header-titles .caption {
+      font-size: 18pt; }
+    uab-header uab-header-titles .title {
+      font-size: 30pt;
+      line-height: 1.1; }
+      uab-header uab-header-titles .title small {
+        color: rgba(255, 255, 255, 0.8) !important; }
+  uab-header .md-toolbar-tools {
+    background-color: rgba(0, 0, 0, 0.2); }
+    uab-header .md-toolbar-tools > .container-fluid {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%; }
+    uab-header .md-toolbar-tools .md-icon-button {
+      font-size: 32px;
+      line-height: 32px;
+      padding: 0px; }
+      uab-header .md-toolbar-tools .md-icon-button md-icon {
+        color: #222; }
+    uab-header .md-toolbar-tools .md-toolbar-tools-text {
+      color: #222;
+      padding: 8px 0px;
+      line-height: 24px; }
 
 uab-header + md-content {
   background-color: transparent; }
@@ -23061,6 +23068,26 @@ uab-pagination {
       fill: rgba(0, 0, 0, 0.38) !important; }
       uab-pagination a.md-button[disabled] md-icon:hover {
         cursor: not-allowed; }
+
+uab-annotations {
+  position: relative;
+  display: block; }
+  uab-annotations md-sidenav {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto; }
+    uab-annotations md-sidenav md-content {
+      min-width: 240px; }
+    uab-annotations md-sidenav .md-toolbar-tools .md-icon-button md-icon {
+      color: #222;
+      fill: #222; }
+
+@media (max-width: 799px) {
+  uab-annotations md-sidenav {
+    position: fixed !important;
+    left: auto !important;
+    right: 0;
+    height: 100%; } }
 
 uab-sanfonado .uab-sanfonado-wrap {
   overflow-x: hidden;

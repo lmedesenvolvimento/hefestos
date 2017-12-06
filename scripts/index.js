@@ -1,5 +1,8 @@
 var manifest = {};
 
+// Get Manifest
+$.get("config.json").then(bootstrapApplication)
+
 var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterProvider, $provide){
   // Configurando o comportamento das roteador
   View.configure($provide)
@@ -29,9 +32,9 @@ var app = angular.module('application', [
 
 app.config(ApplicationConfig).run(ApplicationRun)
 
-$(window).on('load', function(){
-  $.get("config.json").then(function(response){
+function bootstrapApplication(response){
+  angular.element(document).ready(function(){
     manifest = response;
-    angular.bootstrap(document.body, ['application']);
+    angular.bootstrap(document, ['application']);
   })
-})
+}

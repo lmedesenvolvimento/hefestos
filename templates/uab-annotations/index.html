@@ -1,0 +1,18 @@
+<md-sidenav
+    class="md-sidenav-right"
+    md-component-id="uab-annotations"
+    md-is-locked-open="$ctrl.$annotations.visible"
+    md-whiteframe="8">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h4 flex>Comentários</h4>
+      <md-button class="md-icon-button" ng-click="$ctrl.toggle()">
+        <md-icon md-font-icon="icon-close" class="icon-24"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+    <h2>{{$ctrl.topic.nome}}</h2>
+    <p>Lorem Ipsum</p>
+  </md-content>
+</md-sidenav>

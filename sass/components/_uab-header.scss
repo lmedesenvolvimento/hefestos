@@ -1,4 +1,6 @@
 uab-header{
+  height: $uab-header-max-height;
+  max-height: $uab-header-max-height;
   uab-header-titles{
     @extend .container;
     width: 100%;
@@ -31,6 +33,8 @@ uab-header{
     }
     .md-toolbar-tools-text{
       color: $text-color;
+      padding: 8px 0px;
+      line-height: 24px;
     }
   }
 }

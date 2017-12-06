@@ -1,0 +1,25 @@
+uab-annotations{
+  position: relative;
+  display: block;
+  md-sidenav{
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    md-content{
+      min-width: 240px;
+    }
+    .md-toolbar-tools .md-icon-button md-icon{
+      color: $text-color;
+      fill: $text-color;
+    }
+  }
+}
+
+@media (max-width: $screen-sm) {
+  uab-annotations md-sidenav{
+    position: fixed !important;
+    left: auto !important;
+    right: 0;
+    height: 100%;
+  }
+}

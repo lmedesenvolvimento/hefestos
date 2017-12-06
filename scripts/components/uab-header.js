@@ -3,11 +3,15 @@ MAX_FONT_SIZE = 20.5; // 22px
 MIN_FONT_SIZE = 8.5; // 14px
 DEFAULT_FONT_SIZE = 12.5; // 18.5px
 
-var uabHeaderCtrl = function($rootScope, Sidenav){
+var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
   var self = this;
 
   self.toggleSidenav = function(){
     Sidenav.open()
+  };
+
+  self.toggleAnnotations = function(){
+    Annotations.toggle()
   };
 
   self.increaseText = function(){
@@ -35,7 +39,7 @@ var uabHeaderCtrl = function($rootScope, Sidenav){
   return self;
 }
 
-uabHeaderCtrl.$inject = ['$rootScope','Sidenav']
+uabHeaderCtrl.$inject = ['$rootScope','Sidenav','Annotations']
 
 var uabHeader = {
   controller: uabHeaderCtrl,

@@ -1,5 +1,8 @@
 var manifest = {};
 
+// Get Manifest
+$.get("config.json").then(bootstrapApplication)
+
 var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterProvider, $provide){
   // Configurando o comportamento das roteador
   View.configure($provide)
@@ -29,12 +32,12 @@ var app = angular.module('application', [
 
 app.config(ApplicationConfig).run(ApplicationRun)
 
-$(window).on('load', function(){
-  $.get("config.json").then(function(response){
+function bootstrapApplication(response){
+  angular.element(document).ready(function(){
     manifest = response;
-    angular.bootstrap(document.body, ['application']);
+    angular.bootstrap(document, ['application']);
   })
-})
+}
 
 var lazyImgDirective = function(){
   return {
@@ -53,16 +56,35 @@ var lazyImgDirective = function(){
 
 angular.module("application").directive("lazyImg", lazyImgDirective)
 
+var uabFooterCtrl = function(){
+  var self = this;
+
+  return self;
+}
+
+uabFooterCtrl.$inject = []
+
+var uabFooterader = {
+  controller: uabFooterCtrl,
+  templateUrl: "templates/uab-footer"
+}
+
+angular.module('application').component('uabFooterader', uabFooterader)
+
 // Constantes
 MAX_FONT_SIZE = 20.5; // 22px
 MIN_FONT_SIZE = 8.5; // 14px
 DEFAULT_FONT_SIZE = 12.5; // 18.5px
 
-var uabHeaderCtrl = function($rootScope, Sidenav){
+var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
   var self = this;
 
   self.toggleSidenav = function(){
     Sidenav.open()
+  };
+
+  self.toggleAnnotations = function(){
+    Annotations.toggle()
   };
 
   self.increaseText = function(){
@@ -90,7 +112,7 @@ var uabHeaderCtrl = function($rootScope, Sidenav){
   return self;
 }
 
-uabHeaderCtrl.$inject = ['$rootScope','Sidenav']
+uabHeaderCtrl.$inject = ['$rootScope','Sidenav','Annotations']
 
 var uabHeader = {
   controller: uabHeaderCtrl,
@@ -172,24 +194,51 @@ var SanfonadoComponent = {
 
 angular.module('application').component('uabSanfonado', SanfonadoComponent)
 
-var Sidenav = function($mdSidenav){
-  return {
-    $id: "uab-sidenav",
-    open: function(){
-      return $mdSidenav(this.$id).open()
-    },
-    close: function(){
-      return $mdSidenav(this.$id).close()
-    },
-    toggle: function(){
-      return $mdSidenav(this.$id).toggle()
-    },
+var Annotations = function($mdSidenav){
+  var self = this
+
+  self.visible = false
+  self.data = []
+
+  self.toggle = function(){
+    self.visible = !self.visible
   }
+
+  return self
 }
 
-Sidenav.$inject = ['$mdSidenav']
+Annotations.$inject = ['$mdSidenav']
 
-angular.module('application').factory('Sidenav', Sidenav)
+angular.module('application').factory('Annotations',  Annotations)
+
+var uabAnnotationsCtrl = function($rootScope, Annotations){
+  var self = this
+
+  self.$annotations = Annotations
+
+  self.$onInit = function(){
+    self.topic = $rootScope.$global.current_topic
+  }
+
+  self.toggle = function(){
+    Annotations.toggle()
+  }
+
+  $rootScope.$on('topic:change', function(event, topic){
+    self.topic = topic
+  })
+
+  return self
+}
+
+uabAnnotationsCtrl.$inject = ['$rootScope','Annotations']
+
+var uabAnnotations = {
+  controller: uabAnnotationsCtrl,
+  templateUrl: "templates/uab-annotations"
+}
+
+angular.module('application').component('uabAnnotations', uabAnnotations)
 
 var uabSidenavCtrl = function(Sidenav){
   var self = this
@@ -209,6 +258,25 @@ var uabSidenav = {
 }
 
 angular.module('application').component('uabSidenav', uabSidenav)
+
+var Sidenav = function($mdSidenav){
+  return {
+    $id: "uab-sidenav",
+    open: function(){
+      return $mdSidenav(this.$id).open()
+    },
+    close: function(){
+      return $mdSidenav(this.$id).close()
+    },
+    toggle: function(){
+      return $mdSidenav(this.$id).toggle()
+    },
+  }
+}
+
+Sidenav.$inject = ['$mdSidenav']
+
+angular.module('application').factory('Sidenav', Sidenav)
 
 var ApplicationCtrl = function(Sidenav){
     var self = this;
