@@ -83,6 +83,7 @@ gulp.task('copy', ()=> {
   gulp.src('./fonts/*').pipe(gulp.dest('./dist/fonts'));
   gulp.src('./layout/*').pipe(gulp.dest('./dist/layout'));
   gulp.src('./templates/**/*.html').pipe(gulp.dest('./dist/templates'));
+  gulp.src('./topicos/**/*.html').pipe(gulp.dest('./dist/topicos'));
 })
 
 gulp.task('build', ['clean','sass','scripts'],()=> {
