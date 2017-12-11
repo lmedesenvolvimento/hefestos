@@ -11,6 +11,7 @@ gulp.task('vendor', () => {
         './node_modules/string/dist/string.js',
         './node_modules/jquery/dist/jquery.js',
         './node_modules/angular/angular.js',
+        './node_modules/angular-i18n/angular-locale_pt-br.js',
         './node_modules/angular-aria/angular-aria.js',
         './node_modules/angular-animate/angular-animate.js',
         './node_modules/angular-messages/angular-messages.js',

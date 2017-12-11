@@ -4,8 +4,8 @@ body > header{
     left: 0;
     height: $navigation-height;
     width: 100%;
-    background: $bg-color;    
-    > .container{        
+    background: $bg-color;
+    > .container{
         height: $navigation-height;
         box-shadow: 0px 12px 24px -12px transparentize($color: $text-color, $amount: 0.8);
         nav{

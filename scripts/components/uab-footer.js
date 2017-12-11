@@ -1,14 +1,19 @@
-var uabFooterCtrl = function(){
+var uabFooterCtrl = function($element){
   var self = this;
+
+  self.toTop = function(){
+    $($element).closest("md-content").scrollTop(0)
+    return false
+  }
 
   return self;
 }
 
-uabFooterCtrl.$inject = []
+uabFooterCtrl.$inject = ['$element']
 
-var uabFooterader = {
+var uabFooter = {
   controller: uabFooterCtrl,
   templateUrl: "templates/uab-footer"
 }
 
-angular.module('application').component('uabFooterader', uabFooterader)
+angular.module('application').component('uabFooter', uabFooter)

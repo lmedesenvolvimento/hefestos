@@ -1,4 +1,4 @@
-<span>
+<span ng-if="!$ctrl.asText">
   <a md-button class="md-icon-button" ng-disabled="!$ctrl.prevTopic" ng-href="#!/{{$ctrl.prevTopic.slug}}">
     <md-tooltip>Tópico Anterior</md-tooltip>
     <md-icon md-font-icon="icon-arrow_back"></md-icon>
@@ -8,4 +8,9 @@
     <md-tooltip>Próximo Tópico</md-tooltip>
     <md-icon md-font-icon="icon-arrow_forward"></md-icon>
   </a>
+</span>
+
+<span ng-if="$ctrl.asText">
+  <a md-button ng-show="$ctrl.prevTopic" ng-href="#!/{{$ctrl.prevTopic.slug}}">Tópico Anterior</a>
+  <a md-button ng-show="$ctrl.nextTopic" ng-href="#!/{{$ctrl.nextTopic.slug}}">Próximo Tópico</a>
 </span>

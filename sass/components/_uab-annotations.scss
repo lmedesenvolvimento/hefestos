@@ -7,10 +7,24 @@ uab-annotations{
     overflow-y: auto;
     md-content{
       min-width: 240px;
+      .comment{
+        font-size: 1.15rem;
+        margin: 8px 0px;
+        small{
+          color: transparentize($text-color, 0.4);
+        }
+      }
     }
     .md-toolbar-tools .md-icon-button md-icon{
       color: $text-color;
       fill: $text-color;
+    }
+  }
+  footer{
+    background-color: #f4f4f4;
+    padding: 16px 0px;
+    md-input-container{
+      margin: 18px 18px;
     }
   }
 }

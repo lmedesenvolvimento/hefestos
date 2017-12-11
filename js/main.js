@@ -56,20 +56,25 @@ var lazyImgDirective = function(){
 
 angular.module("application").directive("lazyImg", lazyImgDirective)
 
-var uabFooterCtrl = function(){
+var uabFooterCtrl = function($element){
   var self = this;
+
+  self.toTop = function(){
+    $($element).closest("md-content").scrollTop(0)
+    return false
+  }
 
   return self;
 }
 
-uabFooterCtrl.$inject = []
+uabFooterCtrl.$inject = ['$element']
 
-var uabFooterader = {
+var uabFooter = {
   controller: uabFooterCtrl,
   templateUrl: "templates/uab-footer"
 }
 
-angular.module('application').component('uabFooterader', uabFooterader)
+angular.module('application').component('uabFooter', uabFooter)
 
 // Constantes
 MAX_FONT_SIZE = 20.5; // 22px
@@ -128,7 +133,7 @@ var uabPaginationCtrl = function($rootScope, $timeout){
     self.next = function(){
         var currentPosition  = $rootScope.$global.current_topic.position + 1;
         var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
-        
+
         self.nextTopic = hasIndex;
 
         return angular.isDefined(hasIndex) ? true : false;
@@ -148,12 +153,12 @@ var uabPaginationCtrl = function($rootScope, $timeout){
         self.prevTopic = null;
     }
 
-    self.$onInit = function(){        
+    self.$onInit = function(){
         self.reset();
         $timeout(angular.bind(this, self.next));
         $timeout(angular.bind(this, self.prev));
     }
-    
+
     $rootScope.$on("$stateChangeStart", function(event){
         self.reset();
         $timeout(angular.bind(this, self.next));
@@ -167,8 +172,12 @@ uabPaginationCtrl.$inject = ['$rootScope','$timeout']
 
 angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
-    templateUrl: "templates/uab-pagination"
+    templateUrl: "templates/uab-pagination",
+    bindings:{
+      asText: "="
+    }
 })
+
 var SanfonadoCtrl = function($element){
   var self = this
 
@@ -216,12 +225,29 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
 
   self.$annotations = Annotations
 
+  self.$newComment = {
+    text: ''
+  }
+
+  self.comments = []
+
   self.$onInit = function(){
     self.topic = $rootScope.$global.current_topic
   }
 
   self.toggle = function(){
     Annotations.toggle()
+  }
+
+  self.sendComment = function(){
+    self.comments.push({
+      text: self.$newComment.text,
+      created_at: new Date()
+    })
+
+    console.log(self.comments)
+
+    self.$newComment.text = ''
   }
 
   $rootScope.$on('topic:change', function(event, topic){

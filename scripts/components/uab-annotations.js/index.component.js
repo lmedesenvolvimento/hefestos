@@ -3,12 +3,29 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
 
   self.$annotations = Annotations
 
+  self.$newComment = {
+    text: ''
+  }
+
+  self.comments = []
+
   self.$onInit = function(){
     self.topic = $rootScope.$global.current_topic
   }
 
   self.toggle = function(){
     Annotations.toggle()
+  }
+
+  self.sendComment = function(){
+    self.comments.push({
+      text: self.$newComment.text,
+      created_at: new Date()
+    })
+
+    console.log(self.comments)
+
+    self.$newComment.text = ''
   }
 
   $rootScope.$on('topic:change', function(event, topic){

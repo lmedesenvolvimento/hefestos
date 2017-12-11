@@ -3,7 +3,7 @@
     "tema":"css/tema.css",
     "academico":{
         "disciplina":"Modelo UAB",
-        "professor": "Lobato Pipe"
+        "responsavel": "Professor Lobato Pipe"
     },
     "topicos": [
         {
@@ -16,11 +16,11 @@
             "local": "topicos/02.html"
         },
         {
-            "nome": "O Partido Operário Social-Democrata Russo (POSDR)",
+            "nome": "Tópico 03",
             "local": "topicos/03.html"
         },
         {
-            "nome": "A Revolta de 1905: o ensaio para a revolução",
+            "nome": "Tópico 04",
             "local": "topicos/04.html"
         }
     ],
