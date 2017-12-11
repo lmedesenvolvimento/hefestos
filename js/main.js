@@ -71,7 +71,7 @@ uabFooterCtrl.$inject = ['$element']
 
 var uabFooter = {
   controller: uabFooterCtrl,
-  templateUrl: "templates/uab-footer"
+  templateUrl: "templates/uab-footer.html"
 }
 
 angular.module('application').component('uabFooter', uabFooter)
@@ -121,7 +121,7 @@ uabHeaderCtrl.$inject = ['$rootScope','Sidenav','Annotations']
 
 var uabHeader = {
   controller: uabHeaderCtrl,
-  templateUrl: "templates/uab-header"
+  templateUrl: "templates/uab-header.html"
 }
 
 angular.module('application').component('uabHeader', uabHeader)
@@ -172,7 +172,7 @@ uabPaginationCtrl.$inject = ['$rootScope','$timeout']
 
 angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
-    templateUrl: "templates/uab-pagination",
+    templateUrl: "templates/uab-pagination.html",
     bindings:{
       asText: "="
     }
@@ -261,7 +261,7 @@ uabAnnotationsCtrl.$inject = ['$rootScope','Annotations']
 
 var uabAnnotations = {
   controller: uabAnnotationsCtrl,
-  templateUrl: "templates/uab-annotations"
+  templateUrl: "templates/uab-annotations.html"
 }
 
 angular.module('application').component('uabAnnotations', uabAnnotations)
@@ -280,7 +280,7 @@ uabSidenavCtrl.$inject = ['Sidenav']
 
 var uabSidenav = {
   controller: uabSidenavCtrl,
-  templateUrl: "templates/uab-sidenav"
+  templateUrl: "templates/uab-sidenav.html"
 }
 
 angular.module('application').component('uabSidenav', uabSidenav)

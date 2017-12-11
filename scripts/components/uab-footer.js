@@ -13,7 +13,7 @@ uabFooterCtrl.$inject = ['$element']
 
 var uabFooter = {
   controller: uabFooterCtrl,
-  templateUrl: "templates/uab-footer"
+  templateUrl: "templates/uab-footer.html"
 }
 
 angular.module('application').component('uabFooter', uabFooter)

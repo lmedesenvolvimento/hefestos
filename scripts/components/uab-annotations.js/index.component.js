@@ -39,7 +39,7 @@ uabAnnotationsCtrl.$inject = ['$rootScope','Annotations']
 
 var uabAnnotations = {
   controller: uabAnnotationsCtrl,
-  templateUrl: "templates/uab-annotations"
+  templateUrl: "templates/uab-annotations.html"
 }
 
 angular.module('application').component('uabAnnotations', uabAnnotations)

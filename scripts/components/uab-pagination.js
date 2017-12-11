@@ -44,7 +44,7 @@ uabPaginationCtrl.$inject = ['$rootScope','$timeout']
 
 angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
-    templateUrl: "templates/uab-pagination",
+    templateUrl: "templates/uab-pagination.html",
     bindings:{
       asText: "="
     }

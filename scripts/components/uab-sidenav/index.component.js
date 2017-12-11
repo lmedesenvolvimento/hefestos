@@ -12,7 +12,7 @@ uabSidenavCtrl.$inject = ['Sidenav']
 
 var uabSidenav = {
   controller: uabSidenavCtrl,
-  templateUrl: "templates/uab-sidenav"
+  templateUrl: "templates/uab-sidenav.html"
 }
 
 angular.module('application').component('uabSidenav', uabSidenav)

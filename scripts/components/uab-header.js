@@ -43,7 +43,7 @@ uabHeaderCtrl.$inject = ['$rootScope','Sidenav','Annotations']
 
 var uabHeader = {
   controller: uabHeaderCtrl,
-  templateUrl: "templates/uab-header"
+  templateUrl: "templates/uab-header.html"
 }
 
 angular.module('application').component('uabHeader', uabHeader)
