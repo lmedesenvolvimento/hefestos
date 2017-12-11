@@ -86,7 +86,7 @@ gulp.task('copy', ()=> {
   gulp.src('./topicos/**/*.html').pipe(gulp.dest('./dist/topicos'));
 })
 
-gulp.task('build', ['clean','sass','scripts'],()=> {
+gulp.task('build', ['sass','scripts'],()=> {
   gulp.start('copy')
 });
 
