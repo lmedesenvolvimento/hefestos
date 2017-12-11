@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const del = require('del');
 const watch = require('gulp-watch');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
@@ -21,6 +22,10 @@ gulp.task('vendor', () => {
     ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('./js/'));
+})
+
+gulp.task('clean', () => {
+  return del('dist/**/*', 'dist/')
 })
 
 gulp.task('core', () => {
@@ -65,6 +70,23 @@ gulp.task('watch', () => {
     watch('scripts/**/*.js', () => {
         gulp.start('scripts');
     });
+});
+
+gulp.task('copy', ()=> {
+  gulp.src([
+    'index.html',
+    'config.json'
+  ]).pipe(gulp.dest('./dist'));
+
+  gulp.src('./css/*.css').pipe(gulp.dest('./dist/css'));
+  gulp.src('./js/*.js').pipe(gulp.dest('./dist/js'));
+  gulp.src('./fonts/*').pipe(gulp.dest('./dist/fonts'));
+  gulp.src('./layout/*').pipe(gulp.dest('./dist/layout'));
+  gulp.src('./templates/**/*.html').pipe(gulp.dest('./dist/templates'));
+})
+
+gulp.task('build', ['clean','sass','scripts'],()=> {
+  gulp.start('copy')
 });
 
 gulp.task('default', () => {
