@@ -1,0 +1,34 @@
+{
+    "nome": "Aula I",
+    "tema":"css/tema.css",
+    "academico":{
+        "disciplina":"Modelo UAB",
+        "responsavel": "Professor Lobato Pipe"
+    },
+    "topicos": [
+        {
+            "nome": "Tipografia",
+            "local": "topicos/01.html",
+            "default": true
+        },
+        {
+            "nome": "Componetes",
+            "local": "topicos/02.html"
+        },
+        {
+            "nome": "Tópico 03",
+            "local": "topicos/03.html"
+        },
+        {
+            "nome": "Tópico 04",
+            "local": "topicos/04.html"
+        }
+    ],
+    "tema":{
+      "primario": "green",
+      "contraste": "orange"
+    },
+    "imported_styles":[
+        "custom.css"
+    ]
+}
