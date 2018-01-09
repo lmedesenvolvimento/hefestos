@@ -3,19 +3,24 @@ uab-header{
     @extend .container;
     width: 100%;
     padding: 24px 16px 24px;
-    color: white;
+    color: $text-color;
+    .subtitle{
+      font-weight: bold;
+    }
     .subtitle, .caption{
       font-size: 18pt;
+      margin-left: 3rem;
     }
-    .title{
-      font-size: 30pt;
+    .titles{
       line-height: 1.1;
-      small{
-        color: transparentize(white, 0.2) !important;
+      .caption{
+        font-size: 16pt;
+        color: $text-color;
       }
     }
   }
   .md-toolbar-tools {
+    @extend .h4;
     background-color: transparentize(black, 0.8);
     > .container-fluid{
       display: flex;
@@ -46,15 +51,15 @@ uab-header + md-content{
   uab-header {
     uab-header-titles {
       padding: 24px;
-      .subtitle, .caption{
+      .subtitle{
         font-size: 14pt;
       }
-      .title{
+      .caption{
+        font-size: 12pt;
+      }
+      .titles{
         font-size: 24pt;
         line-height: 0.8;
-        small{
-          color: transparentize(white, 0.2) !important;
-        }
       }
     }
     .md-toolbar-tools {
