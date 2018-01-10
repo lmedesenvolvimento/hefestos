@@ -1,0 +1,16 @@
+ul[rn-carousel]{
+  width: 100%;
+  min-height: 480px;
+  height: auto;
+  margin: 0px;
+  li .layer{
+    display: flex;
+    width: 100%;
+    height: inherit;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: no-repeat;
+    user-select: none !important;
+  }
+}

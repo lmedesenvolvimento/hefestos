@@ -2,6 +2,7 @@
     "nome": "Aula I",
     "tema":"css/tema.css",
     "academico":{
+        "curso": "Pedagogia",
         "disciplina":"Modelo UAB",
         "responsavel": "Professor Lobato Pipe"
     },

@@ -24,6 +24,7 @@ var Loader = {
           .primaryPalette(manifest.tema.primario)
           .accentPalette(manifest.tema.contraste);
 
+
         // Configurando o tópico inicial
         var defaultTopic = _.find(manifest.topicos, { default: true });
 

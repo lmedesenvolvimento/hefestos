@@ -1,0 +1,37 @@
+<!-- Primary Colors -->
+<style>
+  .uab-md-primary {
+    background-color: {{$ctrl.colors.primary.hex}};
+  }
+  .uab-md-accent {
+    background-color: {{$ctrl.colors.accent.hex}};
+  }
+</style>
+
+<!-- Plyr -->
+
+<style>
+  .plyr__progress--played, .plyr__volume--display{
+    color: {{$ctrl.colors.accent.hex}};
+  }
+  .plyr--video .plyr__controls button.tab-focus:focus, .plyr--video .plyr__controls button:hover{
+    background: {{$ctrl.colors.accent.hex}};
+  }
+  .plyr--audio .plyr__controls button.tab-focus:focus, .plyr--audio .plyr__controls button:hover{
+    background: {{$ctrl.colors.accent.hex}};
+  }
+  .plyr__play-large{
+    background: {{$ctrl.colors.accent.hex}};
+  }
+  .plyr input[type="range"]:active::-webkit-slider-thumb{
+    background: {{$ctrl.colors.accent.hex}};
+  }
+
+  .plyr input[type="range"]:active::-moz-range-thumb{
+    background: {{$ctrl.colors.accent.hex}};
+  }
+
+  .plyr input[type="range"]:active::-ms-thumb{
+    background: {{$ctrl.colors.accent.hex}};
+  }
+</style>

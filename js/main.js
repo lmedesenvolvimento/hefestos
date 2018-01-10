@@ -26,6 +26,7 @@ ApplicationRun.$inject = ['$rootScope']
 var app = angular.module('application', [
   'ngAnimate',
   'ngMaterial',
+  'angular-carousel',
   'ui.router',
   'ui.router.state.events'
 ])
@@ -55,6 +56,27 @@ var lazyImgDirective = function(){
 }
 
 angular.module("application").directive("lazyImg", lazyImgDirective)
+
+var uabColorsCtrl = function($rootScope, $mdColorPalette){
+  var self = this
+  var tema = $rootScope.$global.manifest.tema
+
+  self.colors = {
+    primary: $mdColorPalette[tema.primario]["500"],
+    accent: $mdColorPalette[tema.contraste]["500"]
+  }
+
+  return self
+}
+
+uabColorsCtrl.$inject = ['$rootScope','$mdColorPalette']
+
+var uabColors = {
+  controller: uabColorsCtrl,
+  templateUrl: "templates/uab-colors.html"
+};
+
+angular.module('application').component('uabColors', uabColors)
 
 var uabFooterCtrl = function($element){
   var self = this;
@@ -177,6 +199,19 @@ angular.module("application").component("uabPagination",{
       asText: "="
     }
 })
+
+var uabQuadro = function(){
+  return {
+    scope: {
+      icon: "@",
+      title: "@"
+    },
+    transclude: true,
+    templateUrl: "templates/uab-quadro.html"
+  }
+};
+
+angular.module('application').directive('uabQuadro', uabQuadro)
 
 var SanfonadoCtrl = function($element){
   var self = this
@@ -303,6 +338,21 @@ var Sidenav = function($mdSidenav){
 Sidenav.$inject = ['$mdSidenav']
 
 angular.module('application').factory('Sidenav', Sidenav)
+
+var uabMedia = function(){
+  return {
+    restrict: 'A',
+    scope: {
+      type: "@"
+    },
+    link: function(scope, element, attr){
+      var media = element.get(0)
+      plyr.setup(media);
+    }
+  }
+};
+
+angular.module('application').directive('uabMedia', uabMedia);
 
 var ApplicationCtrl = function(Sidenav){
     var self = this;

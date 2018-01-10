@@ -26,6 +26,7 @@ ApplicationRun.$inject = ['$rootScope']
 var app = angular.module('application', [
   'ngAnimate',
   'ngMaterial',
+  'angular-carousel',
   'ui.router',
   'ui.router.state.events'
 ])
