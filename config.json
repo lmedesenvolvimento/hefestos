@@ -8,6 +8,10 @@
     },
     "topicos": [
         {
+          "nome": "Orientações",
+          "local": "topicos/orientacoes.html"
+        },
+        {
             "nome": "Tipografia",
             "local": "topicos/01.html",
             "default": true
