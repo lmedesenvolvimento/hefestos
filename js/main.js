@@ -354,6 +354,18 @@ var uabMedia = function(){
 
 angular.module('application').directive('uabMedia', uabMedia);
 
+var uabSlideItem = function(){
+  return {
+    restrict: "A",
+    scope: {
+      uabSlideItem: "@"
+    },
+    templateUrl: "templates/uab-slide-item.html"
+  }
+}
+
+angular.module("application").directive("uabSlideItem", uabSlideItem)
+
 var ApplicationCtrl = function(Sidenav){
     var self = this;
 

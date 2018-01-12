@@ -26,3 +26,16 @@ uab-quadro{
     }
   }
 }
+
+@media (max-width: $screen-sm) {
+  uab-quadro{
+    display: block;
+    .uab-quadro{
+      flex-direction: column;
+      .uab-quadro-icon{
+        margin-left: 12px;
+        margin-bottom: -10px;
+      }
+    }
+  }
+}

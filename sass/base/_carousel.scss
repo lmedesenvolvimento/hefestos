@@ -1,16 +1,92 @@
-ul[rn-carousel]{
-  width: 100%;
-  min-height: 480px;
-  height: auto;
-  margin: 0px;
-  li .layer{
-    display: flex;
+uab-slide{
+  display: block;
+  position: relative;
+  ul[rn-carousel]{
     width: 100%;
-    height: inherit;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center top;
-    background-repeat: no-repeat;
-    user-select: none !important;
+    max-height: 550px;
+    margin: 0px;
+    li{
+      position: relative;
+      margin-left: -100%;
+      margin-right: -4px;
+      overflow: hidden;
+      &:first-child{
+        margin-left: 0px;
+      }
+      .layer{
+        user-select: none !important;
+        &::before{
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          content: '';
+          background: rgba(0,0,0,0.01);
+        }
+      }
+    }
+    li img{
+      display: block;
+      max-width: 100%;
+      margin: auto;
+      user-select: none !important;
+    }
+  }
+
+  .rn-carousel-controls{
+    .rn-carousel-control-next, .rn-carousel-control-prev{
+      font-family: 'icomoon';
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 118px;
+      height: 100%;
+      outline:none;
+      &::before{
+        color: white;
+        font-size: 4.5rem;
+      }
+    }
+    .rn-carousel-control-next{
+      top: 0;
+      right: 0;
+      background: linear-gradient(to right, transparent, transparentize(black, 0.1));
+      &::before{
+        content: '\e315';
+      }
+    }
+    .rn-carousel-control-prev{
+      top: 0;
+      left: 0;
+      background: linear-gradient(to left, transparent, transparentize(black, 0.1));
+      &::before{
+        content: '\e314';
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-md) {
+  uab-slide{
+    ul[rn-carousel]{
+      min-height: 240px;
+      li .layer{
+        background-size: cover;
+        background-position: top;
+      }
+    }
+  }
+}
+@media (max-width: $screen-xs) {
+  uab-slide{
+    ul[rn-carousel]{
+      min-height: 200px;
+      li .layer{
+        background-size: cover;
+        background-position: top;
+      }
+    }
   }
 }
