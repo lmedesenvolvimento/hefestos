@@ -9,6 +9,8 @@ const webserver = require('gulp-webserver');
 gulp.task('vendor', () => {
     return gulp.src([
         './node_modules/lodash/lodash.js',
+        './node_modules/moment/moment.js',
+        './node_modules/moment/locale/pt-br.js',
         './node_modules/string/dist/string.js',
         './node_modules/jquery/dist/jquery.js',
         './node_modules/plyr/dist/plyr.js',

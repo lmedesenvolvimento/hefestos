@@ -24438,6 +24438,11 @@ uab-quadro {
         margin-left: 12px;
         margin-bottom: -10px; } }
 
+.uab-box {
+  padding: 8px 16px;
+  margin: 24px 0px;
+  border: 1px solid; }
+
 main {
   display: block;
   margin: 0;
