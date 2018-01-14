@@ -20988,6 +20988,10 @@ html, body {
 .white-paper {
   background-color: white; }
 
+[class^="col-"] {
+  padding-left: 1rem;
+  padding-right: 1rem; }
+
 @font-face {
   font-family: "Dalek";
   src: url(../fonts/dalek.ttf); }
@@ -21033,6 +21037,7 @@ h1, h2, h3, h4 {
   font-size: 1.2rem; }
 
 .cabecalho {
+  margin-top: 1.6rem;
   margin-bottom: 1.6rem;
   padding-bottom: 8px;
   border-bottom: 1px solid #ddd; }
@@ -24183,7 +24188,11 @@ uab-slide {
       background-position: top; } }
 
 img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
   opacity: 1;
+  margin: auto;
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s; }
 
