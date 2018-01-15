@@ -19,6 +19,7 @@
     "angular-material-data-table": "^0.10.10",
     "angular-messages": "^1.6.7",
     "angular-touch": "^1.6.8",
+    "bourbon": "^5.0.0",
     "flexboxgrid-sass": "^8.0.5",
     "gulp-concat": "^2.6.1",
     "gulp-webserver": "^0.9.1",

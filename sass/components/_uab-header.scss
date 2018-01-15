@@ -5,6 +5,7 @@ uab-header{
     padding: 24px 16px 24px;
     color: $text-color;
     .subtitle{
+      @include ellipsis
       font-weight: bold;
     }
     .subtitle, .caption{
@@ -12,6 +13,7 @@ uab-header{
       margin-left: 3rem;
     }
     .titles{
+      @include ellipsis
       line-height: 1.1;
       .caption{
         font-size: 16pt;

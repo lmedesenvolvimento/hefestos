@@ -20982,6 +20982,10 @@ div.rn-carousel-indicator span {
 .text-right {
   text-align: right; }
 
+.uab-svg-animation {
+  max-width: 100%;
+  margin: auto; }
+
 html, body {
   background: #EBECEC; }
 
@@ -24216,11 +24220,23 @@ uab-header uab-header-titles {
   padding: 24px 16px 24px;
   color: #222; }
   uab-header uab-header-titles .subtitle {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
     font-weight: bold; }
   uab-header uab-header-titles .subtitle, uab-header uab-header-titles .caption {
     font-size: 18pt;
     margin-left: 3rem; }
   uab-header uab-header-titles .titles {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
     line-height: 1.1; }
     uab-header uab-header-titles .titles .caption {
       font-size: 16pt;
