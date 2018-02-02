@@ -12,9 +12,13 @@
           "local": "topicos/orientacoes.html"
         },
         {
-          "nome": "Tópico 01: Abertura da Disciplina",
-          "local": "topicos/01.html",
+          "nome": "Tópico HQ",
+          "local": "topicos/hq.html",
           "default": true
+        },
+        {
+          "nome": "Tópico 01: Abertura da Disciplina",
+          "local": "topicos/01.html"
         },
         {
           "nome": "Tópico 02: Abertura da Disciplina",

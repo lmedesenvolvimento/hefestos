@@ -1,0 +1,25 @@
+<div class="flipbook-viewport">
+	<div class="flipbook-container">
+		<div class="flipbook">
+      <div class="page"
+	    		ng-repeat="image in $ctrl.images"
+	    		style="background-image: url('{{ image.original }}')"
+	    		big-picture="{{image.big}}"></div>
+    </div>
+		<div class="flipbook-controls">
+			<md-button class="md-icon-button" aria-label="Voltar Página" ng-click="$ctrl.back($event)">
+        <md-icon md-font-icon="icon-arrow_back"></md-icon>
+				<md-tooltip>Voltar Página</md-tooltip>
+      </md-button>
+			<md-button class="md-icon-button" aria-label="Avançar Página" ng-click="$ctrl.next($event)">
+        <md-icon md-font-icon="icon-arrow_forward"></md-icon>
+				<md-tooltip>Avançar Página</md-tooltip>
+      </md-button>
+			<!-- <span class="flex"/> -->
+			<!-- <md-button class="md-icon-button" aria-label="Tela Cheia" ng-click="$ctrl.toogleFullscreen($event)">
+				<md-icon md-font-icon="icon-fullscreen"></md-icon>
+				<md-tooltip>Tela Cheia</md-tooltip>
+			</md-button> -->
+		</div>
+  </div>
+</div>

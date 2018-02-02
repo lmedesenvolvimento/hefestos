@@ -24468,6 +24468,85 @@ uab-quadro {
   margin: 24px 0px;
   border: 1px solid; }
 
+uab-hq {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  height: 600px !important;
+  border-radius: 8px;
+  padding: 24px; }
+  uab-hq .flipbook-viewport {
+    overflow: hidden;
+    width: 100%;
+    height: 100%; }
+    uab-hq .flipbook-viewport:hover .flipbook-controls {
+      opacity: 1; }
+  uab-hq .flipbook-viewport .flipbook-container {
+    position: static;
+    margin: auto; }
+  uab-hq .flipbook-viewport .flipbook {
+    overflow: hidden;
+    width: 922px;
+    max-width: 100%;
+    height: 600px !important;
+    margin-left: 0px !important; }
+  uab-hq .flipbook-viewport .page {
+    width: 461px;
+    height: 600px !important;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: 100% 100%; }
+  uab-hq .flipbook .page {
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); }
+    uab-hq .flipbook .page:hover {
+      cursor: -webkit-zoom-in;
+      cursor: zoom-in; }
+    uab-hq .flipbook .page.zoom--active.zoomImg:hover {
+      cursor: -webkit-zoom-out;
+      cursor: zoom-out; }
+  uab-hq .flipbook-viewport .page img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0; }
+  uab-hq .flipbook-viewport .shadow {
+    -webkit-box-shadow: 0 0 20px #ccc;
+    box-shadow: 0 0 20px #ccc; }
+  uab-hq .flipbook-controls {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-box-shadow: 1px 1px 9px rgba(51, 51, 51, 0.5);
+    box-shadow: 1px 1px 9px rgba(51, 51, 51, 0.5);
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    background: rgba(51, 51, 51, 0.5);
+    max-width: 20%;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    margin: auto;
+    border-radius: 4px;
+    opacity: 0;
+    z-index: 20; }
+    uab-hq .flipbook-controls .md-button md-icon {
+      color: white;
+      font-size: 24px; }
+
 main {
   display: block;
   margin: 0;
@@ -24481,6 +24560,11 @@ main {
   main.ng-enter-active {
     /* end with opacity 1 (fade in) */
     opacity: 1; }
+
+.linha {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
 
 .container-fluid {
   width: 100%; }

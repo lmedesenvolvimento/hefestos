@@ -1,28 +1,40 @@
 {
-    "nome": "Aula I",
+    "nome": "Aula 01: Contrato Psicológico",
     "tema":"css/tema.css",
     "academico":{
         "curso": "Pedagogia",
-        "disciplina":"Modelo UAB",
-        "responsavel": "Professor Lobato Pipe"
+        "disciplina":"Psicologia do Desenvolvimento e da Aprendizagem na Adolescência",
+        "responsavel": "Professora Nidia Barone"
     },
     "topicos": [
         {
+          "nome": "Orientações",
+          "local": "topicos/orientacoes.html"
+        },
+        {
+          "nome": "Tópico HQ",
+          "local": "topicos/hq.html",
+          "default": true
+        },
+        {
+          "nome": "Tópico 01: Abertura da Disciplina",
+          "local": "topicos/01.html"
+        },
+        {
+          "nome": "Tópico 02: Abertura da Disciplina",
+          "local": "topicos/02.html"
+        },
+        {
+          "nome": "Tópico 03: Calendário Histórico da Psicologia",
+          "local": "topicos/03.html"
+        },
+        {
             "nome": "Tipografia",
-            "local": "topicos/01.html",
-            "default": true
+            "local": "topicos/tipografia.html"
         },
         {
             "nome": "Componetes",
-            "local": "topicos/02.html"
-        },
-        {
-            "nome": "Tópico 03",
-            "local": "topicos/03.html"
-        },
-        {
-            "nome": "Tópico 04",
-            "local": "topicos/04.html"
+            "local": "topicos/componentes.html"
         }
     ],
     "tema":{

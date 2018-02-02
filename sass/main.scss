@@ -29,6 +29,7 @@ main{
 
 .linha{
   @extend .row;
+  justify-content: center;
 }
 
 .container{

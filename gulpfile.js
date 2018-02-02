@@ -13,6 +13,8 @@ gulp.task('vendor', () => {
         './node_modules/moment/locale/pt-br.js',
         './node_modules/string/dist/string.js',
         './node_modules/jquery/dist/jquery.js',
+        './lib/turn.js',
+        './lib/jquery.zoom.js',
         './node_modules/plyr/dist/plyr.js',
         './node_modules/angular/angular.js',
         './node_modules/angular-i18n/angular-locale_pt-br.js',
