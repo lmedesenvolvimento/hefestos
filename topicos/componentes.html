@@ -431,6 +431,12 @@
       <button md-button class="md-primary">Primário</button>
       <button md-button class="md-accent">Secundário</button>
       <button md-button class="md-warn">Alerta</button>
+      <button md-button ng-click="app.listen('audios/horse.mp3')">
+        <md-icon md-font-icon="icon-play_arrow" class="icon-24"></md-icon> Toque para escutar
+      </button>
+      <button md-button ng-click="app.listen('audios/horse.mp3', 'Mensagem customizada')">
+        <md-icon md-font-icon="icon-play_arrow" class="icon-24"></md-icon> Toque para escutar, mensagem customizada
+      </button>
       <a href="http://portal.virtual.ufc.br/" md-button target="_blank">Link</a>
     </p>
 
@@ -440,6 +446,12 @@
       <button md-button class="md-primary md-raised">Primário</button>
       <button md-button class="md-accent md-raised">Secundário</button>
       <button md-button class="md-warn md-raised">Alerta</button>
+      <button md-button class="md-raised" ng-click="app.listen('audios/horse.mp3')">
+        <md-icon md-font-icon="icon-play_arrow" class="icon-24"></md-icon> Toque para escutar
+      </button>
+      <button md-button class="md-raised" ng-click="app.listen('audios/horse.mp3','Mensagem customizada')">
+        <md-icon md-font-icon="icon-play_arrow" class="icon-24"></md-icon> Toque para escutar, mensagem customizada
+      </button>
       <a href="http://portal.virtual.ufc.br/" md-button class="md-raised" target="_blank">Link</a>
     </p>
   </div>
