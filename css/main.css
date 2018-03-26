@@ -24267,7 +24267,7 @@ uab-header {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 70;
+    z-index: 48;
     -webkit-transform: translateY(calc( -100% + 64px));
     transform: translateY(calc( -100% + 64px)); }
   uab-header uab-header-titles {
