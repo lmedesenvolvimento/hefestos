@@ -20,7 +20,21 @@
   text-align: right;
 }
 
-.uab-svg-animation{
+uab-svg-animation{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+
+uab-svg-animation iframe{
   max-width: 100%;
   margin: auto;
+}
+
+@media(max-width: $screen-xs){
+  uab-svg-animation{
+    max-height: 200px;
+  }
 }

@@ -9,5 +9,19 @@ var View = {
         $(content).focus()
       };
     });
+
+    // Observe content scroll
+    $('.main').on('scroll', function(e){
+      var element = $(e.target);
+      var body = $('body');
+
+      // $('.main').scrollTop() >= 200 
+      //   ? $('uab-header-titles').addClass('hidden') 
+      //   : $('uab-header-titles').removeClass('hidden')
+      
+      $('.main').scrollTop() >= 200 
+        ? $('uab-header').addClass('hidden') 
+        : $('uab-header').removeClass('hidden')
+    })
   }
 }

@@ -6432,7 +6432,7 @@ md-toolbar {
   -webkit-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 3px 3px -2px rgba(0, 0, 0, 0.12);
   box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 3px 3px -2px rgba(0, 0, 0, 0.12); }
 
-.md-whiteframe-4dp, .md-whiteframe-z2 {
+.md-whiteframe-4dp, md-card, .md-whiteframe-z2 {
   -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12); }
 
@@ -20982,12 +20982,31 @@ div.rn-carousel-indicator span {
 .text-right {
   text-align: right; }
 
-.uab-svg-animation {
+uab-svg-animation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  overflow: hidden; }
+
+uab-svg-animation iframe {
   max-width: 100%;
   margin: auto; }
 
+@media (max-width: 599px) {
+  uab-svg-animation {
+    max-height: 200px; } }
+
 html, body {
-  background: #EBECEC; }
+  background: #eeeeee; }
+
+.main {
+  background-color: #eeeeee; }
 
 .white-paper {
   background-color: white; }
@@ -21011,7 +21030,10 @@ body {
 p {
   font-family: 'Roboto', sans-serif;
   font-size: 1.15rem;
-  margin: 24px 0px; }
+  margin: 24px 0px;
+  text-indent: 2.0rem; }
+  p.sem-recuo {
+    text-indent: 0; }
 
 h1, h2, h3, h4 {
   font-family: 'Montserrat', sans-serif;
@@ -21050,6 +21072,19 @@ h1, h2, h3, h4 {
   background-color: #eee;
   border: 1px solid #ddd;
   padding: 24px; }
+  .destaque.abnt {
+    margin-left: 4cm;
+    font-size: 100%; }
+    .destaque.abnt .abnt-fonte {
+      display: block;
+      font-size: 105%;
+      text-align: right; }
+    .destaque.abnt * {
+      text-indent: 0px; }
+
+@media (max-width: 799px) {
+  .destaque.abnt {
+    margin-left: 0cm; } }
 
 /* -- Material Design Table style -------------- */
 .table {
@@ -21076,8 +21111,8 @@ h1, h2, h3, h4 {
       transition: all 0.3s ease; }
   .table > thead > tr > th {
     font-size: 1.25rem;
-    font-weight: 400;
-    color: #757575;
+    font-weight: 600;
+    color: #333;
     vertical-align: bottom;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
   .table > caption + thead > tr:first-child > th,
@@ -21148,8 +21183,8 @@ h1, h2, h3, h4 {
           content: attr(data-title);
           float: left;
           font-size: inherit;
-          font-weight: 400;
-          color: #757575; }
+          font-weight: 600;
+          color: #333; }
   .table-responsive-vertical.shadow-z-1 {
     -webkit-box-shadow: none;
     box-shadow: none; }
@@ -24062,7 +24097,7 @@ body > header {
   left: 0;
   height: 52px;
   width: 100%;
-  background: #EBECEC; }
+  background: #eeeeee; }
   body > header > .container, uab-header body > header > uab-header-titles, body > header > uab-footer, body > header > .white-paper {
     height: 52px;
     -webkit-box-shadow: 0px 12px 24px -12px rgba(34, 34, 34, 0.2);
@@ -24124,6 +24159,7 @@ uab-slide {
       uab-slide ul[rn-carousel] li:first-child {
         margin-left: 0px; }
       uab-slide ul[rn-carousel] li .layer {
+        background-color: black;
         -webkit-user-select: none !important;
         -moz-user-select: none !important;
         -ms-user-select: none !important;
@@ -24189,7 +24225,11 @@ uab-slide {
     min-height: 200px; }
     uab-slide ul[rn-carousel] li .layer {
       background-size: cover;
-      background-position: top; } }
+      background-position: top; }
+  uab-slide .rn-carousel-controls .rn-carousel-control-next, uab-slide .rn-carousel-controls .rn-carousel-control-prev {
+    min-width: 64px; }
+    uab-slide .rn-carousel-controls .rn-carousel-control-next::before, uab-slide .rn-carousel-controls .rn-carousel-control-prev::before {
+      font-size: 2.8rem; } }
 
 img {
   display: inline-block;
@@ -24215,64 +24255,83 @@ img[data-src] {
   max-height: 68px;
   opacity: 0; }
 
-uab-header uab-header-titles {
-  width: 100%;
-  padding: 24px 16px 24px;
-  color: #222; }
-  uab-header uab-header-titles .subtitle {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    font-weight: bold; }
-  uab-header uab-header-titles .subtitle, uab-header uab-header-titles .caption {
-    font-size: 18pt;
-    margin-left: 3rem; }
-  uab-header uab-header-titles .titles {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    line-height: 1.1; }
-    uab-header uab-header-titles .titles .caption {
-      font-size: 16pt;
-      color: #222; }
+body {
+  -webkit-transition: all 1s cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  transition: all 1s cubic-bezier(0.67, 0.35, 0.04, 0.93); }
 
-uab-header .md-toolbar-tools {
-  background-color: rgba(0, 0, 0, 0.2); }
-  uab-header .md-toolbar-tools > .container-fluid {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%; }
-  uab-header .md-toolbar-tools .md-icon-button {
-    font-size: 32px;
-    line-height: 32px;
-    padding: 0px; }
-    uab-header .md-toolbar-tools .md-icon-button md-icon {
-      color: #222; }
-  uab-header .md-toolbar-tools .md-toolbar-tools-text {
-    color: #222;
-    padding: 8px 0px;
-    line-height: 24px; }
+uab-header {
+  -webkit-transition: all 0.4s cubic-bezier(0.67, 0.35, 0.04, 0.93);
+  transition: all 0.4s cubic-bezier(0.67, 0.35, 0.04, 0.93); }
+  uab-header.hidden {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 70;
+    -webkit-transform: translateY(calc( -100% + 64px));
+    transform: translateY(calc( -100% + 64px)); }
+  uab-header uab-header-titles {
+    width: 100%;
+    padding: 24px 16px 24px;
+    color: #222; }
+    uab-header uab-header-titles .subtitle {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-wrap: normal;
+      font-weight: bold; }
+    uab-header uab-header-titles .subtitle, uab-header uab-header-titles .caption {
+      font-size: 18pt;
+      margin-left: 3rem; }
+    uab-header uab-header-titles .titles {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-wrap: normal;
+      line-height: 1.1; }
+      uab-header uab-header-titles .titles .caption {
+        font-size: 16pt;
+        color: #222; }
+  uab-header .md-toolbar-tools {
+    background-color: rgba(0, 0, 0, 0.2); }
+    uab-header .md-toolbar-tools > .container-fluid {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%; }
+    uab-header .md-toolbar-tools .md-icon-button {
+      font-size: 32px;
+      line-height: 32px;
+      padding: 0px; }
+      uab-header .md-toolbar-tools .md-icon-button md-icon {
+        color: #222; }
+    uab-header .md-toolbar-tools .md-toolbar-tools-text {
+      color: #222;
+      padding: 8px 0px;
+      line-height: 24px; }
 
 uab-header + md-content {
   background-color: transparent; }
 
 @media (max-width: 919px) {
   uab-header uab-header-titles {
+    line-height: 1.1;
     padding: 24px; }
     uab-header uab-header-titles .subtitle {
-      font-size: 14pt; }
-    uab-header uab-header-titles .caption {
-      font-size: 12pt; }
+      font-size: 14pt;
+      margin-left: 0px; }
     uab-header uab-header-titles .titles {
       font-size: 24pt;
       line-height: 0.8; }
+      uab-header uab-header-titles .titles .caption {
+        display: block;
+        line-height: 14pt;
+        font-size: 12pt;
+        margin-left: 0px; }
   uab-header .md-toolbar-tools {
     white-space: nowrap;
     overflow-x: auto;
@@ -24286,6 +24345,11 @@ uab-header + md-content {
     uab-header .md-toolbar-tools .md-icon-button {
       font-size: 24px !important;
       line-height: 24px; } }
+
+@media (max-width: 599px) {
+  uab-header.hidden {
+    -webkit-transform: translateY(calc( -100% + 56px));
+    transform: translateY(calc( -100% + 56px)); } }
 
 uab-footer .academic p {
   font-size: 1.06rem; }

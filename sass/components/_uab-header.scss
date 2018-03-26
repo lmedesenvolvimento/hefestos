@@ -1,11 +1,24 @@
+body{
+  transition: all 1s $easing-in-out;
+}
+
 uab-header{
+  transition: all 0.4s $easing-in-out;
+  &.hidden{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 70;
+    transform: translateY( calc( -100% + 64px ));
+  }
   uab-header-titles{
     @extend .container;
     width: 100%;
     padding: 24px 16px 24px;
-    color: $text-color;
+    color: $text-color;    
     .subtitle{
-      @include ellipsis
+      @include ellipsis;
       font-weight: bold;
     }
     .subtitle, .caption{
@@ -13,13 +26,13 @@ uab-header{
       margin-left: 3rem;
     }
     .titles{
-      @include ellipsis
+      @include ellipsis;
       line-height: 1.1;
       .caption{
         font-size: 16pt;
         color: $text-color;
       }
-    }
+    }    
   }
   .md-toolbar-tools {
     @extend .h4;
@@ -52,16 +65,21 @@ uab-header + md-content{
 @media (max-width: $screen-md) {
   uab-header {
     uab-header-titles {
+      line-height: 1.1;
       padding: 24px;
       .subtitle{
         font-size: 14pt;
-      }
-      .caption{
-        font-size: 12pt;
+        margin-left: 0px;
       }
       .titles{
         font-size: 24pt;
         line-height: 0.8;
+        .caption{
+          display: block;
+          line-height: 14pt;
+          font-size: 12pt;
+          margin-left: 0px;
+        }
       }
     }
     .md-toolbar-tools {
@@ -80,5 +98,13 @@ uab-header + md-content{
         line-height: 24px;
       }
     }
+  }
+}
+
+@media(max-width: $screen-xs){
+  uab-header{
+    &.hidden{
+      transform: translateY( calc( -100% + 56px ));     
+    }   
   }
 }

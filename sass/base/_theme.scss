@@ -2,6 +2,10 @@ html, body{
   background: $bg-color;
 }
 
+.main{
+  background-color: $bg-color;
+}
+
 .white-paper{
   @extend .md-whiteframe-1dp;
   background-color: white;

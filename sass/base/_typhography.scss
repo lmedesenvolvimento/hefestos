@@ -17,6 +17,10 @@ p{
   @include roboto;
   font-size: 1.15rem;
   margin: 24px 0px;
+  text-indent: 2.0rem;
+  &.sem-recuo{
+    text-indent: 0;
+  }
 }
 
 h1, h2, h3, h4{
@@ -85,4 +89,24 @@ h4{
   background-color: $ligth-grey;
   border: 1px solid $border-color;
   padding: $box-padding;
+  &.abnt{
+    margin-left: 4cm;
+    font-size: 100%;
+    .abnt-fonte{
+      display: block;
+      font-size: 105%;
+      text-align: right
+    }
+    *{
+      text-indent: 0px;
+    }
+  }
+}
+
+@media(max-width: $screen-sm){
+  .destaque{
+    &.abnt{
+      margin-left: 0cm;
+    }
+  }
 }
