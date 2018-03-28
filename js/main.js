@@ -78,19 +78,51 @@ var uabColors = {
 
 angular.module('application').component('uabColors', uabColors)
 
+var uabDialogImg = function($timeout){
+  return {
+    restrict: 'A',
+    scope: {
+      fancybox: "@"
+    },
+    transclude: true,
+    link: function(scope, element, attrs, ctrl, transclude){
+      transclude(scope, function(clone, scope){
+        $(clone).appendTo(element)
+      })
+    }
+  };
+}
+
+uabDialogImg.$inject = ['$timeout']
+
+angular.module('application').directive('uabDialogImg', uabDialogImg)
+var uabDialogCtrl = function($scope, $element, $mdDialog, $compile){
+  this.simpleText = function(title, text){
+    simpleText($mdDialog, title, text)
+  }
+
+  this.showHtml = function(){
+    var htmlString = $element.find('uab-dialog-content').html();
+    var htmlParsed = angular.element(htmlString);
+    showHtml($mdDialog, $scope.uabDialogTitle, $compile(htmlParsed)($scope));
+  }
+}
+
+uabDialogCtrl.$inject = ['$scope', '$element', '$mdDialog', '$compile']
+
 var uabDialog = function($mdDialog){
   return {
     restrict: 'E',
     transclude: true,
+    controller: uabDialogCtrl,
     scope: {
       uabDialogTitle: "@"
     },
-    template: "<ng-transclude></ng-transclude>",
-    compile: function(scope, element, attrs){
-      $(element)
-        .find('[uab-dialog-trigger]')
-        .on('click', angular.bind(scope, triggerDialog, $mdDialog))
-      console.log(element)
+    link: function(scope, element, attrs, ctrl, transclude){
+      scope.$ctrl = ctrl
+      transclude(scope, function(clone, scope){
+        element.append(clone)
+      })
     }
   }
 }
@@ -101,8 +133,30 @@ angular.module('application').directive('uabDialog', uabDialog)
 
 
 // @private
-function triggerDialog(event, mdDialog){  
-  mdDialog.showSimpleText(this.uabDialogTitle)
+function simpleText(mdDialog, title, text){
+  mdDialog.show({
+    templateUrl: "templates/dialogs/simple-text.html",
+    controller: "SimpleDialogCtrl",
+    controllerAs: "dialog",
+    clickOutsideToClose: true,
+    locals: {
+      title: title,
+      text: text
+    }
+  })
+}
+
+function showHtml(mdDialog, title, html){
+  mdDialog.show({
+    templateUrl: "templates/dialogs/markup.html",
+    controller: "HtmlDialogCtrl",
+    controllerAs: "dialog",
+    clickOutsideToClose: true,
+    locals: {
+      title: title,
+      html: html
+    }
+  })
 }
 var uabFooterCtrl = function($element){
   var self = this;
@@ -551,3 +605,35 @@ var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, Sidenav) {
 ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', 'Sidenav']
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);
+
+var SimpleDialogCtrl = function($scope, $mdDialog, title, text){
+  $scope.title = title
+  $scope.text = text
+
+  $scope.close = function(){
+    $mdDialog.cancel(true)
+  }
+}
+
+SimpleDialogCtrl.$inject = ['$scope', '$mdDialog','title','text']
+
+var HtmlDialogCtrl = function($scope, $element, $mdDialog, $controller, title, html){
+  $controller("SimpleDialogCtrl", { $scope: $scope, title: title, text: html })
+  
+  $scope.title = title;
+
+  this.$onInit = function(){
+    try{
+      $element.find("#markup").append(html)
+    } catch(e){    
+      $element.find("#markup").append('<p>Conteúdo não é um HTML válido</p>')
+    }
+  }
+  
+};
+
+HtmlDialogCtrl.$inject = ['$scope', '$element', '$mdDialog', '$controller', 'title','html'];
+
+angular.module('application').controller('HtmlDialogCtrl', HtmlDialogCtrl);
+angular.module('application').controller('SimpleDialogCtrl', SimpleDialogCtrl);
+

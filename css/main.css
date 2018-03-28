@@ -1,3 +1,4 @@
+@import url(../node_modules/@fancyapps/fancybox/dist/jquery.fancybox.css);
 @import url("https://fonts.googleapis.com/css?family=Montserrat:700");
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 .wrapper, .container, uab-header uab-header-titles, uab-footer, .white-paper {
@@ -24126,6 +24127,11 @@ body > header {
 md-icon.icon-24 {
   font-size: 24px; }
 
+a {
+  font-weight: bold; }
+  a:hover {
+    text-decoration: underline; }
+
 md-card {
   font-size: 1.25rem; }
   md-card md-card-title {
@@ -24230,6 +24236,9 @@ uab-slide {
     min-width: 64px; }
     uab-slide .rn-carousel-controls .rn-carousel-control-next::before, uab-slide .rn-carousel-controls .rn-carousel-control-prev::before {
       font-size: 2.8rem; } }
+
+md-dialog-content {
+  padding: 24px; }
 
 img {
   display: inline-block;
@@ -24487,6 +24496,9 @@ uab-sanfonado md-card-title-text {
 uab-sanfonado .uab-sanfonado-content {
   border-top: 1px solid #ddd;
   padding: 8px 24px; }
+
+uab-dialog uab-dialog-content {
+  display: none; }
 
 uab-quadro {
   display: block; }

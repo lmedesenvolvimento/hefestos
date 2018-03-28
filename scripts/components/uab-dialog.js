@@ -1,16 +1,30 @@
+var uabDialogCtrl = function($scope, $element, $mdDialog, $compile){
+  this.simpleText = function(title, text){
+    simpleText($mdDialog, title, text)
+  }
+
+  this.showHtml = function(){
+    var htmlString = $element.find('uab-dialog-content').html();
+    var htmlParsed = angular.element(htmlString);
+    showHtml($mdDialog, $scope.uabDialogTitle, $compile(htmlParsed)($scope));
+  }
+}
+
+uabDialogCtrl.$inject = ['$scope', '$element', '$mdDialog', '$compile']
+
 var uabDialog = function($mdDialog){
   return {
     restrict: 'E',
     transclude: true,
+    controller: uabDialogCtrl,
     scope: {
       uabDialogTitle: "@"
     },
-    template: "<ng-transclude></ng-transclude>",
-    compile: function(scope, element, attrs){
-      $(element)
-        .find('[uab-dialog-trigger]')
-        .on('click', angular.bind(scope, triggerDialog, $mdDialog))
-      console.log(element)
+    link: function(scope, element, attrs, ctrl, transclude){
+      scope.$ctrl = ctrl
+      transclude(scope, function(clone, scope){
+        element.append(clone)
+      })
     }
   }
 }
@@ -21,6 +35,28 @@ angular.module('application').directive('uabDialog', uabDialog)
 
 
 // @private
-function triggerDialog(event, mdDialog){  
-  mdDialog.showSimpleText(this.uabDialogTitle)
+function simpleText(mdDialog, title, text){
+  mdDialog.show({
+    templateUrl: "templates/dialogs/simple-text.html",
+    controller: "SimpleDialogCtrl",
+    controllerAs: "dialog",
+    clickOutsideToClose: true,
+    locals: {
+      title: title,
+      text: text
+    }
+  })
+}
+
+function showHtml(mdDialog, title, html){
+  mdDialog.show({
+    templateUrl: "templates/dialogs/markup.html",
+    controller: "HtmlDialogCtrl",
+    controllerAs: "dialog",
+    clickOutsideToClose: true,
+    locals: {
+      title: title,
+      html: html
+    }
+  })
 }

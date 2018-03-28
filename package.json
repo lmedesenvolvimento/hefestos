@@ -9,6 +9,7 @@
     "postinstall": "node -e \"var s='../src',d='node_modules/src',fs=require('fs');fs.exists(d,function(e){e||fs.symlinkSync(s,d,'dir')});\""
   },
   "dependencies": {
+    "@fancyapps/fancybox": "^3.2.5",
     "@uirouter/angularjs": "^1.0.8",
     "angular": "^1.6.6",
     "angular-animate": "^1.6.6",

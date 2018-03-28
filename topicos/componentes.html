@@ -291,13 +291,46 @@
   <div class="col-xs-4">
     <p>
       <div class="h3 cabecalho">Efeito Flutuante</div>
+      
+      <uab-dialog>
+        <button md-button ng-click="$ctrl.simpleText('Título Example', 'Cupidatat commodo cillum et culpa culpa aliqua ut mollit nisi adipisicing Lorem.')">Abrir Dialogo Texto Simples</button>      
+      </uab-dialog>
+
       <uab-dialog uab-dialog-title="Título do Flutuante">
-        <button md-button uab-dialog-trigger>Abrir Dialogo</button>
+        <p>
+          Excepteur aliquip duis excepteur excepteur. Et irure eiusmod nostrud eiusmod elit veniam culpa est ullamco nulla enim dolore quis. Excepteur consectetur velit in duis aliqua laboris consectetur. Excepteur tempor proident laborum excepteur officia sunt veniam tempor reprehenderit reprehenderit <a ng-click="$ctrl.showHtml()">abrir dialogo</a>.          
+        </p>
         <uab-dialog-content>
-          <p>Exercitation excepteur quis laborum sit culpa laboris culpa sunt eiusmod ut commodo culpa eiusmod consequat.</p>
+          <p>Exercitation excepteur quis laborum sit culpa laboris culpa sunt eiusmod ut commodo culpa eiusmod consequat.</p>                  
+          <div class="linha">
+            <div class="col-md-1">
+              <img ng-src="http://placeimg.com/320/240/tech"/>
+            </div>
+            <div class="col-md-3">
+              <p>Exercitation excepteur quis laborum sit culpa laboris culpa sunt eiusmod ut commodo culpa eiusmod consequat.Ut sint excepteur magna tempor aliqua aliquip esse irure minim aliquip. Irure commodo velit labore nisi. Laborum cupidatat excepteur cillum irure. Esse exercitation enim laborum ea aute commodo Lorem. Veniam dolor et sint adipisicing nostrud labore consectetur.</p>
+            </div>
+          </div>
         </uab-dialog-content>
       </uab-dialog>
     </p>
+  </div>
+  <div class="col-xs-4">
+    <p>
+      <div class="h3 cabecalho">Efeito Flutuante - Imagens</div>
+      <a data-fancybox="gallery" name="galeria1" data-caption="Eu qui veniam occaecat quis pariatur eu dolore proident dolor laboris amet." uab-dialog-img href="http://placeimg.com/1280/720/tech">
+        <img src="http://placeimg.com/320/240/tech">
+      </a>
+      <a data-fancybox="gallery" name="galeria1" data-caption="Eu qui veniam occaecat quis pariatur eu dolore proident dolor laboris amet." uab-dialog-img href="http://placeimg.com/1280/720/animals">
+        <img src="http://placeimg.com/320/240/animals">
+      </a>
+    </p>
+  </div>
+  <div class="col-xs-4">
+    <a data-fancybox="image" data-caption="Eu qui veniam occaecat quis pariatur eu dolore proident dolor laboris amet." name="lorem" uab-dialog-img href="http://placeimg.com/1280/720/nature"><img src="http://placeimg.com/320/240/nature"></a>
+  </div>
+  <div class="col-xs-4">
+    <div class="h3 cabecalho">Efeito Flutuante - Iframe</div>
+    <a data-fancybox="iframe" data-type="iframe" href="javascript:;" data-src="http://www.google.com.br" md-button>Ver Site</a>
   </div>
 </div>
 

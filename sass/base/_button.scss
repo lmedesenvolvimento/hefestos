@@ -7,3 +7,11 @@ md-icon{
     font-size: 24px;
   }
 }
+
+
+a{
+  font-weight: bold;
+  &:hover{
+    text-decoration: underline;
+  }
+}
