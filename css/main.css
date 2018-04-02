@@ -21092,7 +21092,9 @@ h1, h2, h3, h4 {
   width: 100%;
   max-width: 100%;
   margin-bottom: 2rem;
-  background-color: #fff; }
+  background-color: #fff;
+  border-spacing: 0;
+  border-collapse: collapse; }
   .table > thead > tr,
   .table > tbody > tr,
   .table > tfoot > tr {
@@ -24133,7 +24135,8 @@ a {
     text-decoration: underline; }
 
 md-card {
-  font-size: 1.25rem; }
+  font-size: 1.25rem;
+  margin-bottom: 2rem; }
   md-card md-card-title {
     padding: 16px 16px 8px; }
     md-card md-card-title .md-icon-button {

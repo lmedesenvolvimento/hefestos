@@ -79,6 +79,12 @@ gulp.task('watch', () => {
     watch('scripts/**/*.js', () => {
         gulp.start('scripts');
     });
+
+    watch('templates/**/*.html', () => {
+        console.log("Template changes")
+        gulp.start('sass');
+        gulp.start('scripts');
+    });
 });
 
 gulp.task('copy', ()=> {

@@ -44,6 +44,8 @@ $table-border-color:            #e0e0e0;
   max-width: 100%;
   margin-bottom: 2rem;
   background-color: $table-bg;
+  border-spacing: 0;
+  border-collapse: collapse;
   > thead,
   > tbody,
   > tfoot {

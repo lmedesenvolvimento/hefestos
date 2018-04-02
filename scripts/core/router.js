@@ -6,7 +6,14 @@ var Router = {
       // Notify application
       root.$emit('topic:change', GLOBAL.current_topic)
       // Configure Fancybox
-      $("[data-fancybox]").fancybox();
+      // $("[data-fancybox]").fancybox({
+      //   buttons:[
+      //     'thumbs',
+      //     'slideShow',
+      //     'close',
+      //     'zoom'
+      //   ]
+      // });
     },
     onStateChangeSuccess: function(root, event, toState, toParams, fromState, fromParams){
       // setTimeout(angular.bind(this, Reader.readTopicAsVoice), 500)

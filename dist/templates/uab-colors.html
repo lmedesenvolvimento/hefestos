@@ -41,3 +41,18 @@
     background: {{$ctrl.colors.accent.hex}};
   }
 </style>
+
+
+<!-- Table -->
+<style>
+  .table-hover > tbody > tr:hover{
+    background-color: rgba({{ $ctrl.colors.primary.value.concat(0.15).join(',') }});
+  }
+
+  .table thead.destacado > tr{
+    background-color: {{$ctrl.colors.primary.hex}};
+  }
+  .table thead.destacado > tr th, .table thead.destacado > tr th{
+    color: white;
+  }
+</style>

@@ -7,6 +7,8 @@ var uabColorsCtrl = function($rootScope, $mdColorPalette){
     accent: $mdColorPalette[tema.contraste]["500"]
   }
 
+  console.log(self.colors)
+
   return self
 }
 

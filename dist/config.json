@@ -1,6 +1,5 @@
 {
     "nome": "Aula 01: Contrato Psicológico",
-    "tema":"css/tema.css",
     "academico":{
         "curso": "Pedagogia",
         "disciplina":"Psicologia do Desenvolvimento e da Aprendizagem na Adolescência",
@@ -12,13 +11,9 @@
           "local": "topicos/orientacoes.html"
         },
         {
-          "nome": "Tópico HQ",
-          "local": "topicos/hq.html",
-          "default": true
-        },
-        {
           "nome": "Tópico 01: Abertura da Disciplina",
-          "local": "topicos/01.html"
+          "local": "topicos/01.html",
+          "default": true
         },
         {
           "nome": "Tópico 02: Abertura da Disciplina",
@@ -31,10 +26,15 @@
         {
             "nome": "Tipografia",
             "local": "topicos/tipografia.html"
+            
         },
         {
             "nome": "Componetes",
             "local": "topicos/componentes.html"
+        },
+        {
+            "nome": "Multimídia",
+            "local": "topicos/multimidia.html"
         }
     ],
     "tema":{

@@ -14,11 +14,20 @@ ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterP
 
 var ApplicationRun = function($rootScope){
     $rootScope.$global = GLOBAL
-    // Limpando fila leitor de aulas
-    tts.clear();
     // Eventos de Rotas
     $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $rootScope));
     $rootScope.$on('$stateChangeSuccess', angular.bind(this, Router.onStateChangeSuccess, $rootScope));
+
+    // Init Fancybox
+    $().fancybox({
+      selector: '[data-fancybox]',
+      buttons: [
+        'slideShow',
+        'zoom',
+        'close'
+      ],
+      loop: false,
+    });
 }
 
 ApplicationRun.$inject = ['$rootScope']
@@ -65,6 +74,8 @@ var uabColorsCtrl = function($rootScope, $mdColorPalette){
     primary: $mdColorPalette[tema.primario]["500"],
     accent: $mdColorPalette[tema.contraste]["500"]
   }
+
+  console.log(self.colors)
 
   return self
 }

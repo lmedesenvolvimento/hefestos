@@ -13,13 +13,9 @@ var View = {
     // Observe content scroll
     $('.main').on('scroll', function(e){
       var element = $(e.target);
-      var body = $('body');
-
-      // $('.main').scrollTop() >= 200 
-      //   ? $('uab-header-titles').addClass('hidden') 
-      //   : $('uab-header-titles').removeClass('hidden')
+      var body = $('body');      
       
-      $('.main').scrollTop() >= 200 
+      $('.main').scrollTop() >= 320 
         ? $('uab-header').addClass('hidden') 
         : $('uab-header').removeClass('hidden')
     })

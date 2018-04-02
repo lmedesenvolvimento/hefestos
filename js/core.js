@@ -87,7 +87,14 @@ var Router = {
       // Notify application
       root.$emit('topic:change', GLOBAL.current_topic)
       // Configure Fancybox
-      $("[data-fancybox]").fancybox();
+      // $("[data-fancybox]").fancybox({
+      //   buttons:[
+      //     'thumbs',
+      //     'slideShow',
+      //     'close',
+      //     'zoom'
+      //   ]
+      // });
     },
     onStateChangeSuccess: function(root, event, toState, toParams, fromState, fromParams){
       // setTimeout(angular.bind(this, Reader.readTopicAsVoice), 500)
@@ -137,13 +144,9 @@ var View = {
     // Observe content scroll
     $('.main').on('scroll', function(e){
       var element = $(e.target);
-      var body = $('body');
-
-      // $('.main').scrollTop() >= 200 
-      //   ? $('uab-header-titles').addClass('hidden') 
-      //   : $('uab-header-titles').removeClass('hidden')
+      var body = $('body');      
       
-      $('.main').scrollTop() >= 200 
+      $('.main').scrollTop() >= 320 
         ? $('uab-header').addClass('hidden') 
         : $('uab-header').removeClass('hidden')
     })
