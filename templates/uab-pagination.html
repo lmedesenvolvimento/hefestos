@@ -11,9 +11,6 @@
 </span>
 
 <span ng-if="$ctrl.asText">
-  <a md-button ng-show="$ctrl.prevTopic" ng-href="#!/{{$ctrl.prevTopic.slug}}" ng-if="$root.$mdMedia('gt-xs')">Tópico Anterior</a>
-  <a md-button ng-show="$ctrl.nextTopic" ng-href="#!/{{$ctrl.nextTopic.slug}}" ng-if="$root.$mdMedia('gt-xs')">Próximo Tópico</a>
-
-  <a md-button ng-show="$ctrl.prevTopic" ng-href="#!/{{$ctrl.prevTopic.slug}}" ng-if="$root.$mdMedia('xs')">Ant</a>
-  <a md-button ng-show="$ctrl.nextTopic" ng-href="#!/{{$ctrl.nextTopic.slug}}" ng-if="$root.$mdMedia('xs')">Próx</a>
+  <a md-button ng-show="$ctrl.prevTopic" ng-href="#!/{{$ctrl.prevTopic.slug}}" ng-if="$root.$mdMedia('gt-md')">Tópico Anterior</a>
+  <a md-button ng-show="$ctrl.nextTopic" ng-href="#!/{{$ctrl.nextTopic.slug}}" ng-if="$root.$mdMedia('gt-md')">Próximo Tópico</a>
 </span>

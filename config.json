@@ -29,8 +29,17 @@
             
         },
         {
+            "nome": "Grid",
+            "local": "topicos/grid.html"
+        },
+        {
             "nome": "Componetes",
             "local": "topicos/componentes.html"
+        },
+        {
+            "nome": "Formulários",
+            "local": "topicos/formularios.html"
+            
         },
         {
             "nome": "Multimídia",

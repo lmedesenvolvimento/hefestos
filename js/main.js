@@ -334,6 +334,37 @@ function isChrome() {
    return navigator.userAgent.indexOf('Chrome')!=-1;
 }
 
+var uabInputTextCtrl = function(){
+  var self = this;
+
+  self.$onInit = function(){
+    console.log(self)
+  }
+
+  self.onSubmit = function(){
+    self.incorrect = true
+  }
+}
+
+uabInputTextCtrl.$inject = []
+
+
+var uabInputText = {
+  controller: uabInputTextCtrl,
+  templateUrl: "templates/inputs/text.html",
+  bindings: {
+    label: "@",
+    sentence: "@",
+    full: "=",
+    submitText: "@"
+  }
+};
+
+angular.module('application').component('uabInputText',uabInputText)
+
+
+
+
 var uabPaginationCtrl = function($rootScope, $timeout){
     var self = this;
 
@@ -386,6 +417,33 @@ angular.module("application").component("uabPagination",{
     }
 })
 
+var uabQrCodeCtrl = function($controller, $mdDialog){
+  var self = this
+
+  self.trigger = function(){
+    $mdDialog.show({
+      templateUrl: "templates/dialogs/qr-code.html",
+      controller: "SimpleDialogCtrl",
+      controllerAs: "dialog",
+      clickOutsideToClose: true,
+      locals: {
+        title: null,
+        text: null
+      }
+    })
+  }
+
+  return self;
+}
+
+uabQrCodeCtrl.$inject = ['$controller', '$mdDialog']
+
+var uabQrCode = {
+  controller: uabQrCodeCtrl,
+  templateUrl: 'templates/uab-qr-code.html'
+}
+
+angular.module('application').component('uabQrCode', uabQrCode)
 var uabQuadro = function(){
   return {
     scope: {

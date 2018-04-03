@@ -38,3 +38,16 @@ uab-svg-animation iframe{
     max-height: 200px;
   }
 }
+
+// Flexbox
+.column-reverse{
+  flex-direction: column-reverse;
+}
+
+.column{
+  flex-direction: column;
+}
+
+.truncate{
+  @include ellipsis;
+}

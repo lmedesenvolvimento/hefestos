@@ -1,3 +1,18 @@
-md-dialog-content{
+md-dialog-content, md-dialog-heading{
   padding: 24px;
+}
+
+.qr-code-dialog{
+  .qr-code-wrap{
+    position: relative;
+    text-align: center;
+    .qr-code-icon{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+    }
+  }
 }

@@ -1,0 +1,10 @@
+<div layout="row">
+  <md-button ng-click='$ctrl.trigger()' ng-if="$root.$mdMedia('gt-sm')">
+      <md-tooltip md-direction="top">QR Code – Versão para Impressão</md-tooltip>
+    QR Code
+  </md-button>
+  <md-button class="md-icon-button" ng-click='$ctrl.trigger()' ng-if="$root.$mdMedia('xs')">
+    <md-tooltip md-direction="top">QR Code – Versão para Impressão</md-tooltip>
+    <md-icon md-font-icon="icon-photo_camera" class="icon-24"></md-icon>
+  </md-button>
+</div>

@@ -1,0 +1,7 @@
+<form name="form">
+  <md-input-container ng-class="{'md-block': $ctrl.full, 'md-input-invalid': $ctrl.incorrect}">
+    <label>{{$ctrl.label}}</label>
+    <input ng-model="$ctrl.value">
+  </md-input-container>
+  <md-button class="md-raised" ng-click="$ctrl.onSubmit()">{{ $ctrl.submitText }}</md-button>
+</form>

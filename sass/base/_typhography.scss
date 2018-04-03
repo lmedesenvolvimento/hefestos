@@ -11,6 +11,7 @@ body{
   @include roboto;
   color: $text-color-lighter;
   line-height: 1.66;
+  text-align: justify;
 }
 
 p{
@@ -21,6 +22,10 @@ p{
   &.sem-recuo{
     text-indent: 0;
   }
+}
+
+input, label, textarea{
+  text-indent: 0;
 }
 
 h1, h2, h3, h4{
