@@ -26,7 +26,9 @@ var ApplicationRun = function($rootScope){
         'zoom',
         'close'
       ],
+      touch: false,
       loop: false,
+      hash: false,
     });
 }
 

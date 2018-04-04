@@ -13,10 +13,10 @@ uab-header{
     transform: translateY( calc( -100% + 64px ));
   }
   uab-header-titles{
-    @extend .container;
+    flex-direction: column; 
     width: 100%;
     padding: 24px 16px 24px;
-    color: $text-color;    
+    color: $text-color;
     .subtitle{
       @include ellipsis;
       font-weight: bold;
@@ -33,6 +33,9 @@ uab-header{
         color: $text-color;
       }
     }    
+  }
+  .uab-course-icon{
+    width: 48px;
   }
   .md-toolbar-tools {
     @extend .h4;

@@ -2,6 +2,7 @@
     "nome": "Aula 01: Contrato Psicológico",
     "academico":{
         "curso": "Pedagogia",
+        "cursoIcone": "./layout/icones/quimica-black.svg",
         "disciplina":"Psicologia do Desenvolvimento e da Aprendizagem na Adolescência",
         "responsavel": "Professora Nidia Barone"
     },

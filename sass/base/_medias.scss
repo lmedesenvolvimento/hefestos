@@ -5,6 +5,9 @@ img {
   opacity: 1;
   margin: auto;
   transition: opacity 0.3s;
+  &.block{
+    display: block;
+  }
 }
 
 img[data-src]{

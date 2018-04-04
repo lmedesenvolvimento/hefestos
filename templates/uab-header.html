@@ -1,12 +1,16 @@
 <md-toolbar>
-  <uab-header-titles flex>
-    <div class="subtitle">
-      {{$root.$global.manifest.academico.curso}}: {{$root.$global.manifest.academico.disciplina}}</div>
-    <div class="titles">
-      <small class="caption">{{$root.$global.manifest.nome}}</small>
-      <small class="caption">{{$root.$global.current_topic.nome}}</small>
-    </div>
-  </uab-header-titles>
+  <div class="container" layout="row" flex>
+    <img class="uab-course-icon hide-sm hide-xs" ng-src="{{$root.$global.manifest.academico.cursoIcone}}" />
+    <uab-header-titles flex>
+      <div class="subtitle">
+        {{$root.$global.manifest.academico.curso}}: {{$root.$global.manifest.academico.disciplina}}
+      </div>
+      <div class="titles">
+        <small class="caption">{{$root.$global.manifest.nome}}</small>
+        <small class="caption">{{$root.$global.current_topic.nome}}</small>
+      </div>
+    </uab-header-titles>
+  </div>
 
   <div class="md-toolbar-tools">
     <div class="container-fluid" flex>
