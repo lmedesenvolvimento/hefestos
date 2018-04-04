@@ -334,23 +334,45 @@ function isChrome() {
    return navigator.userAgent.indexOf('Chrome')!=-1;
 }
 
-var uabInputTextCtrl = function(){
-  var self = this;
-
-  self.$onInit = function(){
-    console.log(self)
+var uabInputRadio = function(){
+  return {
+    controller: 'inputValidationCtrl',
+    templateUrl: "templates/inputs/radio.html",
+    transclude: true,
+    scope: {
+      sentence: "@",
+      submitText: "@"
+    },
+    link: function (scope, element, attrs, ctrl, transclude){
+      scope.$ctrl = angular.merge(ctrl, { sentence: scope.sentence, submitText: scope.submitText })
+      transclude(scope, function(clone, scope, compile){
+        var radioGroup = element.find('md-radio-group');
+        $(clone).appendTo(radioGroup);
+      });
+    }
   }
+};
 
-  self.onSubmit = function(){
-    self.incorrect = true
+angular.module('application').directive('uabInputRadio', uabInputRadio)
+
+var uabInputRadioButton = function(){
+  return {
+    template: '<md-radio-button value="{{value}}" ng-disabled="$ctrl.correct"><ng-transclude></ng-transclude></md-radio-button>',
+    transclude: true,
+    require: "^uabInputRadio",
+    scope: {
+      value: "@",
+      disabled: "="
+    },
+    link: function(scope, element, attrs, ctrl){
+      scope.$ctrl = ctrl;
+    }
   }
-}
+};
 
-uabInputTextCtrl.$inject = []
-
-
+angular.module('application').directive('uabInputRadioButton', uabInputRadioButton)
 var uabInputText = {
-  controller: uabInputTextCtrl,
+  controller: 'inputValidationCtrl',
   templateUrl: "templates/inputs/text.html",
   bindings: {
     label: "@",
@@ -706,3 +728,33 @@ HtmlDialogCtrl.$inject = ['$scope', '$element', '$mdDialog', '$controller', 'tit
 angular.module('application').controller('HtmlDialogCtrl', HtmlDialogCtrl);
 angular.module('application').controller('SimpleDialogCtrl', SimpleDialogCtrl);
 
+
+var inputValidationCtrl = function () {
+  var self = this;
+
+  self.$onInit = function () {
+    console.log(self)
+  }
+
+  self.onSubmit = function () {
+    if (self.value.toUpperCase() == self.sentence.toUpperCase()) {
+      setCorrect();
+    } else {
+      setIncorrect();
+    }
+  }
+
+  function setCorrect() {
+    self.correct = true
+    delete self.incorrect
+  }
+
+  function setIncorrect() {
+    self.incorrect = true
+    delete self.correct
+  }
+}
+
+inputValidationCtrl.$inject = []
+
+angular.module('application').controller('inputValidationCtrl', inputValidationCtrl)

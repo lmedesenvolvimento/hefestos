@@ -1,7 +1,13 @@
 <form name="form">
-  <md-input-container ng-class="{'md-block': $ctrl.full, 'md-input-invalid': $ctrl.incorrect}">
+  <md-input-container ng-class="{
+    'md-block': $ctrl.full,
+    'md-input-invalid': $ctrl.incorrect,
+  }">
     <label>{{$ctrl.label}}</label>
-    <input ng-model="$ctrl.value">
+    <input ng-model="$ctrl.value" ng-disabled="$ctrl.correct">
+    <md-icon class="icon-24" md-font-icon="{{ $ctrl.correct ? 'icon-check' : 'icon-cancel' }}" ng-if="( $ctrl.incorrect || $ctrl.correct)"></md-icon>
   </md-input-container>
-  <md-button class="md-raised" ng-click="$ctrl.onSubmit()">{{ $ctrl.submitText }}</md-button>
+  <md-button class="md-raised" ng-class="" ng-click="$ctrl.onSubmit()" ng-disabled="$ctrl.correct">
+    {{ $ctrl.correct ? 'Resposta Correta!' : $ctrl.submitText }}
+  </md-button>
 </form>

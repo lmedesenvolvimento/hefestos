@@ -24,9 +24,14 @@ p{
   }
 }
 
-input, label, textarea{
+.sem-recuo{
   text-indent: 0;
 }
+
+input, label, textarea, form{
+  text-indent: 0;
+}
+
 
 h1, h2, h3, h4{
   @include montserrat;
