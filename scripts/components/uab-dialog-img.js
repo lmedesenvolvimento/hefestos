@@ -1,4 +1,4 @@
-var uabDialogImg = function($timeout){
+var uabDialogImg = function($timeout, $rootScope){
   return {
     restrict: 'A',
     scope: {
@@ -6,13 +6,17 @@ var uabDialogImg = function($timeout){
     },
     transclude: true,
     link: function(scope, element, attrs, ctrl, transclude){
+      $(element).click(function(e){
+        $rootScope.$fancyScrollTop = $('.main').scrollTop();
+      });
+
       transclude(scope, function(clone, scope){
-        $(clone).appendTo(element)
-      })
+        $(clone).appendTo(element);
+      });
     }
   };
 }
 
-uabDialogImg.$inject = ['$timeout']
+uabDialogImg.$inject = ['$timeout','$rootScope']
 
 angular.module('application').directive('uabDialogImg', uabDialogImg)

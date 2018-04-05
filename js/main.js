@@ -29,10 +29,14 @@ var ApplicationRun = function($rootScope){
       touch: false,
       loop: false,
       hash: false,
+      afterShow: function(){
+        console.log($rootScope.$fancyScrollTop)
+        $('.main').scrollTop($rootScope.$fancyScrollTop)
+      }
     });
 }
 
-ApplicationRun.$inject = ['$rootScope']
+ApplicationRun.$inject = ['$rootScope'];
 
 var app = angular.module('application', [
   'ngAnimate',
@@ -91,7 +95,7 @@ var uabColors = {
 
 angular.module('application').component('uabColors', uabColors)
 
-var uabDialogImg = function($timeout){
+var uabDialogImg = function($timeout, $rootScope){
   return {
     restrict: 'A',
     scope: {
@@ -99,14 +103,18 @@ var uabDialogImg = function($timeout){
     },
     transclude: true,
     link: function(scope, element, attrs, ctrl, transclude){
+      $(element).click(function(e){
+        $rootScope.$fancyScrollTop = $('.main').scrollTop();
+      });
+
       transclude(scope, function(clone, scope){
-        $(clone).appendTo(element)
-      })
+        $(clone).appendTo(element);
+      });
     }
   };
 }
 
-uabDialogImg.$inject = ['$timeout']
+uabDialogImg.$inject = ['$timeout','$rootScope']
 
 angular.module('application').directive('uabDialogImg', uabDialogImg)
 var uabDialogCtrl = function($scope, $element, $mdDialog, $compile){
@@ -343,10 +351,11 @@ var uabInputRadio = function(){
     transclude: true,
     scope: {
       sentence: "@",
-      submitText: "@"
+      submitText: "@",
+      failMessage: "@"
     },
     link: function (scope, element, attrs, ctrl, transclude){
-      scope.$ctrl = angular.merge(ctrl, { sentence: scope.sentence, submitText: scope.submitText })
+      scope.$ctrl = angular.merge(ctrl, { sentence: scope.sentence, submitText: scope.submitText, failMessage: scope.failMessage })
       transclude(scope, function(clone, scope, compile){
         var radioGroup = element.find('md-radio-group');
         $(clone).appendTo(radioGroup);
@@ -380,7 +389,8 @@ var uabInputText = {
     label: "@",
     sentence: "@",
     full: "=",
-    submitText: "@"
+    submitText: "@",
+    failMessage: "@"
   }
 };
 
@@ -607,6 +617,22 @@ Sidenav.$inject = ['$mdSidenav']
 
 angular.module('application').factory('Sidenav', Sidenav)
 
+var dataFancyBox = function(){
+  return {
+    restrict: "A",
+    scope: {
+      'fancyBox':'@'
+    },
+    link: function(scope, element, attrs){
+      console.log(element)
+      $(element).click(function(e){
+        console.log("Catch")
+      })
+    }
+  }
+}
+
+angular.module('application').directive('fancyBox', dataFancyBox)
 var uabMedia = function(){
   return {
     restrict: 'A',
@@ -731,7 +757,7 @@ angular.module('application').controller('HtmlDialogCtrl', HtmlDialogCtrl);
 angular.module('application').controller('SimpleDialogCtrl', SimpleDialogCtrl);
 
 
-var inputValidationCtrl = function () {
+var inputValidationCtrl = function ($mdToast) {
   var self = this;
 
   self.$onInit = function () {
@@ -743,6 +769,7 @@ var inputValidationCtrl = function () {
       setCorrect();
     } else {
       setIncorrect();
+      $mdToast.showSimple(self.failMessage || "Resposta incorreta tente novamente")
     }
   }
 
@@ -757,6 +784,6 @@ var inputValidationCtrl = function () {
   }
 }
 
-inputValidationCtrl.$inject = []
+inputValidationCtrl.$inject = ['$mdToast']
 
 angular.module('application').controller('inputValidationCtrl', inputValidationCtrl)

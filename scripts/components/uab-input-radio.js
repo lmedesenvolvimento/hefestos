@@ -5,10 +5,11 @@ var uabInputRadio = function(){
     transclude: true,
     scope: {
       sentence: "@",
-      submitText: "@"
+      submitText: "@",
+      failMessage: "@"
     },
     link: function (scope, element, attrs, ctrl, transclude){
-      scope.$ctrl = angular.merge(ctrl, { sentence: scope.sentence, submitText: scope.submitText })
+      scope.$ctrl = angular.merge(ctrl, { sentence: scope.sentence, submitText: scope.submitText, failMessage: scope.failMessage })
       transclude(scope, function(clone, scope, compile){
         var radioGroup = element.find('md-radio-group');
         $(clone).appendTo(radioGroup);

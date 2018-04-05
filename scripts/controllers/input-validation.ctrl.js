@@ -1,4 +1,4 @@
-var inputValidationCtrl = function () {
+var inputValidationCtrl = function ($mdToast) {
   var self = this;
 
   self.$onInit = function () {
@@ -10,6 +10,7 @@ var inputValidationCtrl = function () {
       setCorrect();
     } else {
       setIncorrect();
+      $mdToast.showSimple(self.failMessage || "Resposta incorreta tente novamente")
     }
   }
 
@@ -24,6 +25,6 @@ var inputValidationCtrl = function () {
   }
 }
 
-inputValidationCtrl.$inject = []
+inputValidationCtrl.$inject = ['$mdToast']
 
 angular.module('application').controller('inputValidationCtrl', inputValidationCtrl)

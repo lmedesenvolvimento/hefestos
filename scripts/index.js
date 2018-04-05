@@ -29,10 +29,14 @@ var ApplicationRun = function($rootScope){
       touch: false,
       loop: false,
       hash: false,
+      afterShow: function(){
+        console.log($rootScope.$fancyScrollTop)
+        $('.main').scrollTop($rootScope.$fancyScrollTop)
+      }
     });
 }
 
-ApplicationRun.$inject = ['$rootScope']
+ApplicationRun.$inject = ['$rootScope'];
 
 var app = angular.module('application', [
   'ngAnimate',

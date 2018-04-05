@@ -1,10 +1,14 @@
 body{
-  transition: all 1s $easing-in-out;
+  &.animated{
+    .main .white-paper{
+      padding-top: 100px;
+    }
+  }
 }
 
 uab-header{
   transition: all 0.4s $easing-in-out;
-  &.hidden{
+  &.animated{
     position: fixed;
     top: 0;
     left: 0;
