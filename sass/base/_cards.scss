@@ -23,3 +23,14 @@ md-card{
     font-size: 1.15rem;
   }
 }
+
+body.hc > #root{
+  md-card{
+    background: transparent;
+    border: 1px solid $hc-border-color;
+    color: $hc-text-color;
+    md-card-content, md-card-title-text{
+      color: $hc-text-color;
+    }
+  }
+}

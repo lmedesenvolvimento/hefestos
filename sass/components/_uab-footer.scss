@@ -4,3 +4,14 @@ uab-footer{
     font-size: 1.06rem;
   }
 }
+
+body.hc > #root{
+  uab-footer{
+    md-toolbar{
+      background: transparent;
+      color: $hc-border-color;
+      border-top: 1px solid $hc-border-color;
+      border-bottom: 1px solid $hc-border-color;
+    }
+  }
+}

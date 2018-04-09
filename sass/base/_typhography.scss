@@ -120,3 +120,19 @@ h4{
     }
   }
 }
+
+body.hc > #root{
+  a{
+    color: $hc-border-color;
+  }
+  h1, h2, h3, h4{
+    color: $hc-text-color;
+  } 
+  .destaque{
+    background: transparent;
+    border: 1px solid $hc-border-color;
+  }
+  .cabecalho{
+    border-bottom: 1px solid $hc-border-color;
+  }
+}

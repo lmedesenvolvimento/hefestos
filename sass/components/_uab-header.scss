@@ -115,3 +115,22 @@ uab-header + md-content{
     }   
   }
 }
+
+
+body.hc > #root{
+  uab-header{
+    background: transparent;
+    border-bottom: 1px solid $hc-border-color;
+    md-toolbar{
+      background-color: transparent;
+      uab-header-titles{
+        .subtitle, .caption{
+          color: $hc-text-color !important;
+        }
+      }
+      .md-icon-button md-icon{
+        color: $hc-border-color;
+      }
+    }
+  }
+}

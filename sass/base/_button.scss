@@ -15,3 +15,19 @@ a{
     text-decoration: underline;
   }
 }
+
+body.hc > #root{
+  .md-button{
+    &.md-raised{
+      background: transparent;
+      color: $hc-border-color;
+      border-color: $hc-border-color;
+      &:hover{
+        color: $hc-border-color;
+      }
+      &:disabled:hover{
+        color: $hc-border-color;
+      }
+    }
+  }
+}

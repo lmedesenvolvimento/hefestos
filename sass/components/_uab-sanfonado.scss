@@ -37,3 +37,12 @@ uab-sanfonado{
     padding: 8px 24px;
   }
 }
+
+
+body.hc > #root{
+  uab-sanfonado{
+    .uab-sanfonado-content{
+      border-top: 1px solid $hc-border-color;
+    }
+  }
+}

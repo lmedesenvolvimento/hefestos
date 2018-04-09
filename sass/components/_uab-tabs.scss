@@ -1,0 +1,99 @@
+$uab-tabs-vertical-max-height: 480px;
+
+uab-tabs-vertical{
+  display: flex;  
+  .uab-tabs-pagination{
+    flex: 0.25;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 0px;
+    margin: 0px;
+    border-right: 1px $border-color solid;
+    max-height: $uab-tabs-vertical-max-height;
+    li{
+      list-style: none;
+      &.active{
+        border-width: 3px;  
+        border-left-width: 0px;
+        border-top-width: 0px;
+        border-bottom-width: 0px;
+        border-style: solid;        
+      }
+    }
+    .md-button{
+      display: block;
+      padding: 8px 12px;
+      width: 100%;
+      margin: 0px;
+      border-radius: 0px;
+    }
+  }
+  .uab-tabs-body{
+    flex: 1;
+    md-content{
+      display: none;
+      max-height: $uab-tabs-vertical-max-height;
+      &.active{
+        display: block;
+      }
+    }
+  }
+}
+
+@media(max-width: $screen-xs){
+  uab-tabs-vertical{
+    flex-direction: column;
+    .uab-tabs-pagination{
+      display: flex;
+      flex-direction: row;
+      white-space: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      li{
+        list-style: none;
+        &.active{
+          border-width: 3px;  
+          border-right-width: 0px;
+          border-left-width: 0px;
+          border-top-width: 0px;
+          border-bottom-width: 3px;
+          border-style: solid;        
+        }
+      }
+    }
+  }
+}
+
+body.hc > #root{
+  md-tabs{
+    md-tab-item{
+      color: $hc-text-color;
+      &.md-active{        
+        color: $hc-border-color;
+      }
+    }
+    md-ink-bar{
+      background-color: $hc-border-color;
+      color: $hc-border-color;
+    }
+    md-tab-content md-content{
+      background: transparent;
+      color: $hc-text-color;
+    }
+  }
+  uab-tabs-vertical{
+    .uab-tabs-pagination{
+      border-right-color: transparent;
+      li.active{
+        border-right-color: $hc-border-color;
+        .md-button{
+          font-weight: bold;
+          color: $hc-border-color;
+        }
+      }
+    }
+    md-content{
+      background: transparent;
+    }
+  }
+}

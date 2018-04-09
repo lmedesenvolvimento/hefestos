@@ -4,3 +4,31 @@ uab-input-text{
     margin-bottom: 0px;
   }
 }
+
+body.hc > #root{
+  uab-input-text{
+    // md-input-container:not(.md-input-invalid).md-input-focused .md-input{
+      // border-color: red
+    // }
+    md-input-container{
+      &:not(.md-input-invalid){
+        &.md-input-has-value, &.md-input-focused{
+          label{
+            color: $hc-border-color;    
+          }
+          .md-input, .md-input:disabled{
+            color: $hc-text-color;
+            border-bottom: 2px solid $hc-border-color;
+          }
+        }
+      }
+      label{
+        color: $hc-border-color;
+      }
+      input{
+        color: $hc-text-color;
+        border-bottom: 1px solid $hc-border-color;
+      }
+    }
+  } 
+}

@@ -39,3 +39,17 @@ uab-quadro{
     }
   }
 }
+
+body.hc > #root{
+  uab-quadro{
+    .uab-quadro{
+      background: transparent;
+      .uab-quadro-icon{
+        background: transparent;
+        margin-right: -10px;
+        border: 1px solid $hc-border-color;
+        border-right: none;
+      }
+    }
+  }
+}

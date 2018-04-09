@@ -38,3 +38,14 @@ uab-sidenav{
     }
   }
 }
+
+body.hc > #root{
+  uab-sidenav{  
+    md-sidenav md-content{
+      color: $text-color;
+    }
+    .md-button{
+      color: $text-color;
+    }
+  }
+}

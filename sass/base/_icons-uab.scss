@@ -1,0 +1,103 @@
+@font-face {
+  font-family: 'uab';
+  src:  url('../fonts/uab.eot?luut5j');
+  src:  url('../fonts/uab.eot?luut5j#iefix') format('embedded-opentype'),
+    url('../fonts/uab.ttf?luut5j') format('truetype'),
+    url('../fonts/uab.woff?luut5j') format('woff'),
+    url('../fonts/uab.svg?luut5j#uab') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="uab-"], [class*=" uab-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'uab' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.uab-bagp:before {
+  content: "\e900";
+  color: #fefefe;
+}
+.uab-espanhol:before {
+  content: "\e901";
+  color: #fefefe;
+}
+.uab-fisica:before {
+  content: "\e902";
+  color: #fefefe;
+}
+.uab-ingles:before {
+  content: "\e903";
+  color: #fefefe;
+}
+.uab-matematica:before {
+  content: "\e904";
+  color: #fefefe;
+}
+.uab-pedag:before {
+  content: "\e905";
+  color: #fefefe;
+}
+.uab-portugues .path1:before {
+  content: "\e906";
+  color: rgb(255, 255, 255);
+}
+.uab-portugues .path2:before {
+  content: "\e907";
+  margin-left: -1.0849609375em;
+  color: rgb(254, 254, 254);
+}
+.uab-portugues .path3:before {
+  content: "\e908";
+  margin-left: -1.0849609375em;
+  color: rgb(254, 254, 254);
+}
+.uab-portugues .path4:before {
+  content: "\e909";
+  margin-left: -1.0849609375em;
+  color: rgb(254, 254, 254);
+}
+.uab-portugues .path5:before {
+  content: "\e90a";
+  margin-left: -1.0849609375em;
+  color: rgb(254, 254, 254);
+}
+.uab-portugues .path6:before {
+  content: "\e90b";
+  margin-left: -1.0849609375em;
+  color: rgb(254, 254, 254);
+}
+.uab-portugues .path7:before {
+  content: "\e90c";
+  margin-left: -1.0849609375em;
+  color: rgb(254, 254, 254);
+}
+.uab-portugues .path8:before {
+  content: "\e90d";
+  margin-left: -1.0849609375em;
+  color: rgb(254, 254, 254);
+}
+.uab-portugues .path9:before {
+  content: "\e90e";
+  margin-left: -1.0849609375em;
+  color: rgb(254, 254, 254);
+}
+.uab-portugues .path10:before {
+  content: "\e90f";
+  margin-left: -1.0849609375em;
+  color: rgb(255, 255, 255);
+}
+.uab-quimica:before {
+  content: "\e910";
+  color: #fefefe;
+}

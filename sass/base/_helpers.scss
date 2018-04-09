@@ -20,6 +20,21 @@
   text-align: right;
 }
 
+.uab-icon{
+  font-size: 48px;
+  &::before{
+    color: $text-color !important;
+  }
+}
+
+body.hc > #root{
+  .uab-icon{
+    &::before{
+      color: $hc-text-color !important;
+    }
+  }
+}
+
 uab-svg-animation{
   display: flex;
   align-items: center;

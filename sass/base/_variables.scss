@@ -4,7 +4,6 @@ $line-height: 1.55;
 $box-padding: 24px;
 
 // Colors
-// $bg-color: #EBECEC;
 $bg-color: #eeeeee;
 
 $black: #000;
@@ -30,3 +29,10 @@ $easing-in-out: cubic-bezier(.67,.35,.04,.93);
 // $easing-in-out: cubic-bezier(.17,.67,.83,.67);
 
 $uab-header-max-height: 240px;
+
+
+//  high-contrast
+
+$hc-background-color: black;
+$hc-text-color: yellow;
+$hc-border-color: lime;

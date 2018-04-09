@@ -26,6 +26,10 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
     increment >= MIN_FONT_SIZE ? $("body, html").css("font-size", floatToPx(increment)) : false
   }
 
+  self.toggleHightContrast = function(){
+    $("body").toggleClass("hc")
+  }
+
   // @private
   floatToPx = function(number){
     console.log(number);

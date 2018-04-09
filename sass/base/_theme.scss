@@ -10,3 +10,20 @@ html, body{
   @extend .md-whiteframe-1dp;
   background-color: white;
 }
+
+
+body.hc > #root{
+  background: $hc-background-color;
+  color: $hc-text-color;
+  .main{
+    background: transparent;
+  }
+  .white-paper{
+    box-shadow: none;
+    background: transparent;
+  }
+
+  md-content{
+    color: $hc-text-color;
+  }
+}

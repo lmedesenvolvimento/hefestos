@@ -2,3 +2,25 @@ uab-input-radio{
   display: block;
   margin: 24px 0px 0px;
 }
+
+body.hc > #root{
+  uab-input-radio{
+    md-radio-button{
+      .md-off{
+        border-color: $hc-text-color;
+      }
+      .md-on{
+        background-color: $hc-text-color;
+      }
+      &.md-checked {
+        .md-off{
+          border-color: $hc-border-color;
+        }
+        .md-on{
+          background-color: $hc-border-color;
+        }
+      }
+    }
+  }
+
+}
