@@ -24173,7 +24173,7 @@ body.hc > #root .table-striped > tbody > tr > td:nth-child(odd) {
   font-weight: normal;
   font-style: normal; }
 
-[class^="uab-"], [class*=" uab-"] {
+[class^="uab-icon"], [class*=" uab-icon"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'uab' !important;
   speak: none;
@@ -24186,80 +24186,80 @@ body.hc > #root .table-striped > tbody > tr > td:nth-child(odd) {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.uab-bagp:before {
+.uab-icon-bagp:before {
   content: "\e900";
   color: #fefefe; }
 
-.uab-espanhol:before {
+.uab-icon-espanhol:before {
   content: "\e901";
   color: #fefefe; }
 
-.uab-fisica:before {
+.uab-icon-fisica:before {
   content: "\e902";
   color: #fefefe; }
 
-.uab-ingles:before {
+.uab-icon-ingles:before {
   content: "\e903";
   color: #fefefe; }
 
-.uab-matematica:before {
+.uab-icon-matematica:before {
   content: "\e904";
   color: #fefefe; }
 
-.uab-pedag:before {
+.uab-icon-pedag:before {
   content: "\e905";
   color: #fefefe; }
 
-.uab-portugues .path1:before {
+.uab-icon-portugues .path1:before {
   content: "\e906";
   color: white; }
 
-.uab-portugues .path2:before {
+.uab-icon-portugues .path2:before {
   content: "\e907";
   margin-left: -1.0849609375em;
   color: #fefefe; }
 
-.uab-portugues .path3:before {
+.uab-icon-portugues .path3:before {
   content: "\e908";
   margin-left: -1.0849609375em;
   color: #fefefe; }
 
-.uab-portugues .path4:before {
+.uab-icon-portugues .path4:before {
   content: "\e909";
   margin-left: -1.0849609375em;
   color: #fefefe; }
 
-.uab-portugues .path5:before {
+.uab-icon-portugues .path5:before {
   content: "\e90a";
   margin-left: -1.0849609375em;
   color: #fefefe; }
 
-.uab-portugues .path6:before {
+.uab-icon-portugues .path6:before {
   content: "\e90b";
   margin-left: -1.0849609375em;
   color: #fefefe; }
 
-.uab-portugues .path7:before {
+.uab-icon-portugues .path7:before {
   content: "\e90c";
   margin-left: -1.0849609375em;
   color: #fefefe; }
 
-.uab-portugues .path8:before {
+.uab-icon-portugues .path8:before {
   content: "\e90d";
   margin-left: -1.0849609375em;
   color: #fefefe; }
 
-.uab-portugues .path9:before {
+.uab-icon-portugues .path9:before {
   content: "\e90e";
   margin-left: -1.0849609375em;
   color: #fefefe; }
 
-.uab-portugues .path10:before {
+.uab-icon-portugues .path10:before {
   content: "\e90f";
   margin-left: -1.0849609375em;
   color: white; }
 
-.uab-quimica:before {
+.uab-icon-quimica:before {
   content: "\e910";
   color: #fefefe; }
 
