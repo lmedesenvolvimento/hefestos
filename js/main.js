@@ -620,14 +620,8 @@ angular.module('application').directive('uabQuadro', uabQuadro)
 
 var SanfonadoGroupCtrl = function($rootScope){
   var self = {
-    children: [],
-    lorem: "Ullamco Lorem excepteur voluptate labore Lorem enim qui Lorem in pariatur. Et magna magna minim minim sunt aliqua nulla amet fugiat laboris consectetur sunt. Voluptate est ut laboris enim excepteur Lorem aliqua Lorem eu dolore et laborum eu. Anim occaecat sit eiusmod eiusmod ad ex duis nostrud ex occaecat mollit. Ad id eiusmod proident magna dolore dolor proident nisi proident minim deserunt cupidatat ea."
+    children: []
   }
-
-  self.$onInit = function(){
-    console.log("Initialzed", self)
-  }
-  
 
   self.closeAll = function(){
     self.children.forEach(hide)    
@@ -635,8 +629,6 @@ var SanfonadoGroupCtrl = function($rootScope){
 
   self.join = function(child){
     self.children.push(child)
-
-    console.log("New child added!", child)
   }
   
   function hide(child){
@@ -678,7 +670,9 @@ var SanfonadoCtrl = function($scope, $element){
   }
 
   self.toggle = function(){
-    self.group.closeAll()
+    if(self.group){
+      self.group.closeAll()
+    }
     $(self.element).toggleClass('active')
     $(self.element).find('.uab-sanfonado-wrap').toggleClass('active')
   }
