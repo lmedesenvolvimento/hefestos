@@ -12,7 +12,9 @@ var SanfonadoCtrl = function($scope, $element){
   }
 
   self.toggle = function(){
-    self.group.closeAll()
+    if(self.group){
+      self.group.closeAll()
+    }
     $(self.element).toggleClass('active')
     $(self.element).find('.uab-sanfonado-wrap').toggleClass('active')
   }
