@@ -1,6 +1,6 @@
 <md-toolbar>
   <div class="container" layout="row" layout-align="start center" flex>
-    <i class="uab-icon {{$root.$global.manifest.academico.cursoIcone}}" />
+    <i class="uab-icon {{$root.$global.manifest.academico.cursoIcone}}" ng-if="$root.$mdMedia('gt-sm')" />
     <uab-header-titles flex>
       <div class="subtitle">
         {{$root.$global.manifest.academico.curso}}: {{$root.$global.manifest.academico.disciplina}}

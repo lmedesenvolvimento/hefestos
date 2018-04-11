@@ -19,9 +19,10 @@
   </md-content>
   <footer>
     <div layout="row" layout-align="start center">
-      <md-input-container class="md-block" flex>
+      <text-angular ng-model="$ctrl.$newComment.text"></text-angular>
+      <!-- <md-input-container class="md-block" flex>
         <textarea ng-model="$ctrl.$newComment.text" md-maxlength="245" rows="2" md-select-on-focus placeholder="Inserir comentário"></textarea>
-      </md-input-container>
+      </md-input-container> -->
       <md-button class="md-icon-button" ng-click="$ctrl.sendComment()">
         <md-icon md-font-icon="icon-send icon-24"><md-icon>
       </md-button>

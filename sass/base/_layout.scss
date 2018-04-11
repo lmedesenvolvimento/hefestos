@@ -2,3 +2,43 @@
   padding-left: 1rem;
   padding-right: 1rem;
 }
+
+main{
+  display: block;
+  margin: 0;
+  padding: 0;
+  &.ng-enter {
+    /* transition on enter for .5s */
+    transition: .5s;
+
+    /* start with opacity 0 (invisible) */
+    opacity: 0;
+  }
+
+  &.ng-enter-active {
+    /* end with opacity 1 (fade in) */
+    opacity: 1;
+  }
+}
+
+.linha{
+  @extend .row;
+  justify-content: center;
+}
+
+.container{
+  @extend .wrapper;
+}
+
+.container-fluid{
+  width: 100%;
+}
+
+.white-paper{
+  @extend .container;
+  padding: 32px 24px 64px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: 1148px;
+}

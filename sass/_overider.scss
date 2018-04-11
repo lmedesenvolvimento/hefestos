@@ -2,3 +2,54 @@
 .fancybox-active {
   height: inherit;
 }
+
+$md-primary: #212121;
+$md-text-secondary: rgba(0, 0, 0, 0.54);
+$md-background-100: #f5f5f5;
+
+text-angular{
+  p{
+    text-indent: 0px;
+    margin: 4px 0px;
+  }
+  .ta-scroll-window > .ta-bind{
+    overflow-x: auto;
+    overflow-y: auto;
+    min-height: 80px;
+    max-height: 120px;
+  }
+  .ta-toolbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .ta-button-group {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      button {
+        min-width: 0;
+        min-height: 0;
+        line-height: normal;
+        margin-left: 0;
+        color: $md-text-secondary;
+        md-icon {
+          font-size: 24px;
+          color: $md-text-secondary;
+        }
+        &.active {
+          background-color: $md-background-100;
+        }
+      }
+    }
+  }
+  
+  .ta-text-editor {
+    .ta-bind {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
+      &:focus {
+        border-bottom: 2px solid $md-primary;
+        outline: none;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
 var GLOBAL = {
-    manifest: null
+    manifest: null,
+    impress: null
 }

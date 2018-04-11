@@ -1,5 +1,9 @@
 var uabAnnotationsCtrl = function($rootScope, Annotations){
-  var self = this
+  var self = {
+    taToolbar: [
+      ['h1', 'h2', 'bold', 'italics'],
+    ]
+  }
 
   self.$annotations = Annotations
 
@@ -18,12 +22,11 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
   }
 
   self.sendComment = function(){
+    console.log(self.$newComment.text)
     self.comments.push({
       text: self.$newComment.text,
       created_at: new Date()
     })
-
-    console.log(self.comments)
 
     self.$newComment.text = ''
   }

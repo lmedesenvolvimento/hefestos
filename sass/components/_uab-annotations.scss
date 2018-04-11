@@ -10,6 +10,10 @@ uab-annotations{
       .comment{
         font-size: 1.15rem;
         margin: 8px 0px;
+        p{
+          text-indent: 0px;
+          margin: 0px;
+        }
         small{
           color: transparentize($text-color, 0.4);
         }

@@ -33,10 +33,24 @@ uab-sanfonado{
   }
 
   .uab-sanfonado-content{
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 480px;
     border-top: 1px solid $border-color;
     padding: 8px 24px;
   }
 }
+
+uab-sanfonado-group{
+  uab-sanfonado{
+    &:not(:last-child){
+      md-card{
+        @extend .md-whiteframe-2dp;
+        margin-bottom: 0px;
+      }
+    }
+  }
+} 
 
 
 body.hc > #root{

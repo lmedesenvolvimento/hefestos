@@ -7,12 +7,15 @@ var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterP
   // Configurando o comportamento das roteador
   View.configure($provide)
   // Configurando a aula de acordo com seus meta dados
-  Loader.onLoadManifest($stateProvider, $mdThemingProvider, $urlRouterProvider, manifest)
+  Loader.onLoadManifest($stateProvider, $mdThemingProvider, $urlRouterProvider, manifest);  
 }
 
 ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterProvider','$provide']
 
-var ApplicationRun = function($rootScope){
+var ApplicationRun = function($rootScope, $http){
+    // Configurando Impresso
+    Impress.instance($http, manifest)
+
     $rootScope.$global = GLOBAL
     // Eventos de Rotas
     $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $rootScope));
@@ -30,20 +33,21 @@ var ApplicationRun = function($rootScope){
       loop: false,
       hash: false,
       afterShow: function(){
-        console.log($rootScope.$fancyScrollTop)
         $('.main').scrollTop($rootScope.$fancyScrollTop)
       }
     });
 }
 
-ApplicationRun.$inject = ['$rootScope'];
+ApplicationRun.$inject = ['$rootScope','$http'];
 
 var app = angular.module('application', [
   'ngAnimate',
+  'ngSanitize',
   'ngMaterial',
   'angular-carousel',
   'ui.router',
-  'ui.router.state.events'
+  'ui.router.state.events',
+  'textAngular'
 ])
 
 app.config(ApplicationConfig).run(ApplicationRun)
@@ -55,6 +59,56 @@ function bootstrapApplication(response){
   })
 }
 
+var taConfig = function ($provide) {
+  $provide.decorator('taOptions', ['$delegate', function (taOptions) {
+      taOptions.forceTextAngularSanitize = true;
+      taOptions.keyMappings = [];
+      taOptions.toolbar = [
+          ['h1', 'h2', 'h3', 'p', 'pre', 'quote'],
+          ['bold', 'italics', 'underline', 'ul', 'ol', 'redo', 'undo', 'clear'],
+          ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+          ['html', 'insertImage', 'insertLink']
+      ];
+      taOptions.classes = {
+          focussed: '',
+          toolbar: 'ta-toolbar',
+          toolbarGroup: 'ta-button-group',
+          toolbarButton: '',
+          toolbarButtonActive: 'active',
+          disabled: 'disabled',
+          textEditor: 'ta-text-editor',
+          htmlEditor: 'md-input'
+      };
+      return taOptions;
+  }]);
+  $provide.decorator('taTools', ['$delegate', function (taTools) {
+      taTools.h1.display = '<md-button aria-label="Heading 1">H1</md-button>';
+      taTools.h2.display = '<md-button aria-label="Heading 2">H2</md-button>';
+      taTools.h3.display = '<md-button aria-label="Heading 3">H3</md-button>';
+      taTools.p.display = '<md-button aria-label="Paragraph">P</md-button>';
+      taTools.pre.display = '<md-button aria-label="Pre">pre</md-button>';
+      taTools.bold.display = '<md-button class="md-icon-button" aria-label="Bold"><md-icon md-font-icon="icon-format_bold"></md-icon></md-button>';
+      taTools.italics.display = '<md-button class="md-icon-button" aria-label="Italic"><md-icon md-font-icon="icon-format_italic"></md-icon></md-button>';
+      taTools.underline.display = '<md-button class="md-icon-button" aria-label="Underline"><md-icon md-font-icon="icon-format_underlined"></md-icon></md-button>';
+      taTools.ul.display = '<md-button class="md-icon-button" aria-label="Buletted list"><md-icon md-font-icon="icon-format_list_bulleted"></md-icon></md-button>';
+      taTools.ol.display = '<md-button class="md-icon-button" aria-label="Numbered list"><md-icon md-font-icon="icon-format_list_numbered"></md-icon></md-button>';
+      taTools.undo.display = '<md-button class="md-icon-button" aria-label="Undo"><md-icon md-font-icon="icon-undo"></md-icon></md-button>';
+      taTools.redo.display = '<md-button class="md-icon-button" aria-label="Redo"><md-icon md-font-icon="icon-redo"></md-icon></md-button>';
+      taTools.justifyLeft.display = '<md-button class="md-icon-button" aria-label="Align left"><md-icon md-font-icon="icon-format_align_left"></md-icon></md-button>';
+      taTools.justifyRight.display = '<md-button class="md-icon-button" aria-label="Align right"><md-icon md-font-icon="icon-format_align_right"></md-icon></md-button>';
+      taTools.justifyCenter.display = '<md-button class="md-icon-button" aria-label="Align center"><md-icon md-font-icon="icon-format_align_center"></md-icon></md-button>';
+      taTools.justifyFull.display = '<md-button class="md-icon-button" aria-label="Justify"><md-icon md-font-icon="icon-format_align_justify"></md-icon></md-button>';
+      taTools.clear.display = '<md-button class="md-icon-button" aria-label="Clear formatting"><md-icon md-font-icon="icon-format_clear"></md-icon></md-button>';
+      taTools.html.display = '<md-button class="md-icon-button" aria-label="Show HTML"><md-icon md-font-icon="icon-code"></md-icon></md-button>';
+      taTools.insertLink.display = '<md-button class="md-icon-button" aria-label="Insert link"><md-icon md-font-icon="icon-insert_link"></md-icon></md-button>';
+      taTools.insertImage.display = '<md-button class="md-icon-button" aria-label="Insert photo"><md-icon md-font-icon="icon-insert_photo"></md-icon></md-button>';
+      return taTools;
+  }]);
+};
+
+taConfig.$inject = ['$provide'];
+
+angular.module('application').config(taConfig);
 var lazyImgDirective = function(){
   return {
     restrict: "A",
@@ -72,6 +126,75 @@ var lazyImgDirective = function(){
 
 angular.module("application").directive("lazyImg", lazyImgDirective)
 
+var uabAudioButtonCtrl = function($scope, $rootScope, $element, $mdToast){
+  var self = this;
+
+  self.isPlaying = false
+  
+  self.$onInit = function(){
+    self.sound = document.createElement('audio');
+
+    self.sound.addEventListener('play', function (e) {
+      $mdToast.showSimple( $scope.msg || 'Executando Faixa');
+    });
+
+    self.sound.addEventListener('pause', function (e) {
+      self.isPlaying = false;
+    });
+
+    self.sound.src = $scope.src;
+    
+    // Bind click event
+    $($element).find('> .md-button, > button').click(angular.bind(self, self.listen));
+  }
+
+  self.listen = function(){
+    if (self.isPlaying){
+      self.sound.pause();
+      self.isPlaying = false;
+    } else{
+      // Notify another players
+      $rootScope.$emit('uab-audio-button:play');
+      // Execute audio
+      self.sound.play();
+      self.isPlaying = true;
+    }
+  };
+
+  // Event listen
+  $rootScope.$on('uab-audio-button:play', function(){
+    self.isPlaying = false
+    self.sound.pause();
+  });
+
+  return self;
+};
+
+uabAudioButtonCtrl.$inject = ['$scope', '$rootScope','$element','$mdToast'];
+
+var uabAudioButton = function(){
+  return {
+    restrict: "E",
+    transclude: true,
+    scope:{
+      src: "@",
+      msg: "@"
+    },
+    controller: uabAudioButtonCtrl,
+    link: function(scope, element, attrs, ctrl, transclude){
+      scope.$ctrl = ctrl
+      transclude(scope, function(clone, scope){
+        $(element).html(clone)
+        // Initialize Component
+        scope.$ctrl.$onInit()
+      });
+    }
+  }
+}
+
+uabAudioButton.$inject = []
+
+angular.module('application').directive('uabAudioButton', uabAudioButton)
 var uabColorsCtrl = function($rootScope, $mdColorPalette){
   var self = this
   var tema = $rootScope.$global.manifest.tema
@@ -495,27 +618,91 @@ var uabQuadro = function(){
 
 angular.module('application').directive('uabQuadro', uabQuadro)
 
-var SanfonadoCtrl = function($element){
-  var self = this
-
-  self.$onInit = function(){
-    self.element = $element
-
-    $(self.element).find('[uab-sanfonado-toggle]').on('click', self.toggle)
+var SanfonadoGroupCtrl = function($rootScope){
+  var self = {
+    children: [],
+    lorem: "Ullamco Lorem excepteur voluptate labore Lorem enim qui Lorem in pariatur. Et magna magna minim minim sunt aliqua nulla amet fugiat laboris consectetur sunt. Voluptate est ut laboris enim excepteur Lorem aliqua Lorem eu dolore et laborum eu. Anim occaecat sit eiusmod eiusmod ad ex duis nostrud ex occaecat mollit. Ad id eiusmod proident magna dolore dolor proident nisi proident minim deserunt cupidatat ea."
   }
 
-  self.toggle = function(){
-    $(self.element).toggleClass('active')
-    $(self.element).find('.uab-sanfonado-wrap').toggleClass('active')
+  self.$onInit = function(){
+    console.log("Initialzed", self)
+  }
+  
+
+  self.closeAll = function(){
+    self.children.forEach(hide)    
+  }
+
+  self.join = function(child){
+    self.children.push(child)
+
+    console.log("New child added!", child)
+  }
+  
+  function hide(child){
+    child.$ctrl.hide()
   }
 
   return self
 }
 
-SanfonadoCtrl.$inject = ['$element']
+SanfonadoGroupCtrl.$inject = ['$rootScope']
+
+var SanfonadoGroupComponent = function(){
+  return {
+    controller: SanfonadoGroupCtrl,
+    transclude: true,
+    link: function(scope, element, attrs, ctrl, transclude){
+      scope.$group = ctrl;
+      
+      transclude(scope, function(clone){
+        $(element).html(clone)
+      })
+    }
+  };
+}
+
+angular.module('application').directive('uabSanfonadoGroup', SanfonadoGroupComponent)
+
+var SanfonadoCtrl = function($scope, $element){
+  var self = this
+
+  self.$onInit = function(){
+    self.element = $element    
+
+    $(self.element).find('[uab-sanfonado-toggle]').on('click', self.toggle)
+
+    if(self.group){
+      self.group.join($scope)
+    }
+  }
+
+  self.toggle = function(){
+    self.group.closeAll()
+    $(self.element).toggleClass('active')
+    $(self.element).find('.uab-sanfonado-wrap').toggleClass('active')
+  }
+  
+  self.open = function(){
+    $(self.element).addClass('active')
+    $(self.element).find('.uab-sanfonado-wrap').addClass('active')
+  }
+
+  self.hide = function(){
+    $(self.element).removeClass('active')
+    $(self.element).find('.uab-sanfonado-wrap').removeClass('active')
+  }
+
+  return self
+}
+
+SanfonadoCtrl.$inject = ['$scope','$element']
 
 var SanfonadoComponent = {
-  controller: SanfonadoCtrl
+  controller: SanfonadoCtrl,
+  bindings: {
+    group: "="
+  }
 }
 
 angular.module('application').component('uabSanfonado', SanfonadoComponent)
@@ -579,7 +766,11 @@ Annotations.$inject = ['$mdSidenav']
 angular.module('application').factory('Annotations',  Annotations)
 
 var uabAnnotationsCtrl = function($rootScope, Annotations){
-  var self = this
+  var self = {
+    taToolbar: [
+      ['h1', 'h2', 'bold', 'italics'],
+    ]
+  }
 
   self.$annotations = Annotations
 
@@ -598,12 +789,11 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
   }
 
   self.sendComment = function(){
+    console.log(self.$newComment.text)
     self.comments.push({
       text: self.$newComment.text,
       created_at: new Date()
     })
-
-    console.log(self.comments)
 
     self.$newComment.text = ''
   }
@@ -746,27 +936,33 @@ var onIframeLoad = function(element){
 
   $(window).resize(angular.bind(this, onIframeLoad, element))
 }
-var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, Sidenav) {
+var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav) {
   var self = this;
 
-  $rootScope.$mdMedia = $mdMedia;
-
+  
+  self.renderHTML = function(text){
+    return $sce.trustAsHtml(text);
+  }
+  
   // Audio Button API
   self.listen = function (location, msg) {
     var sound = document.createElement('audio')
-
+    
     sound.addEventListener('play', function (e) {
       $mdToast.showSimple( msg || 'Executando Faixa')
     })
-
+    
     sound.src = location
     sound.play();
   }
 
+  $rootScope.$mdMedia = $mdMedia;
+  $rootScope.$renderHTML = self.renderHTML
+
   return self;
 };
 
-ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', 'Sidenav']
+ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', '$sce', 'Sidenav']
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);
 

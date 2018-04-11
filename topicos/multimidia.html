@@ -135,14 +135,17 @@
         <source src="https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3" type="audio/mp3">
       </audio>
 
-      <button md-button ng-click="app.listen('audios/horse.mp3')">
-        <md-icon md-font-icon="icon-play_arrow" class="icon-24"></md-icon> Toque para escutar
-      </button>
-      
-      <button md-button ng-click="app.listen('audios/horse.mp3','Mensagem customizada')">        
-        <md-icon md-font-icon="icon-play_arrow" class="icon-24"></md-icon> 
-        Toque para escutar, mensagem customizada
-      </button>
+      <uab-audio-button src="https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3">
+        <button md-button>
+          <md-icon md-font-icon="icon-play_arrow" class="icon-24" ng-class="$ctrl.isPlaying ? 'icon-pause' : 'icon-play_arrow'"></md-icon> Toque para escutar
+        </button>
+      </uab-audio-button>
+
+      <uab-audio-button src="https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3" msg="Mensagem customizada">
+        <button md-button>
+          <md-icon md-font-icon="icon-play_arrow" class="icon-24" ng-class="$ctrl.isPlaying ? 'icon-pause' : 'icon-play_arrow'"></md-icon> Toque para escutar, mensagem customizada
+        </button>
+      </uab-audio-button>      
     </p>
   </div>
 </div>
