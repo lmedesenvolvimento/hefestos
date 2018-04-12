@@ -22,7 +22,6 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
   }
 
   self.sendComment = function(){
-    console.log(self.$newComment.text)
     self.comments.push({
       text: self.$newComment.text,
       created_at: new Date()

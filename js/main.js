@@ -471,6 +471,46 @@ function isChrome() {
    return navigator.userAgent.indexOf('Chrome')!=-1;
 }
 
+var uabInputCheckbox = function(){
+  return {
+    restrict: "E",
+    controller: 'inputGroupValidationCtrl',
+    templateUrl: "templates/inputs/checkbox.html",
+    transclude: true,
+    scope: {
+      sentence: "@",
+      submitText: "@",
+      failMessage: "@"
+    },
+    link: function (scope, element, attrs, ctrl, transclude){
+      scope.$ctrl = angular.merge(ctrl, { sentence: scope.sentence, submitText: scope.submitText, failMessage: scope.failMessage })
+      transclude(scope, function(clone, scope, compile){
+        var checkboxGroup = element.find('.checkbox-group');
+        $(clone).appendTo(checkboxGroup);
+      });
+    }
+  }
+};
+
+
+var uabInputCheckboxButton = function(){
+  return {
+    template: '<md-checkbox value="{{value}}" ng-disabled="$ctrl.correct" ng-checked="$ctrl.exist(value)" ng-click="$ctrl.toggle(value)"><ng-transclude></ng-transclude></md-checkbox>',
+    transclude: true,
+    require: "^uabInputCheckbox",
+    scope: {
+      value: "@",
+      disabled: "="
+    },
+    link: function(scope, element, attrs, ctrl){
+      scope.$ctrl = ctrl      
+    }
+  }
+};
+
+angular.module('application')
+  .directive('uabInputCheckbox', uabInputCheckbox)
+  .directive('uabInputCheckboxButton', uabInputCheckboxButton)
 var uabInputRadio = function(){
   return {
     controller: 'inputValidationCtrl',
@@ -783,7 +823,6 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
   }
 
   self.sendComment = function(){
-    console.log(self.$newComment.text)
     self.comments.push({
       text: self.$newComment.text,
       created_at: new Date()
@@ -1022,3 +1061,50 @@ var inputValidationCtrl = function ($mdToast) {
 inputValidationCtrl.$inject = ['$mdToast']
 
 angular.module('application').controller('inputValidationCtrl', inputValidationCtrl)
+
+
+var inputGroupValidationCtrl = function ($mdToast) {
+  var self = this;
+
+  self.items = [];
+
+  self.toggle = function(item){
+    var idx = self.items.indexOf(item);
+    if (idx > -1) {
+      self.items.splice(idx, 1);
+    }
+    else {
+      self.items.push(item);
+    }
+  }
+
+  self.exist = function(item){
+    return self.items.indexOf(item) > -1;
+  }
+
+  self.onSubmit = function () {
+    var a1 = self.items.sort()
+    var a2 = self.sentence.split(',').sort()
+
+    if (_.isEqual(a1, a2)) {
+      setCorrect();
+    } else {
+      setIncorrect();
+      $mdToast.showSimple(self.failMessage || "Resposta incorreta tente novamente")
+    }
+  }
+
+  function setCorrect() {
+    self.correct = true
+    delete self.incorrect
+  }
+
+  function setIncorrect() {
+    self.incorrect = true
+    delete self.correct
+  }
+}
+
+inputValidationCtrl.$inject = ['$mdToast']
+
+angular.module('application').controller('inputGroupValidationCtrl', inputGroupValidationCtrl)
