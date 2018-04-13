@@ -1,44 +1,44 @@
 var SanfonadoCtrl = function($scope, $element){
-  var self = this
+  var self = this;
 
   self.$onInit = function(){
-    self.element = $element    
+    self.element = $element;
 
-    $(self.element).find('[uab-sanfonado-toggle]').on('click', self.toggle)
+    $(self.element).find('[uab-sanfonado-toggle]').on('click', self.toggle);
 
     if(self.group){
-      self.group.join($scope)
+      self.group.join($scope);
     }
   }
 
   self.toggle = function(){
     if(self.group){
-      self.group.closeAll()
+      self.group.closeAll($scope);
     }
-    $(self.element).toggleClass('active')
-    $(self.element).find('.uab-sanfonado-wrap').toggleClass('active')
+    $($element).toggleClass('active');
+    $($element).find('.uab-sanfonado-wrap').toggleClass('active');
   }
   
   self.open = function(){
-    $(self.element).addClass('active')
-    $(self.element).find('.uab-sanfonado-wrap').addClass('active')
+    $($element).addClass('active');
+    $($element).find('.uab-sanfonado-wrap').addClass('active');
   }
 
   self.hide = function(){
-    $(self.element).removeClass('active')
-    $(self.element).find('.uab-sanfonado-wrap').removeClass('active')
+    $($element).removeClass('active');
+    $($element).find('.uab-sanfonado-wrap').removeClass('active');
   }
 
-  return self
+  return self;
 }
 
-SanfonadoCtrl.$inject = ['$scope','$element']
+SanfonadoCtrl.$inject = ['$scope','$element'];
 
 var SanfonadoComponent = {
   controller: SanfonadoCtrl,
   bindings: {
     group: "="
   }
-}
+};
 
-angular.module('application').component('uabSanfonado', SanfonadoComponent)
+angular.module('application').component('uabSanfonado', SanfonadoComponent);

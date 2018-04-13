@@ -3,16 +3,18 @@ var SanfonadoGroupCtrl = function($rootScope){
     children: []
   }
 
-  self.closeAll = function(){
-    self.children.forEach(hide)    
+  self.closeAll = function(target){
+    self.children.forEach(angular.bind(target, hide));
   }
 
   self.join = function(child){
-    self.children.push(child)
+    self.children.push(child);
   }
   
   function hide(child){
-    child.$ctrl.hide()
+    if(this != child){
+      child.$ctrl.hide();
+    };
   }
 
   return self

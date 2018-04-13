@@ -41,3 +41,17 @@ uab-annotations{
     height: 100%;
   }
 }
+
+body.hc{
+  uab-annotations{
+    p, h1, h2, h3, h4{
+      color: $text-color !important;
+    }
+  }  
+}
+
+body.animated{
+  uab-annotations{
+    margin-top: 62px;
+  }
+}

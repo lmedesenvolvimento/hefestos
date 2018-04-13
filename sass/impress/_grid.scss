@@ -1,0 +1,7 @@
+.linha{
+  display: block;
+  margin: 24px  0px;
+  [class^=col-]{
+    display: block;    
+  }
+}
