@@ -1,0 +1,15 @@
+img{
+  display: block;
+  max-width: 100%;
+  margin: 24px auto;
+}
+
+uab-slide{
+  display: block;
+  li[uab-slide-item]{
+    display: block;
+    width: 300px;
+    height: 300px;
+    content: attr(uab-slide-item) ": ";
+  }
+}

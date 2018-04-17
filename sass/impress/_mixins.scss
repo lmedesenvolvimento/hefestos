@@ -1,0 +1,6 @@
+@mixin card{
+  display: block;
+  border: 1px solid $border-color;
+  padding: 24px 16px;
+  margin: 24px auto;
+}

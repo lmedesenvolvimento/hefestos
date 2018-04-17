@@ -1,0 +1,45 @@
+// Cards
+md-card{
+  @include card;
+}
+
+// Sanfona
+uab-sanfonado{
+  display: block;
+  padding: 4px;
+}
+
+
+uab-slide{
+  ul[rn-carousel]{
+    display: block;
+    width: 100%;
+    height: auto;
+    li{
+      display: block;
+      height: auto;
+      width: 100%;
+      img{
+        display: block;
+        max-width: 100%;
+        margin: 24px auto;
+      }
+    }
+  }
+}
+
+uab-dialog{
+  @include card;
+}
+
+#links{
+  li{
+    text-align: left;
+  }
+  &::before{
+    @extend .h3;
+    @extend .cabecalho;
+    display: block;
+    content: 'Fontes das Imagens'
+  }
+}

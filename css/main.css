@@ -24455,7 +24455,7 @@ uab-slide {
       font-size: 2.8rem; } }
 
 md-dialog md-dialog-content, md-dialog md-dialog-heading {
-  padding: 24px; }
+  padding: 16px 24px; }
 
 md-dialog md-dialog-actions {
   border-top: 1px solid #ddd; }

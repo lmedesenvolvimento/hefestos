@@ -1,0 +1,10 @@
+table.table{
+  > thead {
+    &.destacado > tr{
+      background-color: $ligth-grey !important;
+      th{
+        color: $text-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+a, a:link, a:visited {
+  content: " Fonte da imagem";
+  text-decoration: underline;
+}
+
+
+a[href$='.pdf']:after,a[href$='.doc']:after,a[href$='.xls']:after,a[href$='.ppt']:after,a[href$='.rar']:after,a[href$='.exe']:after {
+	content: " (Visite a aula online para realizar download deste arquivo.)"
+}
+
+.destaque{
+  &.uab-md-primary-light, .uab-md-accent-light{
+    background-color: $ligth-grey;
+  }
+  &.abnt{
+    margin-left: 4cm !important;
+  }
+}
+
+.uab-box{
+  padding: 8px 16px;
+  margin: 24px 0px;
+  border: 1px solid $border-color !important;
+}
