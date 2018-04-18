@@ -15,6 +15,7 @@
     <div layout="row" flex>
       <md-content class="main" layout-padding flex>
         <div class="white-paper">
+          <h2 class="cabecalho">{{$root.$global.current_topic.nome}}</h2>
           <main ui-view autoscroll='true'></main>
         </div>
         <uab-footer></uab-footer>
@@ -25,7 +26,14 @@
   <div id='impress' class='ng-hide'>
     <ul>
       <li ng-repeat="t in $root.$global.impress._instance.topicos">
-        <div ng-bind-html="app.renderHTML(t)"></div>
+        <header>
+          <div class="course">
+            {{$root.$global.manifest.academico.disciplina}} <br>
+            {{ $root.$global.manifest.nome }}
+          </div>
+          <div class="discipline">{{ t.nome }}</div>
+        </header>
+        <div ng-bind-html="app.renderHTML(t.data)"></div>
       </li>
     </ul>
   </div>

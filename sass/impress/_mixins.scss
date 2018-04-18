@@ -4,3 +4,12 @@
   padding: 24px 16px;
   margin: 24px auto;
 }
+
+@mixin card-title{
+  @include montserrat;
+  font-size: 120%;
+  justify-content: center;
+  text-transform: uppercase;
+  color: $text-color-lighter;
+  margin: 16px 0px;
+}

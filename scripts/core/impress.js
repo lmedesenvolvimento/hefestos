@@ -9,7 +9,10 @@ var Impress = {
 
     manifest.topicos.forEach(function(t){
       $http.get(t.local).then(function(response){
-        Impress._instance.topicos.push(response.data)
+        Impress._instance.topicos.push({
+         nome: t.nome,
+         data: response.data
+        })
       });
     });
     // Bind print events

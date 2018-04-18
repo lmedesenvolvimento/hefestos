@@ -1,7 +1,18 @@
-[uab-sanfonado-toggle], .uab-tabs-pagination{
+[uab-sanfonado-toggle], .uab-tabs-pagination, uab-svg-animation,
+video, audio, uab-audio-button{
   display: none;
 }
 
 [ng-click]{
   display: none;
+}
+
+.hidden-print{
+  display: none;
+}
+
+.visible-print{
+  display: block;
+  font-size: 80%;
+  text-indent: 0px;
 }

@@ -1,6 +1,6 @@
 var uabDialogCtrl = function($scope, $element, $mdDialog, $compile){
   this.simpleText = function(title, text){
-    simpleText($mdDialog, title, text)
+    simpleText($mdDialog, $scope.uabDialogTitle, $scope.uabDialogText)
   }
 
   this.showHtml = function(){
@@ -18,7 +18,8 @@ var uabDialog = function($mdDialog){
     transclude: true,
     controller: uabDialogCtrl,
     scope: {
-      uabDialogTitle: "@"
+      uabDialogTitle: "@",
+      uabDialogText: "@"
     },
     link: function(scope, element, attrs, ctrl, transclude){
       scope.$ctrl = ctrl

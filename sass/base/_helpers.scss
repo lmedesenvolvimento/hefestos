@@ -66,3 +66,7 @@ uab-svg-animation iframe{
 .truncate{
   @include ellipsis;
 }
+
+.visible-print{
+  display: none;
+}

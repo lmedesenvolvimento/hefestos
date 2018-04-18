@@ -1,6 +1,31 @@
+// Header
+#impress{
+  > ul > li{
+    page-break-before: always;
+  }
+  > ul > li > header{
+    background-color: $ligth-grey;
+    .course, .discipline{
+      @include roboto;
+      padding: 8px 24px;
+      font-size: 120%;
+      font-weight: bold;
+    }
+    .discipline{
+      background-color: darken($color: $ligth-grey, $amount: 10);
+    }
+    .topic{
+      font-size: 18px;
+    }
+  }
+}
+
 // Cards
 md-card{
   @include card;
+  md-card-title-text{
+    @include card-title;
+  }
 }
 
 // Sanfona
@@ -30,6 +55,15 @@ uab-slide{
 
 uab-dialog{
   @include card;
+  &::before{
+    @include card-title;
+    display: block;
+    content: attr(uab-dialog-title);
+  }
+  &::after{
+    display: block;
+    content: attr(uab-dialog-text);
+  }
 }
 
 #links{
@@ -41,5 +75,16 @@ uab-dialog{
     @extend .cabecalho;
     display: block;
     content: 'Fontes das Imagens'
+  }
+}
+
+
+// Forms
+uab-input-text{
+  display: block;
+  &::after{
+    content: attr(label);
+    border-bottom: 1px solid $border-color;
+    margin: 16px 0px 24px;
   }
 }
