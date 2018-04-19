@@ -1,6 +1,6 @@
 // Header
 #impress{
-  > ul > li{
+  > ul > li:not(:first-child){
     page-break-before: always;
   }
   > ul > li > header{
@@ -49,6 +49,12 @@ uab-slide{
         max-width: 100%;
         margin: 24px auto;
       }
+      &[legend]::after{
+        display: block;
+        text-indent: 0px;
+        text-align: center;
+        content: "("attr(legend)")";
+      }
     }
   }
 }
@@ -83,8 +89,45 @@ uab-dialog{
 uab-input-text{
   display: block;
   &::after{
-    content: attr(label);
-    border-bottom: 1px solid $border-color;
+    display: block;
+    border-bottom: 2px solid $border-color;
     margin: 16px 0px 24px;
+    content: attr(label);
+    text-indent: 0px;
   }
+}
+
+uab-input-radio, uab-input-radio-button{
+  display: block;
+  text-indent: 0px;
+}
+
+uab-input-radio-button{
+  &::before{
+    display: inline-block;
+    content: " ";
+    width: 16px;
+    height: 16px;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    margin-top: 8px;
+    margin-right: 16px;
+  }  
+}
+
+uab-input-checkbox, uab-input-checkbox-button{
+  display: block;
+  text-indent: 0px; 
+}
+
+uab-input-checkbox-button{
+  &::before{
+    display: inline-block;
+    content: " ";
+    width: 16px;
+    height: 16px;
+    border: 1px solid $border-color;
+    margin-top: 8px;
+    margin-right: 16px;
+  }  
 }

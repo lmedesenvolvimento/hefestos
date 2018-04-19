@@ -1,0 +1,16 @@
+[uab-slide-item]{
+  position: relative;
+  .layer{
+    position: relative;
+    legend{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      background-color: transparentize($color: #000000, $amount: 0.7);
+      padding: 16px 24px;
+      text-align: center;
+    }
+  }
+}

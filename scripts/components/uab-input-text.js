@@ -6,7 +6,9 @@ var uabInputText = {
     sentence: "@",
     full: "=",
     submitText: "@",
-    failMessage: "@"
+    failMessage: "@",
+    multiline: "=",
+    rows: "="
   }
 };
 

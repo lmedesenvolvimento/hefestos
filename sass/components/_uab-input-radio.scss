@@ -5,7 +5,8 @@ uab-input-radio{
 
 body.hc > #root{
   uab-input-radio{
-    md-radio-button{
+    md-radio-button, md-radio-button[disabled]{
+      color: $hc-text-color;
       .md-off{
         border-color: $hc-text-color;
       }

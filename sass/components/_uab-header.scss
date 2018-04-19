@@ -16,6 +16,9 @@ uab-header{
     z-index: 48;
     transform: translateY( calc( -100% + 64px ));
   }
+  md-toolbar{
+    display: block;
+  }
   uab-header-titles{
     flex-direction: column; 
     width: 100%;
@@ -121,7 +124,7 @@ body.hc > #root{
   uab-header{
     background: transparent;
     border-bottom: 1px solid $hc-border-color;
-    md-toolbar{
+    md-toolbar{      
       background-color: transparent;
       uab-header-titles{
         .subtitle, .caption{

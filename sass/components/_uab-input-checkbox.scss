@@ -1,0 +1,24 @@
+uab-input-checkbox{
+  display: block;
+  margin: 24px 0px 0px;
+}
+
+body.hc > #root{
+  uab-input-checkbox{
+    uab-input-checkbox-button{
+      md-checkbox{
+        &.md-checked{
+          .md-ink-ripple{
+            color: transparent !important;
+          }
+          .md-icon{
+            background-color: $hc-text-color !important;
+          }
+        }
+        .md-icon{
+          border-color: $hc-text-color !important;
+        }
+      } 
+    }
+  }
+}

@@ -25487,6 +25487,8 @@ uab-header {
     z-index: 48;
     -webkit-transform: translateY(calc( -100% + 64px));
     transform: translateY(calc( -100% + 64px)); }
+  uab-header md-toolbar {
+    display: block; }
   uab-header uab-header-titles {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -25716,7 +25718,7 @@ body.hc > #root uab-input-text md-input-container:not(.md-input-invalid).md-inpu
 body.hc > #root uab-input-text md-input-container label {
   color: lime; }
 
-body.hc > #root uab-input-text md-input-container input {
+body.hc > #root uab-input-text md-input-container input, body.hc > #root uab-input-text md-input-container textarea {
   color: yellow;
   border-bottom: 1px solid lime; }
 
@@ -25724,17 +25726,29 @@ uab-input-radio {
   display: block;
   margin: 24px 0px 0px; }
 
-body.hc > #root uab-input-radio md-radio-button .md-off {
-  border-color: yellow; }
+body.hc > #root uab-input-radio md-radio-button, body.hc > #root uab-input-radio md-radio-button[disabled] {
+  color: yellow; }
+  body.hc > #root uab-input-radio md-radio-button .md-off, body.hc > #root uab-input-radio md-radio-button[disabled] .md-off {
+    border-color: yellow; }
+  body.hc > #root uab-input-radio md-radio-button .md-on, body.hc > #root uab-input-radio md-radio-button[disabled] .md-on {
+    background-color: yellow; }
+  body.hc > #root uab-input-radio md-radio-button.md-checked .md-off, body.hc > #root uab-input-radio md-radio-button[disabled].md-checked .md-off {
+    border-color: lime; }
+  body.hc > #root uab-input-radio md-radio-button.md-checked .md-on, body.hc > #root uab-input-radio md-radio-button[disabled].md-checked .md-on {
+    background-color: lime; }
 
-body.hc > #root uab-input-radio md-radio-button .md-on {
-  background-color: yellow; }
+uab-input-checkbox {
+  display: block;
+  margin: 24px 0px 0px; }
 
-body.hc > #root uab-input-radio md-radio-button.md-checked .md-off {
-  border-color: lime; }
+body.hc > #root uab-input-checkbox uab-input-checkbox-button md-checkbox.md-checked .md-ink-ripple {
+  color: transparent !important; }
 
-body.hc > #root uab-input-radio md-radio-button.md-checked .md-on {
-  background-color: lime; }
+body.hc > #root uab-input-checkbox uab-input-checkbox-button md-checkbox.md-checked .md-icon {
+  background-color: yellow !important; }
+
+body.hc > #root uab-input-checkbox uab-input-checkbox-button md-checkbox .md-icon {
+  border-color: yellow !important; }
 
 uab-sanfonado .uab-sanfonado-wrap {
   overflow-x: hidden;
@@ -26010,6 +26024,20 @@ body.hc > #root uab-tabs-vertical .uab-tabs-pagination {
 
 body.hc > #root uab-tabs-vertical md-content {
   background: transparent; }
+
+[uab-slide-item] {
+  position: relative; }
+  [uab-slide-item] .layer {
+    position: relative; }
+    [uab-slide-item] .layer legend {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 16px 24px;
+      text-align: center; }
 
 .fancybox-active {
   height: inherit; }

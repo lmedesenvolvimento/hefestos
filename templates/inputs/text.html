@@ -4,10 +4,11 @@
     'md-input-invalid': $ctrl.incorrect,
   }">
     <label>{{$ctrl.label}}</label>
-    <input ng-model="$ctrl.value" ng-disabled="$ctrl.correct">
+    <input ng-model="$ctrl.value" ng-disabled="$ctrl.correct" ng-if="!$ctrl.multiline">
+    <textarea ng-model="$ctrl.value" ng-disabled="$ctrl.correct" ng-if="$ctrl.multiline" rows="{{ $ctrl.rows || 3 }}"></textarea>
     <md-icon class="icon-24" md-font-icon="{{ $ctrl.correct ? 'icon-check' : 'icon-cancel' }}" ng-if="( $ctrl.incorrect || $ctrl.correct)"></md-icon>
   </md-input-container>
-  <md-button class="md-raised" ng-class="" ng-click="$ctrl.onSubmit()" ng-disabled="$ctrl.correct">
+  <md-button class="md-raised" ng-class="" ng-click="$ctrl.onSubmit()" ng-disabled="$ctrl.correct" ng-show="$ctrl.sentence">
     {{ $ctrl.correct ? 'Resposta Correta!' : $ctrl.submitText }}
   </md-button>
 </form>

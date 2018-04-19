@@ -558,7 +558,9 @@ var uabInputText = {
     sentence: "@",
     full: "=",
     submitText: "@",
-    failMessage: "@"
+    failMessage: "@",
+    multiline: "=",
+    rows: "="
   }
 };
 
@@ -923,6 +925,7 @@ var uabSlideItem = function(){
   return {
     restrict: "A",
     scope: {
+      legend: "@",
       uabSlideItem: "@"
     },
     templateUrl: "templates/uab-slide-item.html"
