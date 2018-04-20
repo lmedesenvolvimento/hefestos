@@ -21161,6 +21161,16 @@ h1, h2, h3, h4 {
     .destaque.abnt * {
       text-indent: 0px; }
 
+.folha-de-caderno {
+  background-image: url(../layout/caderno-background.png);
+  background-repeat: repeat-y;
+  width: 100%;
+  max-width: 640px;
+  margin: 24px auto;
+  line-height: 24px;
+  padding: 24px 24px 24px 32px;
+  border-right: 1px solid #bbb; }
+
 @media (max-width: 799px) {
   .destaque.abnt {
     margin-left: 0cm; } }
@@ -21177,6 +21187,10 @@ body.hc > #root .destaque {
 
 body.hc > #root .cabecalho {
   border-bottom: 1px solid lime; }
+
+body.hc > #root .folha-de-caderno {
+  background: transparent;
+  border: 1px solid lime; }
 
 /* -- Material Design Table style -------------- */
 .table {
