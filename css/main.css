@@ -25510,26 +25510,20 @@ uab-header {
     flex-direction: column;
     width: 100%;
     padding: 24px 16px 24px;
-    color: #222; }
+    color: #222;
+    text-align: left; }
+    uab-header uab-header-titles .course {
+      font-size: 80%;
+      font-weight: bold;
+      margin-left: 3rem; }
     uab-header uab-header-titles .subtitle {
-      display: inline-block;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      word-wrap: normal;
       font-weight: bold; }
     uab-header uab-header-titles .subtitle, uab-header uab-header-titles .caption {
-      font-size: 18pt;
+      font-size: 16pt;
       margin-left: 3rem; }
     uab-header uab-header-titles .titles {
-      display: inline-block;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      word-wrap: normal;
-      line-height: 1.1; }
+      line-height: 1.1;
+      font-size: 18px; }
       uab-header uab-header-titles .titles .caption {
         font-size: 16pt;
         color: #222; }
@@ -25595,7 +25589,7 @@ body.hc > #root uab-header {
   border-bottom: 1px solid lime; }
   body.hc > #root uab-header md-toolbar {
     background-color: transparent; }
-    body.hc > #root uab-header md-toolbar uab-header-titles .subtitle, body.hc > #root uab-header md-toolbar uab-header-titles .caption {
+    body.hc > #root uab-header md-toolbar uab-header-titles .subtitle, body.hc > #root uab-header md-toolbar uab-header-titles .caption, body.hc > #root uab-header md-toolbar uab-header-titles .course {
       color: yellow !important; }
     body.hc > #root uab-header md-toolbar .md-icon-button md-icon {
       color: lime; }

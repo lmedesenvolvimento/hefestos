@@ -24,17 +24,22 @@ uab-header{
     width: 100%;
     padding: 24px 16px 24px;
     color: $text-color;
+    text-align: left;
+    .course{
+      font-size: 80%;
+      font-weight: bold;
+      margin-left: 3rem;
+    }
     .subtitle{
-      @include ellipsis;
       font-weight: bold;
     }
     .subtitle, .caption{
-      font-size: 18pt;
+      font-size: 16pt;
       margin-left: 3rem;
     }
     .titles{
-      @include ellipsis;
       line-height: 1.1;
+      font-size: 18px;
       .caption{
         font-size: 16pt;
         color: $text-color;
@@ -127,7 +132,7 @@ body.hc > #root{
     md-toolbar{      
       background-color: transparent;
       uab-header-titles{
-        .subtitle, .caption{
+        .subtitle, .caption, .course{
           color: $hc-text-color !important;
         }
       }
