@@ -799,7 +799,7 @@
 .uab-icon {
   font-size: 48px; }
   .uab-icon::before {
-    color: #222 !important; }
+    color: white !important; }
 
 body.hc > #root .uab-icon::before {
   color: yellow !important; }
@@ -1422,6 +1422,11 @@ h1, h2, h3, h4 {
   line-height: 24px;
   padding: 24px 24px 24px 32px;
   border-right: 1px solid #bbb; }
+
+@media (max-width: 599px) {
+  .folha-de-caderno {
+    margin: 24px -15px;
+    padding: 24px 4px 24px 32px; } }
 
 @media (max-width: 799px) {
   .destaque.abnt {

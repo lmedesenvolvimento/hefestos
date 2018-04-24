@@ -1,5 +1,5 @@
 <form name="form">
-  <md-radio-group ng-model="$ctrl.value"> </md-radio-group>
+  <md-radio-group name="radio" ng-model="$ctrl.value"> </md-radio-group>  
   <md-button class="md-raised" ng-class="" ng-click="$ctrl.onSubmit()" ng-disabled="$ctrl.correct">
     {{ $ctrl.correct ? 'Resposta Correta!' : $ctrl.submitText }}
   </md-button>

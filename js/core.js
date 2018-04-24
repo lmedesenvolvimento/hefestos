@@ -87,10 +87,17 @@ var Loader = {
 
         // Configurando Tema
 
+        var primaryPalette = manifest.tema.primario.split('-')
+        var accentPalette = manifest.tema.contraste.split('-')
+
         mdThemingProvider
           .theme('default')
-          .primaryPalette(manifest.tema.primario)
-          .accentPalette(manifest.tema.contraste);
+          .primaryPalette(primaryPalette[0], {
+            'default': primaryPalette.length > 1 ? primaryPalette[1] : '500'
+          })
+          .accentPalette(accentPalette[0], {
+            'default': accentPalette.length > 1 ? accentPalette[1] : '500'
+          });
 
 
         // Configurando o tópico inicial

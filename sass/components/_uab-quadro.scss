@@ -15,8 +15,8 @@ uab-quadro{
     }
     .uab-quadro-body{
       flex: 1;
-      md-card{
-        md-card-content{
+      > md-card{
+        > md-card-content{
           min-height: 86px;
           p{
             margin: 8px 0px;

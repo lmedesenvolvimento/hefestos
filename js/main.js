@@ -43,6 +43,7 @@ ApplicationRun.$inject = ['$rootScope','$http'];
 var app = angular.module('application', [
   'ngAnimate',
   'ngSanitize',
+  'ngMessages',
   'ngMaterial',
   'angular-carousel',
   'ui.router',

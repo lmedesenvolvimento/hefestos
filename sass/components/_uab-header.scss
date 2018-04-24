@@ -23,7 +23,7 @@ uab-header{
     flex-direction: column; 
     width: 100%;
     padding: 24px 16px 24px;
-    color: $text-color;
+    color: white;
     text-align: left;
     .course{
       font-size: 80%;
@@ -42,7 +42,7 @@ uab-header{
       font-size: 18px;
       .caption{
         font-size: 16pt;
-        color: $text-color;
+        color: white;
       }
     }    
   }
@@ -61,11 +61,11 @@ uab-header{
       line-height: 32px;
       padding: 0px;
       md-icon{
-        color: $text-color;
+        color: white;
       }
     }
     .md-toolbar-tools-text{
-      color: $text-color;
+      color: white;
       padding: 8px 0px;
       line-height: 24px;
     }

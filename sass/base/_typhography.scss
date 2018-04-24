@@ -124,6 +124,12 @@ h4{
   border-right: 1px solid #bbb;
 }
 
+@media(max-width: $screen-xs){
+  .folha-de-caderno{
+    margin: 24px -15px;
+    padding: 24px 4px 24px 32px;
+  }
+}
 @media(max-width: $screen-sm){
   .destaque{
     &.abnt{
