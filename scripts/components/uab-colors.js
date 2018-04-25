@@ -2,9 +2,12 @@ var uabColorsCtrl = function($rootScope, $mdColorPalette){
   var self = this
   var tema = $rootScope.$global.manifest.tema
 
+  var primario = tema.primario.split('-');
+  var contraste = tema.contraste.split('-');
+
   self.colors = {
-    primary: $mdColorPalette[tema.primario]["500"],
-    accent: $mdColorPalette[tema.contraste]["500"]
+    primary: $mdColorPalette[primario[0]][primario[1] || "500" ],
+    accent: $mdColorPalette[contraste[0]][contraste[1] || "500"]
   }
 
   console.log(self.colors)
