@@ -76,7 +76,7 @@
         <p class="text-center">
           <div class="qr-code-wrap">
             <img src="layout/qr-code-logo.png" width="{{ $root.$mdMedia('gt-sm') ? '72' : '48' }}" height="{{ $root.$mdMedia('gt-sm') ? '72' : '48' }} }}" class="qr-code-icon" />
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size={{ $root.$mdMedia('gt-sm') ? '360x360' : '180x180'}}&data=http://www.africau.edu/images/default/sample.pdf&ecc=M&charset-source=UTF-8" />
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size={{ $root.$mdMedia('gt-sm') ? '360x360' : '180x180'}}&data={{text}}&ecc=M&charset-source=UTF-8" />
           </div>
         </p>
       </div>

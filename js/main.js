@@ -625,10 +625,11 @@ angular.module("application").component("uabPagination",{
     }
 })
 
-var uabQrCodeCtrl = function($controller, $mdDialog){
+var uabQrCodeCtrl = function($rootScope, $controller, $mdDialog){
   var self = this
 
   self.trigger = function(){
+    var url = window.location.origin + "/" + $rootScope.$global.current_topic.pdf
     $mdDialog.show({
       templateUrl: "templates/dialogs/qr-code.html",
       controller: "SimpleDialogCtrl",
@@ -636,7 +637,7 @@ var uabQrCodeCtrl = function($controller, $mdDialog){
       clickOutsideToClose: true,
       locals: {
         title: null,
-        text: null
+        text: url
       }
     })
   }
@@ -644,7 +645,7 @@ var uabQrCodeCtrl = function($controller, $mdDialog){
   return self;
 }
 
-uabQrCodeCtrl.$inject = ['$controller', '$mdDialog']
+uabQrCodeCtrl.$inject = ['$rootScope','$controller', '$mdDialog']
 
 var uabQrCode = {
   controller: uabQrCodeCtrl,

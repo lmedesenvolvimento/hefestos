@@ -10,24 +10,28 @@
         {
             "nome": "Tipografia",
             "local": "topicos/tipografia.html",
-            "default": true
+            "default": true,
+            "pdf": "pdf/tipografia.pdf"
         },
         {
             "nome": "Grid",
-            "local": "topicos/grid.html"
+            "local": "topicos/grid.html",
+            "pdf": "pdf/grid.pdf"
         },
         {
             "nome": "Componetes",
-            "local": "topicos/componentes.html"
+            "local": "topicos/componentes.html",
+            "pdf": "pdf/componentes.pdf"
         },
         {
             "nome": "Formulários",
-            "local": "topicos/formularios.html"
-            
+            "local": "topicos/formularios.html",
+            "pdf": "pdf/formularios.pdf"
         },
         {
             "nome": "Multimídia",
-            "local": "topicos/multimidia.html"
+            "local": "topicos/multimidia.html",
+            "pdf": "pdf/multimidia.pdf"
         }
     ],
     "tema":{
