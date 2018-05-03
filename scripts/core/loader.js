@@ -3,7 +3,7 @@ var Loader = {
         GLOBAL.manifest = manifest;
 
         // Set document settings
-        document.title = GLOBAL.manifest.nome
+        document.title = GLOBAL.manifest.academico.curso
 
         manifest.topicos.forEach(function(t, position){
           t.slug = S(t.nome).slugify().s;

@@ -21105,10 +21105,10 @@ p {
   font-size: 1.15rem;
   margin: 24px 0px;
   text-indent: 2.0rem; }
-  p.sem-recuo {
+  p.sem_recuo {
     text-indent: 0; }
 
-.sem-recuo {
+.sem_recuo {
   text-indent: 0; }
 
 input, label, textarea, form {
@@ -21170,6 +21170,8 @@ h1, h2, h3, h4 {
   line-height: 24px;
   padding: 24px 24px 24px 32px;
   border-right: 1px solid #bbb; }
+  .folha-de-caderno p {
+    margin: 0px; }
 
 @media (max-width: 599px) {
   .folha-de-caderno {
@@ -25829,8 +25831,14 @@ uab-sanfonado-group uab-sanfonado:not(:last-child) md-card {
 body.hc > #root uab-sanfonado .uab-sanfonado-content {
   border-top: 1px solid lime; }
 
-uab-dialog uab-dialog-content {
+uab-dialog uab-dialog-content, uab-dialog-group uab-dialog-content {
   display: none; }
+
+uab-dialog [uab-dialog-trigger], uab-dialog-group [uab-dialog-trigger] {
+  cursor: pointer; }
+
+body.hc > #root uab-dialog uab-dialog-content, body.hc > #root uab-dialog-group uab-dialog-content {
+  display: block; }
 
 uab-quadro {
   display: block; }
@@ -25881,7 +25889,7 @@ body.hc > #root uab-quadro .uab-quadro {
     border: 1px solid lime;
     border-right: none; }
 
-.uab-box {
+.uab-box, body.hc > #root uab-dialog uab-dialog-content, body.hc > #root uab-dialog-group uab-dialog-content {
   padding: 8px 16px;
   margin: 24px 0px;
   border: 1px solid; }

@@ -222,6 +222,40 @@ var uabColors = {
 
 angular.module('application').component('uabColors', uabColors)
 
+var uabDialogTriggerCtrl = function($element, $scope, $mdDialog, $compile){
+  $element.on('click', function(e){
+    var htmlString = $element.closest('uab-dialog-group').find($scope.uabDialogTrigger).html();
+    var htmlParsed = angular.element(htmlString);
+    showHtml($mdDialog, $scope.uabDialogTitle, $compile(htmlParsed)($scope));
+  });
+};
+
+uabDialogTriggerCtrl.$inject = ['$element','$scope','$mdDialog','$compile'];
+
+var uabDialogTriggerComponent = function(){
+  return {
+    restrict: 'A',
+    controller: uabDialogTriggerCtrl,
+    scope: {
+      uabDialogTrigger: '@'
+    }
+  };
+}
+
+angular.module('application').directive('uabDialogTrigger', uabDialogTriggerComponent);
+
+function showHtml(mdDialog, title, html){
+  mdDialog.show({
+    templateUrl: "templates/dialogs/markup.html",
+    controller: "HtmlDialogCtrl",
+    controllerAs: "dialog",
+    clickOutsideToClose: true,
+    locals: {
+      title: title,
+      html: html
+    }
+  })
+}
 var uabDialogImg = function($timeout, $rootScope){
   return {
     restrict: 'A',
@@ -776,9 +810,9 @@ function onClickItem(element, e){
 
   // unmark all itens
   $(e.target).closest('ul').find('li').removeClass('active');
-  $(e.target).closest('ul').find('li .md-primary').removeClass('md-primary');
+  $(e.target).closest('ul').find('li .md-primary').removeClass('md-primary md-raised');
   // mark current item
-  $(e.target).addClass('md-primary');
+  $(e.target).addClass('md-primary md-raised');
   $(e.target).parent().addClass('active');
 
   activeTab(element, tabId);

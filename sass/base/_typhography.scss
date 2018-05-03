@@ -19,12 +19,12 @@ p{
   font-size: 1.15rem;
   margin: 24px 0px;
   text-indent: 2.0rem;
-  &.sem-recuo{
+  &.sem_recuo{
     text-indent: 0;
   }
 }
 
-.sem-recuo{
+.sem_recuo{
   text-indent: 0;
 }
 
@@ -122,6 +122,9 @@ h4{
   line-height: 24px;
   padding: 24px 24px 24px 32px;
   border-right: 1px solid #bbb;
+  p{
+    margin: 0px;
+  }
 }
 
 @media(max-width: $screen-xs){

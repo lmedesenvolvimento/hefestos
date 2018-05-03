@@ -1,5 +1,17 @@
-uab-dialog{
+uab-dialog, uab-dialog-group{
   uab-dialog-content{
     display: none;
+  }
+  [uab-dialog-trigger]{
+   cursor: pointer; 
+  }
+}
+
+body.hc > #root{
+  uab-dialog, uab-dialog-group{
+    uab-dialog-content{
+      display: block;
+      @extend .uab-box;
+    }
   }
 }

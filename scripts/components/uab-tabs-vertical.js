@@ -23,9 +23,9 @@ function onClickItem(element, e){
 
   // unmark all itens
   $(e.target).closest('ul').find('li').removeClass('active');
-  $(e.target).closest('ul').find('li .md-primary').removeClass('md-primary');
+  $(e.target).closest('ul').find('li .md-primary').removeClass('md-primary md-raised');
   // mark current item
-  $(e.target).addClass('md-primary');
+  $(e.target).addClass('md-primary md-raised');
   $(e.target).parent().addClass('active');
 
   activeTab(element, tabId);
