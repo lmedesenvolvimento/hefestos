@@ -3,7 +3,12 @@ md-card{
   margin-bottom: 2rem;
   @extend .md-whiteframe-4dp;
   md-card-title{
-    padding: 16px 16px 8px;
+    padding: 8px 16px 8px;
+    a{
+      @include roboto;
+      font-weight: normal;
+      color: $text-color;
+    }
     .md-icon-button{
       font-size: 24px;
     }

@@ -21201,7 +21201,6 @@ body.hc > #root .folha-de-caderno {
 .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 2rem;
   background-color: transparent;
   border-spacing: 0;
   border-collapse: collapse; }
@@ -24367,7 +24366,11 @@ md-card {
   font-size: 1.25rem;
   margin-bottom: 2rem; }
   md-card md-card-title {
-    padding: 16px 16px 8px; }
+    padding: 8px 16px 8px; }
+    md-card md-card-title a {
+      font-family: 'Roboto', sans-serif;
+      font-weight: normal;
+      color: #222; }
     md-card md-card-title .md-icon-button {
       font-size: 24px; }
   md-card md-card-title-text {
@@ -25533,7 +25536,11 @@ uab-header {
         font-size: 16pt;
         color: white; }
   uab-header .uab-course-icon {
-    width: 48px; }
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin: 8px auto; }
   uab-header .md-toolbar-tools {
     background-color: rgba(0, 0, 0, 0.2); }
     uab-header .md-toolbar-tools > .container-fluid {
@@ -25591,7 +25598,10 @@ uab-header + md-content {
 @media (max-width: 599px) {
   uab-header.hidden {
     -webkit-transform: translateY(calc( -100% + 56px));
-    transform: translateY(calc( -100% + 56px)); } }
+    transform: translateY(calc( -100% + 56px)); }
+  uab-header .uab-course-icon {
+    margin: 8px 0px;
+    padding-left: 8px; } }
 
 body.hc > #root uab-header {
   background: transparent;
@@ -25844,6 +25854,8 @@ uab-quadro {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1; }
+    uab-quadro .uab-quadro .uab-quadro-body > md-card > md-card-title {
+      padding: 16px 16px 8px; }
     uab-quadro .uab-quadro .uab-quadro-body > md-card > md-card-content {
       min-height: 86px; }
       uab-quadro .uab-quadro .uab-quadro-body > md-card > md-card-content p {
@@ -25980,7 +25992,9 @@ uab-tabs-vertical {
       padding: 8px 12px;
       width: 100%;
       margin: 0px;
-      border-radius: 0px; }
+      border-radius: 0px;
+      text-transform: none;
+      white-space: normal; }
   uab-tabs-vertical .uab-tabs-body {
     -webkit-box-flex: 1;
     -ms-flex: 1;
@@ -26041,6 +26055,9 @@ body.hc > #root uab-tabs-vertical .uab-tabs-pagination {
 
 body.hc > #root uab-tabs-vertical md-content {
   background: transparent; }
+
+md-tabs md-pagination-wrapper md-tab-item {
+  text-transform: none !important; }
 
 [uab-slide-item] {
   position: relative; }

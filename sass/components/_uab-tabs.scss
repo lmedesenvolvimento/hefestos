@@ -26,6 +26,8 @@ uab-tabs-vertical{
       width: 100%;
       margin: 0px;
       border-radius: 0px;
+      text-transform: none;
+      white-space: normal;
     }
   }
   .uab-tabs-body{
@@ -88,12 +90,18 @@ body.hc > #root{
         border-right-color: $hc-border-color;
         .md-button{
           font-weight: bold;
-          color: $hc-border-color;
+          color: $hc-border-color;          
         }
       }
     }
     md-content{
       background: transparent;
     }
+  }
+}
+
+md-tabs{
+  md-pagination-wrapper md-tab-item{
+    text-transform: none !important;
   }
 }

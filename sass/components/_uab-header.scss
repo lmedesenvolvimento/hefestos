@@ -47,7 +47,11 @@ uab-header{
     }    
   }
   .uab-course-icon{
-    width: 48px;
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin: 8px auto;    
   }
   .md-toolbar-tools {
     @extend .h4;
@@ -124,6 +128,10 @@ uab-header + md-content{
     &.hidden{
       transform: translateY( calc( -100% + 56px ));     
     }   
+    .uab-course-icon{
+      margin: 8px 0px;    
+      padding-left: 8px
+    }
   }
 }
 
