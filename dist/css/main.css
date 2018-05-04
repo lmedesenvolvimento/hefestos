@@ -21170,7 +21170,7 @@ h1, h2, h3, h4 {
   line-height: 24px;
   padding: 24px 24px 24px 32px;
   border-right: 1px solid #bbb; }
-  .folha-de-caderno p {
+  .folha-de-caderno p, .folha-de-caderno ul, .folha-de-caderno ul li {
     margin: 0px; }
 
 @media (max-width: 599px) {
@@ -25837,9 +25837,6 @@ uab-dialog uab-dialog-content, uab-dialog-group uab-dialog-content {
 uab-dialog [uab-dialog-trigger], uab-dialog-group [uab-dialog-trigger] {
   cursor: pointer; }
 
-body.hc > #root uab-dialog uab-dialog-content, body.hc > #root uab-dialog-group uab-dialog-content {
-  display: block; }
-
 uab-quadro {
   display: block; }
   uab-quadro .uab-quadro .uab-quadro-icon {
@@ -25889,7 +25886,7 @@ body.hc > #root uab-quadro .uab-quadro {
     border: 1px solid lime;
     border-right: none; }
 
-.uab-box, body.hc > #root uab-dialog uab-dialog-content, body.hc > #root uab-dialog-group uab-dialog-content {
+.uab-box {
   padding: 8px 16px;
   margin: 24px 0px;
   border: 1px solid; }

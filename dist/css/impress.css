@@ -1421,7 +1421,7 @@ h1, h2, h3, h4 {
   line-height: 24px;
   padding: 24px 24px 24px 32px;
   border-right: 1px solid #bbb; }
-  .folha-de-caderno p {
+  .folha-de-caderno p, .folha-de-caderno ul, .folha-de-caderno ul li {
     margin: 0px; }
 
 @media (max-width: 599px) {
@@ -1611,6 +1611,28 @@ uab-dialog {
     display: block;
     content: attr(uab-dialog-text); }
 
+uab-dialog-group [uab-dialog-trigger] {
+  font-weight: bold;
+  text-decoration: none; }
+
+uab-dialog-group uab-dialog-content {
+  display: block;
+  display: block;
+  border: 1px solid #ddd;
+  padding: 24px 16px;
+  margin: 24px auto; }
+  uab-dialog-group uab-dialog-content::before {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 120%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.78);
+    margin: 16px 0px;
+    display: block;
+    content: attr(title); }
+
 #links li {
   text-align: left; }
 
@@ -1654,7 +1676,7 @@ uab-input-checkbox-button::before {
   margin-top: 8px;
   margin-right: 16px; }
 
-[uab-sanfonado-toggle], .uab-tabs-pagination, uab-svg-animation,
+.uab-tabs-pagination, uab-svg-animation,
 video, audio, uab-audio-button {
   display: none; }
 
@@ -1668,3 +1690,9 @@ video, audio, uab-audio-button {
   display: block;
   font-size: 80%;
   text-indent: 0px; }
+
+[uab-sanfonado-toggle] {
+  text-decoration: none; }
+
+button[uab-sanfonado-toggle] {
+  display: none; }

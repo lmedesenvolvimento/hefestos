@@ -168,12 +168,11 @@ $table-border-color: #e0e0e0;
             margin-bottom: 0;
             background-color: transparent;
 
-            > thead,
             > tfoot {
                 display: none;
             }
 
-            > tbody {
+            > tbody, thead {
                 display: block;
 
                 > tr {
@@ -182,7 +181,7 @@ $table-border-color: #e0e0e0;
                     border-radius: 2px;
                     margin-bottom: $table-cell-padding;
 
-                    > td {
+                    > td, > th {
                         background-color: $table-bg;
                         display: block;
                         vertical-align: middle;
