@@ -7,12 +7,15 @@ var ApplicationConfig = function($stateProvider, $mdThemingProvider, $urlRouterP
   // Configurando o comportamento das roteador
   View.configure($provide)
   // Configurando a aula de acordo com seus meta dados
-  Loader.onLoadManifest($stateProvider, $mdThemingProvider, $urlRouterProvider, manifest)
+  Loader.onLoadManifest($stateProvider, $mdThemingProvider, $urlRouterProvider, manifest);  
 }
 
 ApplicationConfig.$inject = ['$stateProvider', '$mdThemingProvider','$urlRouterProvider','$provide']
 
-var ApplicationRun = function($rootScope){
+var ApplicationRun = function($rootScope, $http){
+    // Configurando Impresso
+    Impress.instance($http, manifest)
+
     $rootScope.$global = GLOBAL
     // Eventos de Rotas
     $rootScope.$on('$stateChangeStart', angular.bind(this, Router.onStateChangeStart, $rootScope));
@@ -26,18 +29,26 @@ var ApplicationRun = function($rootScope){
         'zoom',
         'close'
       ],
+      touch: false,
       loop: false,
+      hash: false,
+      afterShow: function(){
+        $('.main').scrollTop($rootScope.$fancyScrollTop)
+      }
     });
 }
 
-ApplicationRun.$inject = ['$rootScope']
+ApplicationRun.$inject = ['$rootScope','$http'];
 
 var app = angular.module('application', [
   'ngAnimate',
+  'ngSanitize',
+  'ngMessages',
   'ngMaterial',
   'angular-carousel',
   'ui.router',
-  'ui.router.state.events'
+  'ui.router.state.events',
+  'textAngular'
 ])
 
 app.config(ApplicationConfig).run(ApplicationRun)
@@ -49,6 +60,56 @@ function bootstrapApplication(response){
   })
 }
 
+var taConfig = function ($provide) {
+  $provide.decorator('taOptions', ['$delegate', function (taOptions) {
+      taOptions.forceTextAngularSanitize = true;
+      taOptions.keyMappings = [];
+      taOptions.toolbar = [
+          ['h1', 'h2', 'h3', 'p', 'pre', 'quote'],
+          ['bold', 'italics', 'underline', 'ul', 'ol', 'redo', 'undo', 'clear'],
+          ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+          ['html', 'insertImage', 'insertLink']
+      ];
+      taOptions.classes = {
+          focussed: '',
+          toolbar: 'ta-toolbar',
+          toolbarGroup: 'ta-button-group',
+          toolbarButton: '',
+          toolbarButtonActive: 'active',
+          disabled: 'disabled',
+          textEditor: 'ta-text-editor',
+          htmlEditor: 'md-input'
+      };
+      return taOptions;
+  }]);
+  $provide.decorator('taTools', ['$delegate', function (taTools) {
+      taTools.h1.display = '<md-button aria-label="Heading 1">H1</md-button>';
+      taTools.h2.display = '<md-button aria-label="Heading 2">H2</md-button>';
+      taTools.h3.display = '<md-button aria-label="Heading 3">H3</md-button>';
+      taTools.p.display = '<md-button aria-label="Paragraph">P</md-button>';
+      taTools.pre.display = '<md-button aria-label="Pre">pre</md-button>';
+      taTools.bold.display = '<md-button class="md-icon-button" aria-label="Bold"><md-icon md-font-icon="icon-format_bold"></md-icon></md-button>';
+      taTools.italics.display = '<md-button class="md-icon-button" aria-label="Italic"><md-icon md-font-icon="icon-format_italic"></md-icon></md-button>';
+      taTools.underline.display = '<md-button class="md-icon-button" aria-label="Underline"><md-icon md-font-icon="icon-format_underlined"></md-icon></md-button>';
+      taTools.ul.display = '<md-button class="md-icon-button" aria-label="Buletted list"><md-icon md-font-icon="icon-format_list_bulleted"></md-icon></md-button>';
+      taTools.ol.display = '<md-button class="md-icon-button" aria-label="Numbered list"><md-icon md-font-icon="icon-format_list_numbered"></md-icon></md-button>';
+      taTools.undo.display = '<md-button class="md-icon-button" aria-label="Undo"><md-icon md-font-icon="icon-undo"></md-icon></md-button>';
+      taTools.redo.display = '<md-button class="md-icon-button" aria-label="Redo"><md-icon md-font-icon="icon-redo"></md-icon></md-button>';
+      taTools.justifyLeft.display = '<md-button class="md-icon-button" aria-label="Align left"><md-icon md-font-icon="icon-format_align_left"></md-icon></md-button>';
+      taTools.justifyRight.display = '<md-button class="md-icon-button" aria-label="Align right"><md-icon md-font-icon="icon-format_align_right"></md-icon></md-button>';
+      taTools.justifyCenter.display = '<md-button class="md-icon-button" aria-label="Align center"><md-icon md-font-icon="icon-format_align_center"></md-icon></md-button>';
+      taTools.justifyFull.display = '<md-button class="md-icon-button" aria-label="Justify"><md-icon md-font-icon="icon-format_align_justify"></md-icon></md-button>';
+      taTools.clear.display = '<md-button class="md-icon-button" aria-label="Clear formatting"><md-icon md-font-icon="icon-format_clear"></md-icon></md-button>';
+      taTools.html.display = '<md-button class="md-icon-button" aria-label="Show HTML"><md-icon md-font-icon="icon-code"></md-icon></md-button>';
+      taTools.insertLink.display = '<md-button class="md-icon-button" aria-label="Insert link"><md-icon md-font-icon="icon-insert_link"></md-icon></md-button>';
+      taTools.insertImage.display = '<md-button class="md-icon-button" aria-label="Insert photo"><md-icon md-font-icon="icon-insert_photo"></md-icon></md-button>';
+      return taTools;
+  }]);
+};
+
+taConfig.$inject = ['$provide'];
+
+angular.module('application').config(taConfig);
 var lazyImgDirective = function(){
   return {
     restrict: "A",
@@ -66,13 +127,85 @@ var lazyImgDirective = function(){
 
 angular.module("application").directive("lazyImg", lazyImgDirective)
 
+var uabAudioButtonCtrl = function($scope, $rootScope, $element, $mdToast){
+  var self = this;
+
+  self.isPlaying = false
+  
+  self.$onInit = function(){
+    self.sound = document.createElement('audio');
+
+    self.sound.addEventListener('play', function (e) {
+      $mdToast.showSimple( $scope.msg || 'Executando Faixa');
+    });
+
+    self.sound.addEventListener('pause', function (e) {
+      self.isPlaying = false;
+    });
+
+    self.sound.src = $scope.src;
+    
+    // Bind click event
+    $($element).find('> .md-button, > button').click(angular.bind(self, self.listen));
+  }
+
+  self.listen = function(){
+    if (self.isPlaying){
+      self.sound.pause();
+      self.isPlaying = false;
+    } else{
+      // Notify another players
+      $rootScope.$emit('uab-audio-button:play');
+      // Execute audio
+      self.sound.play();
+      self.isPlaying = true;
+    }
+  };
+
+  // Event listen
+  $rootScope.$on('uab-audio-button:play', function(){
+    self.isPlaying = false
+    self.sound.pause();
+  });
+
+  return self;
+};
+
+uabAudioButtonCtrl.$inject = ['$scope', '$rootScope','$element','$mdToast'];
+
+var uabAudioButton = function(){
+  return {
+    restrict: "E",
+    transclude: true,
+    scope:{
+      src: "@",
+      msg: "@"
+    },
+    controller: uabAudioButtonCtrl,
+    link: function(scope, element, attrs, ctrl, transclude){
+      scope.$ctrl = ctrl
+      transclude(scope, function(clone, scope){
+        $(element).html(clone)
+        // Initialize Component
+        scope.$ctrl.$onInit()
+      });
+    }
+  }
+}
+
+uabAudioButton.$inject = []
+
+angular.module('application').directive('uabAudioButton', uabAudioButton)
 var uabColorsCtrl = function($rootScope, $mdColorPalette){
   var self = this
   var tema = $rootScope.$global.manifest.tema
 
+  var primario = tema.primario.split('-');
+  var contraste = tema.contraste.split('-');
+
   self.colors = {
-    primary: $mdColorPalette[tema.primario]["500"],
-    accent: $mdColorPalette[tema.contraste]["500"]
+    primary: $mdColorPalette[primario[0]][primario[1] || "500" ],
+    accent: $mdColorPalette[contraste[0]][contraste[1] || "500"]
   }
 
   console.log(self.colors)
@@ -89,7 +222,41 @@ var uabColors = {
 
 angular.module('application').component('uabColors', uabColors)
 
-var uabDialogImg = function($timeout){
+var uabDialogTriggerCtrl = function($element, $scope, $mdDialog, $compile){
+  $element.on('click', function(e){
+    var htmlString = $element.closest('uab-dialog-group').find($scope.uabDialogTrigger).html();
+    var htmlParsed = angular.element(htmlString);
+    showHtml($mdDialog, $scope.uabDialogTitle, $compile(htmlParsed)($scope));
+  });
+};
+
+uabDialogTriggerCtrl.$inject = ['$element','$scope','$mdDialog','$compile'];
+
+var uabDialogTriggerComponent = function(){
+  return {
+    restrict: 'A',
+    controller: uabDialogTriggerCtrl,
+    scope: {
+      uabDialogTrigger: '@'
+    }
+  };
+}
+
+angular.module('application').directive('uabDialogTrigger', uabDialogTriggerComponent);
+
+function showHtml(mdDialog, title, html){
+  mdDialog.show({
+    templateUrl: "templates/dialogs/markup.html",
+    controller: "HtmlDialogCtrl",
+    controllerAs: "dialog",
+    clickOutsideToClose: true,
+    locals: {
+      title: title,
+      html: html
+    }
+  })
+}
+var uabDialogImg = function($timeout, $rootScope){
   return {
     restrict: 'A',
     scope: {
@@ -97,19 +264,23 @@ var uabDialogImg = function($timeout){
     },
     transclude: true,
     link: function(scope, element, attrs, ctrl, transclude){
+      $(element).click(function(e){
+        $rootScope.$fancyScrollTop = $('.main').scrollTop();
+      });
+
       transclude(scope, function(clone, scope){
-        $(clone).appendTo(element)
-      })
+        $(clone).appendTo(element);
+      });
     }
   };
 }
 
-uabDialogImg.$inject = ['$timeout']
+uabDialogImg.$inject = ['$timeout','$rootScope']
 
 angular.module('application').directive('uabDialogImg', uabDialogImg)
 var uabDialogCtrl = function($scope, $element, $mdDialog, $compile){
   this.simpleText = function(title, text){
-    simpleText($mdDialog, title, text)
+    simpleText($mdDialog, $scope.uabDialogTitle, $scope.uabDialogText)
   }
 
   this.showHtml = function(){
@@ -127,7 +298,8 @@ var uabDialog = function($mdDialog){
     transclude: true,
     controller: uabDialogCtrl,
     scope: {
-      uabDialogTitle: "@"
+      uabDialogTitle: "@",
+      uabDialogText: "@"
     },
     link: function(scope, element, attrs, ctrl, transclude){
       scope.$ctrl = ctrl
@@ -215,6 +387,10 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
     var font_size = $("body").css("font-size").replace('px','');
     var increment = parseFloat(font_size) - 2;
     increment >= MIN_FONT_SIZE ? $("body, html").css("font-size", floatToPx(increment)) : false
+  }
+
+  self.toggleHightContrast = function(){
+    $("body").toggleClass("hc")
   }
 
   // @private
@@ -334,6 +510,103 @@ function isChrome() {
    return navigator.userAgent.indexOf('Chrome')!=-1;
 }
 
+var uabInputCheckbox = function(){
+  return {
+    restrict: "E",
+    controller: 'inputGroupValidationCtrl',
+    templateUrl: "templates/inputs/checkbox.html",
+    transclude: true,
+    scope: {
+      sentence: "@",
+      submitText: "@",
+      failMessage: "@"
+    },
+    link: function (scope, element, attrs, ctrl, transclude){
+      scope.$ctrl = angular.merge(ctrl, { sentence: scope.sentence, submitText: scope.submitText, failMessage: scope.failMessage })
+      transclude(scope, function(clone, scope, compile){
+        var checkboxGroup = element.find('.checkbox-group');
+        $(clone).appendTo(checkboxGroup);
+      });
+    }
+  }
+};
+
+
+var uabInputCheckboxButton = function(){
+  return {
+    template: '<md-checkbox value="{{value}}" ng-disabled="$ctrl.correct" ng-checked="$ctrl.exist(value)" ng-click="$ctrl.toggle(value)"><ng-transclude></ng-transclude></md-checkbox>',
+    transclude: true,
+    require: "^uabInputCheckbox",
+    scope: {
+      value: "@",
+      disabled: "="
+    },
+    link: function(scope, element, attrs, ctrl){
+      scope.$ctrl = ctrl      
+    }
+  }
+};
+
+angular.module('application')
+  .directive('uabInputCheckbox', uabInputCheckbox)
+  .directive('uabInputCheckboxButton', uabInputCheckboxButton)
+var uabInputRadio = function(){
+  return {
+    controller: 'inputValidationCtrl',
+    templateUrl: "templates/inputs/radio.html",
+    transclude: true,
+    scope: {
+      sentence: "@",
+      submitText: "@",
+      failMessage: "@"
+    },
+    link: function (scope, element, attrs, ctrl, transclude){
+      scope.$ctrl = angular.merge(ctrl, { sentence: scope.sentence, submitText: scope.submitText, failMessage: scope.failMessage })
+      transclude(scope, function(clone, scope, compile){
+        var radioGroup = element.find('md-radio-group');
+        $(clone).appendTo(radioGroup);
+      });
+    }
+  }
+};
+
+angular.module('application').directive('uabInputRadio', uabInputRadio)
+
+var uabInputRadioButton = function(){
+  return {
+    template: '<md-radio-button value="{{value}}" ng-disabled="$ctrl.correct"><ng-transclude></ng-transclude></md-radio-button>',
+    transclude: true,
+    require: "^uabInputRadio",
+    scope: {
+      value: "@",
+      disabled: "="
+    },
+    link: function(scope, element, attrs, ctrl){
+      scope.$ctrl = ctrl;
+    }
+  }
+};
+
+angular.module('application').directive('uabInputRadioButton', uabInputRadioButton)
+var uabInputText = {
+  controller: 'inputValidationCtrl',
+  templateUrl: "templates/inputs/text.html",
+  bindings: {
+    label: "@",
+    sentence: "@",
+    full: "=",
+    submitText: "@",
+    failMessage: "@",
+    multiline: "=",
+    rows: "="
+  }
+};
+
+angular.module('application').component('uabInputText',uabInputText)
+
+
+
+
 var uabPaginationCtrl = function($rootScope, $timeout){
     var self = this;
 
@@ -386,6 +659,34 @@ angular.module("application").component("uabPagination",{
     }
 })
 
+var uabQrCodeCtrl = function($rootScope, $controller, $mdDialog){
+  var self = this
+
+  self.trigger = function(){
+    var url = window.location.origin + "/" + $rootScope.$global.manifest.pdf
+    $mdDialog.show({
+      templateUrl: "templates/dialogs/qr-code.html",
+      controller: "SimpleDialogCtrl",
+      controllerAs: "dialog",
+      clickOutsideToClose: true,
+      locals: {
+        title: null,
+        text: url
+      }
+    })
+  }
+
+  return self;
+}
+
+uabQrCodeCtrl.$inject = ['$rootScope','$controller', '$mdDialog']
+
+var uabQrCode = {
+  controller: uabQrCodeCtrl,
+  templateUrl: 'templates/uab-qr-code.html'
+}
+
+angular.module('application').component('uabQrCode', uabQrCode)
 var uabQuadro = function(){
   return {
     scope: {
@@ -399,31 +700,132 @@ var uabQuadro = function(){
 
 angular.module('application').directive('uabQuadro', uabQuadro)
 
-var SanfonadoCtrl = function($element){
-  var self = this
-
-  self.$onInit = function(){
-    self.element = $element
-
-    $(self.element).find('[uab-sanfonado-toggle]').on('click', self.toggle)
+var SanfonadoGroupCtrl = function($rootScope){
+  var self = {
+    children: []
   }
 
-  self.toggle = function(){
-    $(self.element).toggleClass('active')
-    $(self.element).find('.uab-sanfonado-wrap').toggleClass('active')
+  self.closeAll = function(target){
+    self.children.forEach(angular.bind(target, hide));
+  }
+
+  self.join = function(child){
+    self.children.push(child);
+  }
+  
+  function hide(child){
+    if(this != child){
+      child.$ctrl.hide();
+    };
   }
 
   return self
 }
 
-SanfonadoCtrl.$inject = ['$element']
+SanfonadoGroupCtrl.$inject = ['$rootScope']
 
-var SanfonadoComponent = {
-  controller: SanfonadoCtrl
+var SanfonadoGroupComponent = function(){
+  return {
+    controller: SanfonadoGroupCtrl,
+    transclude: true,
+    link: function(scope, element, attrs, ctrl, transclude){
+      scope.$group = ctrl;
+      
+      transclude(scope, function(clone){
+        $(element).html(clone)
+      })
+    }
+  };
 }
 
-angular.module('application').component('uabSanfonado', SanfonadoComponent)
+angular.module('application').directive('uabSanfonadoGroup', SanfonadoGroupComponent)
 
+var SanfonadoCtrl = function($scope, $element){
+  var self = this;
+
+  self.$onInit = function(){
+    self.element = $element;
+
+    $(self.element).find('[uab-sanfonado-toggle]').on('click', self.toggle);
+
+    if(self.group){
+      self.group.join($scope);
+    }
+  }
+
+  self.toggle = function(){
+    if(self.group){
+      self.group.closeAll($scope);
+    }
+    $($element).toggleClass('active');
+    $($element).find('.uab-sanfonado-wrap').toggleClass('active');
+  }
+  
+  self.open = function(){
+    $($element).addClass('active');
+    $($element).find('.uab-sanfonado-wrap').addClass('active');
+  }
+
+  self.hide = function(){
+    $($element).removeClass('active');
+    $($element).find('.uab-sanfonado-wrap').removeClass('active');
+  }
+
+  return self;
+}
+
+SanfonadoCtrl.$inject = ['$scope','$element'];
+
+var SanfonadoComponent = {
+  controller: SanfonadoCtrl,
+  bindings: {
+    group: "="
+  }
+};
+
+angular.module('application').component('uabSanfonado', SanfonadoComponent);
+
+var uabTabsVerticalCtrl = function($element){
+  var self = this
+
+  $($element)
+    .find('.uab-tabs-pagination .md-button').on('click', angular.bind(self, onClickItem, $element))
+
+  return self;
+};
+
+uabTabsVerticalCtrl.$inject = ['$element'];
+
+var uabTabsVertical = {
+  controller: uabTabsVerticalCtrl  
+};
+
+angular.module('application').component('uabTabsVertical', uabTabsVertical);
+
+// @private
+function onClickItem(element, e){
+  e.preventDefault()
+
+  var tabId = $(e.target).parent().attr('target')
+
+  // unmark all itens
+  $(e.target).closest('ul').find('li').removeClass('active');
+  $(e.target).closest('ul').find('li .md-primary').removeClass('md-primary md-raised');
+  // mark current item
+  $(e.target).addClass('md-primary md-raised');
+  $(e.target).parent().addClass('active');
+
+  activeTab(element, tabId);
+};
+
+function activeTab(element, tabId){
+  $(element).find('.uab-tabs-body md-content').removeClass('active');
+
+  var tab = $(element).find('.uab-tabs-body').find(tabId)
+
+  $(tab).addClass('active');
+  $(tab).scrollTop(0);
+};
 var Annotations = function($mdSidenav){
   var self = this
 
@@ -442,7 +844,11 @@ Annotations.$inject = ['$mdSidenav']
 angular.module('application').factory('Annotations',  Annotations)
 
 var uabAnnotationsCtrl = function($rootScope, Annotations){
-  var self = this
+  var self = {
+    taToolbar: [
+      ['h1', 'h2', 'bold', 'italics'],
+    ]
+  }
 
   self.$annotations = Annotations
 
@@ -465,8 +871,6 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
       text: self.$newComment.text,
       created_at: new Date()
     })
-
-    console.log(self.comments)
 
     self.$newComment.text = ''
   }
@@ -525,6 +929,22 @@ Sidenav.$inject = ['$mdSidenav']
 
 angular.module('application').factory('Sidenav', Sidenav)
 
+var dataFancyBox = function(){
+  return {
+    restrict: "A",
+    scope: {
+      'fancyBox':'@'
+    },
+    link: function(scope, element, attrs){
+      console.log(element)
+      $(element).click(function(e){
+        console.log("Catch")
+      })
+    }
+  }
+}
+
+angular.module('application').directive('fancyBox', dataFancyBox)
 var uabMedia = function(){
   return {
     restrict: 'A',
@@ -544,6 +964,7 @@ var uabSlideItem = function(){
   return {
     restrict: "A",
     scope: {
+      legend: "@",
       uabSlideItem: "@"
     },
     templateUrl: "templates/uab-slide-item.html"
@@ -593,27 +1014,33 @@ var onIframeLoad = function(element){
 
   $(window).resize(angular.bind(this, onIframeLoad, element))
 }
-var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, Sidenav) {
+var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav) {
   var self = this;
 
-  $rootScope.$mdMedia = $mdMedia;
-
+  
+  self.renderHTML = function(text){
+    return $sce.trustAsHtml(text);
+  }
+  
   // Audio Button API
   self.listen = function (location, msg) {
     var sound = document.createElement('audio')
-
+    
     sound.addEventListener('play', function (e) {
       $mdToast.showSimple( msg || 'Executando Faixa')
     })
-
+    
     sound.src = location
     sound.play();
   }
 
+  $rootScope.$mdMedia = $mdMedia;
+  $rootScope.$renderHTML = self.renderHTML
+
   return self;
 };
 
-ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', 'Sidenav']
+ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', '$sce', 'Sidenav']
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);
 
@@ -648,3 +1075,81 @@ HtmlDialogCtrl.$inject = ['$scope', '$element', '$mdDialog', '$controller', 'tit
 angular.module('application').controller('HtmlDialogCtrl', HtmlDialogCtrl);
 angular.module('application').controller('SimpleDialogCtrl', SimpleDialogCtrl);
 
+
+var inputValidationCtrl = function ($mdToast) {
+  var self = this;
+
+  self.$onInit = function () {
+    console.log(self)
+  }
+
+  self.onSubmit = function () {
+    if (self.value.toUpperCase() == self.sentence.toUpperCase()) {
+      setCorrect();
+    } else {
+      setIncorrect();
+      $mdToast.showSimple(self.failMessage || "Resposta incorreta tente novamente")
+    }
+  }
+
+  function setCorrect() {
+    self.correct = true
+    delete self.incorrect
+  }
+
+  function setIncorrect() {
+    self.incorrect = true
+    delete self.correct
+  }
+}
+
+inputValidationCtrl.$inject = ['$mdToast']
+
+angular.module('application').controller('inputValidationCtrl', inputValidationCtrl)
+
+
+var inputGroupValidationCtrl = function ($mdToast) {
+  var self = this;
+
+  self.items = [];
+
+  self.toggle = function(item){
+    var idx = self.items.indexOf(item);
+    if (idx > -1) {
+      self.items.splice(idx, 1);
+    }
+    else {
+      self.items.push(item);
+    }
+  }
+
+  self.exist = function(item){
+    return self.items.indexOf(item) > -1;
+  }
+
+  self.onSubmit = function () {
+    var a1 = self.items.sort()
+    var a2 = self.sentence.split(',').sort()
+
+    if (_.isEqual(a1, a2)) {
+      setCorrect();
+    } else {
+      setIncorrect();
+      $mdToast.showSimple(self.failMessage || "Resposta incorreta tente novamente")
+    }
+  }
+
+  function setCorrect() {
+    self.correct = true
+    delete self.incorrect
+  }
+
+  function setIncorrect() {
+    self.incorrect = true
+    delete self.correct
+  }
+}
+
+inputValidationCtrl.$inject = ['$mdToast']
+
+angular.module('application').controller('inputGroupValidationCtrl', inputGroupValidationCtrl)

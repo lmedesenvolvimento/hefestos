@@ -1,12 +1,13 @@
 <md-toolbar>
-  <uab-header-titles flex>
-    <div class="subtitle">
-      {{$root.$global.manifest.academico.curso}}: {{$root.$global.manifest.academico.disciplina}}</div>
-    <div class="titles">
-      <small class="caption">{{$root.$global.manifest.nome}}</small>
-      <small class="caption">{{$root.$global.current_topic.nome}}</small>
-    </div>
-  </uab-header-titles>
+  <div class="container" layout="row" layout-align="start center" flex>
+    <uab-header-titles flex>
+      <md-icon class='uab-course-icon' md-svg-src="{{$root.$global.manifest.academico.cursoIcone}}" ></md-icon>
+      <div class="subtitle">{{$root.$global.manifest.academico.disciplina}}</div>
+      <div class="titles">
+        <small class="caption">{{$root.$global.manifest.nome}}</small>
+      </div>
+    </uab-header-titles>
+  </div>
 
   <div class="md-toolbar-tools">
     <div class="container-fluid" flex>
@@ -27,12 +28,12 @@
         <md-icon md-font-icon="icon-decrease"></md-icon>
       </md-button>
 
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button" ng-click="$ctrl.toggleHightContrast()">
         <md-tooltip>Inverter Cores</md-tooltip>
         <md-icon md-font-icon="icon-invert_colors"></md-icon>
       </md-button>
 
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button" ng-href="{{$root.$global.manifest.pdf}}" target="_blank">
         <md-tooltip>Versão Impressa</md-tooltip>
         <md-icon md-font-icon="icon-print"></md-icon>
       </md-button>

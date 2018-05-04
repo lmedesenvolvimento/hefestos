@@ -1,0 +1,88 @@
+<md-dialog class="qr-code-dialog">
+  <md-dialog-heading>    
+    <div class="md-title truncate">QR Code – impressos das aulas UFC Virtual</div>
+  </md-dialog-heading>
+  <md-dialog-content ng-init="dialog.$onInit()">
+    <div class="linha" ng-class="$root.$mdMedia('xs') ? 'column-reverse' : ''">
+      <div class="col-md-2">
+        <p class="h3 cabecalho">Instruções</p>
+        <p>Siga as instruções abaixo para realizar o download dos impressos das aulas em seu celular.</p>
+        <p>Selecione o Sistema Operacional do seu celular, para instruções:</p>
+        
+        <uab-sanfonado>
+          <md-card class='sanfonado'>
+            <md-card-title>
+              <md-card-title-text>
+                <a uab-sanfonado-toggle>
+                  <md-truncate>Android</md-truncate>
+                </a>
+              </md-card-title-text>
+
+              <button md-button class="md-icon-button" uab-sanfonado-toggle>
+                <md-icon md-font-icon="icon-keyboard_arrow_down"></md-icon>
+              </button>
+            </md-card-title>
+            <md-card-content class="uab-sanfonado-wrap">
+              <div class="uab-sanfonado-content">
+                <p class="sem-recuo">- baixe o aplicativo
+                  <a href="https://play.google.com/store/apps/details?id=la.droid.qr&hl=pt_BR" target="_blank">QR Droid</a> em seu celular;
+                  <br>- abra o aplicativo QR Droid do seu celular;
+                  <br>- na aula, clique no ícone “Mobile - QR Code” na barra inferior das aulas (qualquer tópico);
+                  <br>- posicione a câmera do seu celular em frente ao código (QR Code) da aula e espere o aplicativo reconhecer o
+                  código;
+                  <br>- na primeira vez que o aplicativo reconhecer o código irá perguntar o que deve fazer. Toque em “Abrir URL”;
+                  <br>- abrirá a página de download do impresso da aula em seu navegador padrão. Caso não tenha um navegador padrão,
+                  selecione um navegador de sua preferência;
+                  <br>- após a página abrir, seu navegador iniciará o download automaticamente.(O arquivo ficará salvo na pasta de
+                  download do seu celular);
+                  <br>- abra o arquivo com o aplicativo leitor de pdf padrão do seu celular.</p>
+              </div>
+            </md-card-content>
+          </md-card>
+        </uab-sanfonado>
+
+        <uab-sanfonado>
+          <md-card class='sanfonado'>
+            <md-card-title>
+              <md-card-title-text>
+                <a uab-sanfonado-toggle>
+                  <md-truncate>IOS</md-truncate>
+                </a>
+              </md-card-title-text>
+
+              <button md-button class="md-icon-button" uab-sanfonado-toggle>
+                <md-icon md-font-icon="icon-keyboard_arrow_down"></md-icon>
+              </button>
+            </md-card-title>
+            <md-card-content class="uab-sanfonado-wrap">
+              <div class="uab-sanfonado-content">
+                <p class="sem-recuo">- baixe o aplicativo
+                <a href="https://itunes.apple.com/us/app/quick-scan-qr-code-reader/id483336864?mt=8" target="_blank">Quick Scan (Digitalizador de código de QR)</a> em seu celular;
+                <br>- abra o aplicativo Quick Scan do seu celular;
+                <br>- na aula, clique no ícone “Mobile - QR Code” na barra inferior das aulas (qualquer tópico);
+                <br>- posicione a câmera do seu celular em frente ao código (QR Code) da aula e espere o aplicativo reconhecer o
+                código;
+                <br>- após o aplicativo reconhecer o código, clique em "Open";
+                <br>- clique no último botão inferior à direita;
+                <br>- clique em “Open in Safari";
+                <br>- clique em abrir no "iBooks" para salvar o arquivo ou em “abrir com”, para selecionar outra opção de armazenamento;
+                <br>- o arquivo ficará armazenado na pasta selecionada.</p>
+              </div>
+            </md-card-content>
+          </md-card>
+        </uab-sanfonado>    
+      </div>
+      <div class="col-md-2">
+        <p class="text-center">
+          <div class="qr-code-wrap">
+            <img src="layout/qr-code-logo.png" width="{{ $root.$mdMedia('gt-sm') ? '72' : '48' }}" height="{{ $root.$mdMedia('gt-sm') ? '72' : '48' }} }}" class="qr-code-icon" />
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size={{ $root.$mdMedia('gt-sm') ? '360x360' : '180x180'}}&data={{text}}&ecc=M&charset-source=UTF-8" />
+          </div>
+        </p>
+      </div>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="close()" class="md-primary">Fechar</md-button>
+  </md-dialog-actions>
+</md-dialog>

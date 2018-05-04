@@ -1,0 +1,20 @@
+<form name="form">
+  <md-input-container ng-class="{
+    'md-block': $ctrl.full,
+    'md-input-invalid': $ctrl.incorrect,
+  }">
+    <label>{{$ctrl.label}}</label>
+    <input name="input" ng-model="$ctrl.value" ng-disabled="$ctrl.correct" ng-if="!$ctrl.multiline" required>
+    <textarea name="textarea" ng-model="$ctrl.value" ng-disabled="$ctrl.correct" ng-if="$ctrl.multiline" rows="{{ $ctrl.rows || 3 }}" required></textarea>
+    <md-icon class="icon-24" md-font-icon="{{ $ctrl.correct ? 'icon-check' : 'icon-cancel' }}" ng-if="( $ctrl.incorrect || $ctrl.correct)"></md-icon>
+    <div ng-messages="form.input.$error">
+      <div ng-message="required">Sua resposta está vazia</div>
+    </div>
+    <div ng-messages="form.textarea.$error">
+      <div ng-message="required">Sua resposta está vazia</div>
+    </div>
+  </md-input-container>
+  <md-button class="md-raised" ng-class="" ng-click="$ctrl.onSubmit()" ng-disabled="$ctrl.correct" ng-show="$ctrl.sentence">
+    {{ $ctrl.correct ? 'Resposta Correta!' : $ctrl.submitText }}
+  </md-button>
+</form>

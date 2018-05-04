@@ -101,9 +101,12 @@ gulp.task('copy', ()=> {
   gulp.src('./css/*.css').pipe(gulp.dest('./dist/css'));
   gulp.src('./js/*.js').pipe(gulp.dest('./dist/js'));
   gulp.src('./fonts/*').pipe(gulp.dest('./dist/fonts'));
-  gulp.src('./layout/*').pipe(gulp.dest('./dist/layout'));
+  gulp.src('./layout/**/*').pipe(gulp.dest('./dist/layout'));
   gulp.src('./templates/**/*.html').pipe(gulp.dest('./dist/templates'));
   gulp.src('./topicos/**/*.html').pipe(gulp.dest('./dist/topicos'));
+  gulp.src('./html5/**/*').pipe(gulp.dest('./dist/html5'));
+  gulp.src('./audios/**/*').pipe(gulp.dest('./dist/audios'));
+  gulp.src('./pdf/**/*.pdf').pipe(gulp.dest('./dist/pdf'));
 })
 
 gulp.task('build', ['sass','scripts'],()=> {

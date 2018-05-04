@@ -1611,6 +1611,28 @@ uab-dialog {
     display: block;
     content: attr(uab-dialog-text); }
 
+uab-dialog-group [uab-dialog-trigger] {
+  font-weight: bold;
+  text-decoration: none; }
+
+uab-dialog-group uab-dialog-content {
+  display: block;
+  display: block;
+  border: 1px solid #ddd;
+  padding: 24px 16px;
+  margin: 24px auto; }
+  uab-dialog-group uab-dialog-content::before {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 120%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.78);
+    margin: 16px 0px;
+    display: block;
+    content: attr(title); }
+
 #links li {
   text-align: left; }
 

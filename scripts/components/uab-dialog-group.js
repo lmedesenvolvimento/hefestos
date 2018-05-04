@@ -1,8 +1,11 @@
 var uabDialogTriggerCtrl = function($element, $scope, $mdDialog, $compile){
   $element.on('click', function(e){
-    var htmlString = $element.closest('uab-dialog-group').find($scope.uabDialogTrigger).html();
+    var content = $element.closest('uab-dialog-group').find($scope.uabDialogTrigger)
+    var htmlString = content.html();
     var htmlParsed = angular.element(htmlString);
-    showHtml($mdDialog, $scope.uabDialogTitle, $compile(htmlParsed)($scope));
+    var htmlTitle = content.attr('title');
+
+    showHtml($mdDialog, htmlTitle, $compile(htmlParsed)($scope));
   });
 };
 
@@ -13,7 +16,8 @@ var uabDialogTriggerComponent = function(){
     restrict: 'A',
     controller: uabDialogTriggerCtrl,
     scope: {
-      uabDialogTrigger: '@'
+      uabDialogTrigger: '@',
+      title: '@'
     }
   };
 }

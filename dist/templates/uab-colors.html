@@ -3,8 +3,14 @@
   .uab-md-primary {
     background-color: {{$ctrl.colors.primary.hex}};
   }
+  .uab-md-primary-light{
+    background-color: rgba({{$ctrl.colors.primary.value.concat(0.10).join(',')}});
+  }
   .uab-md-accent {
     background-color: {{$ctrl.colors.accent.hex}};
+  }
+  .uab-md-accent-light{
+    background-color: rgba({{$ctrl.colors.accent.value.concat(0.10).join(',')}});
   }
   .uab-box-primary{
     border-color: {{$ctrl.colors.primary.hex}};

@@ -72,6 +72,22 @@ uab-dialog{
   }
 }
 
+uab-dialog-group{
+  [uab-dialog-trigger]{
+    font-weight: bold;
+    text-decoration: none;
+  }
+  uab-dialog-content{
+    display: block;
+    @include card;
+    &::before{
+      @include card-title;
+      display: block;
+      content: attr(title);
+    }
+  }
+}
+
 #links{
   li{
     text-align: left;

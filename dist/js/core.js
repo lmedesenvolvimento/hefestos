@@ -1,12 +1,77 @@
 var GLOBAL = {
-    manifest: null
+    manifest: null,
+    impress: null
+}
+var Impress = {
+  _instance: {
+    isPrinting: false,
+    topicos: []
+  },
+
+  instance: function($http, manifest){
+    GLOBAL.impress = Impress;
+
+    manifest.topicos.forEach(function(t){
+      $http.get(t.local).then(function(response){
+        Impress._instance.topicos.push({
+         nome: t.nome,
+         data: response.data
+        })
+      });
+    });
+    // Bind print events
+    window.onbeforeprint = Impress.onBeforePrint
+    window.onafterprint = Impress.onAfterPrint
+  },
+  onBeforePrint: function(){
+    $('#root').addClass('ng-hide')
+    $('#impress').removeClass('ng-hide') 
+    Impress.addLinkFonts()
+    console.log("printing...")
+  },
+  onAfterPrint: function(){
+    $('#impress').addClass('ng-hide')
+    $('#root').removeClass('ng-hide')
+    Impress.removeLinkFonts()
+    console.log("exit print...")
+  },
+  addLinkFonts: function(){
+    Impress.createListLinks();
+    
+    $('#impress').find("a[href^='http']").each(function(i){
+			if ( $(this).attr('id') == 'logo-ufc' || $(this).attr('id') == 'logo-ufcv' ) {
+				// evitando colocar os links dos logos de rodape na lista de links
+			} else {
+				var b = i+1;
+        link = $(this).attr("href");
+        // Create Link reference
+        $(this).append("<span class='image-link'> ["+b+"]</span>");
+        // Add link in list
+				$("#links").append("<li>"+ b + " - " + link+"</li>");
+			}
+		});
+  },
+  removeLinkFonts: function(){
+    Impress.destroyListLinks();
+    
+    $('#impress').find(".image-link").each(function(i){
+			$(this).remove()
+		});
+  },
+  createListLinks: function(){
+    var list = "<ol id='links'></ol>"
+    $('#impress').append(list)
+  },
+  destroyListLinks: function(){
+    $('#impress #links').remove()
+  }
 }
 var Loader = {
     onLoadManifest: function(stateProvider, mdThemingProvider, urlRouterProvider, manifest){
         GLOBAL.manifest = manifest;
 
         // Set document settings
-        document.title = GLOBAL.manifest.nome
+        document.title = GLOBAL.manifest.academico.curso
 
         manifest.topicos.forEach(function(t, position){
           t.slug = S(t.nome).slugify().s;
@@ -22,10 +87,17 @@ var Loader = {
 
         // Configurando Tema
 
+        var primaryPalette = manifest.tema.primario.split('-')
+        var accentPalette = manifest.tema.contraste.split('-')
+
         mdThemingProvider
           .theme('default')
-          .primaryPalette(manifest.tema.primario)
-          .accentPalette(manifest.tema.contraste);
+          .primaryPalette(primaryPalette[0], {
+            'default': primaryPalette.length > 1 ? primaryPalette[1] : '500'
+          })
+          .accentPalette(accentPalette[0], {
+            'default': accentPalette.length > 1 ? accentPalette[1] : '500'
+          });
 
 
         // Configurando o tópico inicial
@@ -81,20 +153,9 @@ var Reader = {
 
 var Router = {
     onStateChangeStart: function(root, event, toState, toParams, fromState, fromParams){
-      // Limpando fila leitor de aulas
-      tts.clear();
       GLOBAL.current_topic = _.find(GLOBAL.manifest.topicos, {slug: toState.name})
       // Notify application
-      root.$emit('topic:change', GLOBAL.current_topic)
-      // Configure Fancybox
-      // $("[data-fancybox]").fancybox({
-      //   buttons:[
-      //     'thumbs',
-      //     'slideShow',
-      //     'close',
-      //     'zoom'
-      //   ]
-      // });
+      root.$emit('topic:change', GLOBAL.current_topic)      
     },
     onStateChangeSuccess: function(root, event, toState, toParams, fromState, fromParams){
       // setTimeout(angular.bind(this, Reader.readTopicAsVoice), 500)
@@ -144,11 +205,11 @@ var View = {
     // Observe content scroll
     $('.main').on('scroll', function(e){
       var element = $(e.target);
-      var body = $('body');      
+      var body = $('body');
       
-      $('.main').scrollTop() >= 320 
-        ? $('uab-header').addClass('hidden') 
-        : $('uab-header').removeClass('hidden')
+      $('.main').scrollTop() >= 320
+        ? $('uab-header, body').addClass('animated') 
+        : $('uab-header, body').removeClass('animated')
     })
   }
 }
