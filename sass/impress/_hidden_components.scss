@@ -1,4 +1,4 @@
-[uab-sanfonado-toggle], .uab-tabs-pagination, uab-svg-animation,
+.uab-tabs-pagination, uab-svg-animation,
 video, audio, uab-audio-button{
   display: none;
 }
@@ -15,4 +15,11 @@ video, audio, uab-audio-button{
   display: block;
   font-size: 80%;
   text-indent: 0px;
+}
+
+[uab-sanfonado-toggle]{
+  text-decoration: none;
+}
+button[uab-sanfonado-toggle]{
+  display: none;
 }
