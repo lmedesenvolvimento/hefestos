@@ -23,9 +23,12 @@ uab-sanfonado{
     transition-timing-function: $easing-in-out;
     transition-duration: 0.3s;
   }
-
-  [uab-sanfonado-toggle]:hover{
-    cursor: pointer;
+  [uab-sanfonado-toggle]{
+    font-weight: bold;
+    text-transform: none;
+    &:hover{
+      cursor: pointer;
+    }
   }
 
   md-card-title-text{

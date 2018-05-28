@@ -25808,8 +25808,11 @@ uab-sanfonado .uab-sanfonado-wrap:not(.active) {
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s; }
 
-uab-sanfonado [uab-sanfonado-toggle]:hover {
-  cursor: pointer; }
+uab-sanfonado [uab-sanfonado-toggle] {
+  font-weight: bold;
+  text-transform: none; }
+  uab-sanfonado [uab-sanfonado-toggle]:hover {
+    cursor: pointer; }
 
 uab-sanfonado md-card-title-text {
   -webkit-user-select: none;
