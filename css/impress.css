@@ -974,7 +974,6 @@ main {
         .table-responsive-vertical > .table > tbody > tr > td, .table-responsive-vertical > .table > tbody > tr > th, .table-responsive-vertical > .table thead > tr > td, .table-responsive-vertical > .table thead > tr > th {
           background-color: transparent;
           display: block;
-          vertical-align: middle;
           text-align: right; }
         .table-responsive-vertical > .table > tbody > tr > td[data-title]:before, .table-responsive-vertical > .table thead > tr > td[data-title]:before {
           content: attr(data-title);
