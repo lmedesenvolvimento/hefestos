@@ -27,6 +27,7 @@ uab-sanfonado{
     font-weight: bold;
     text-transform: none;
     &:hover{
+      text-decoration: none;
       cursor: pointer;
     }
   }
@@ -44,6 +45,7 @@ uab-sanfonado{
   }
 }
 
+// Sanfonado Grupo
 uab-sanfonado-group{
   uab-sanfonado{
     &:not(:last-child){
@@ -54,6 +56,16 @@ uab-sanfonado-group{
     }
   }
 } 
+
+// Sanfonado Quadro
+uab-quadro{
+  uab-sanfonado{
+    md-card{
+      border-bottom: 1px $border-color solid;
+      box-shadow: none;
+    }
+  }
+}
 
 
 body.hc > #root{

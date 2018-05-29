@@ -8,6 +8,10 @@ img {
   &.block{
     display: block;
   }
+  &.img-inline{
+    display: inline;
+    margin: 0px;
+  }
 }
 
 img[data-src]{

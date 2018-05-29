@@ -20987,6 +20987,9 @@ div.rn-carousel-indicator span {
   .uab-icon::before {
     color: white !important; }
 
+.icon-24 {
+  font-size: 24px; }
+
 body.hc > #root .uab-icon::before {
   color: yellow !important; }
 
@@ -21219,7 +21222,7 @@ body.hc > #root .folha-de-caderno {
     .table > tfoot > tr > td {
       text-align: left;
       padding: 1.2rem;
-      vertical-align: top;
+      vertical-align: middle;
       border-top: 0;
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease; }
@@ -24512,6 +24515,9 @@ img {
   transition: opacity 0.3s; }
   img.block {
     display: block; }
+  img.img-inline {
+    display: inline;
+    margin: 0px; }
 
 img[data-src] {
   display: -webkit-box;
@@ -25812,6 +25818,7 @@ uab-sanfonado [uab-sanfonado-toggle] {
   font-weight: bold;
   text-transform: none; }
   uab-sanfonado [uab-sanfonado-toggle]:hover {
+    text-decoration: none;
     cursor: pointer; }
 
 uab-sanfonado md-card-title-text {
@@ -25829,6 +25836,11 @@ uab-sanfonado .uab-sanfonado-content {
 
 uab-sanfonado-group uab-sanfonado:not(:last-child) md-card {
   margin-bottom: 0px; }
+
+uab-quadro uab-sanfonado md-card {
+  border-bottom: 1px #ddd solid;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
 
 body.hc > #root uab-sanfonado .uab-sanfonado-content {
   border-top: 1px solid lime; }

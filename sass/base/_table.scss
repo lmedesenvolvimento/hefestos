@@ -50,9 +50,8 @@ $table-border-color: #e0e0e0;
             > td {
                 text-align: left;
                 padding: $table-cell-padding;
-                vertical-align: top;
+                vertical-align: middle;
                 border-top: 0;
-
                 @include transition(all 0.3s ease);
             }
         }

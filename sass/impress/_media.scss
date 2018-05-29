@@ -2,6 +2,10 @@ img{
   display: block;
   max-width: 100%;
   margin: 24px auto;
+  &.img-inline{
+    display: inline;
+    margin: 0px;
+  }
 }
 
 uab-slide{
