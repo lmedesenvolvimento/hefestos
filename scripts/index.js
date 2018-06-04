@@ -48,7 +48,8 @@ var app = angular.module('application', [
   'angular-carousel',
   'ui.router',
   'ui.router.state.events',
-  'textAngular'
+  'textAngular',
+  'cfp.hotkeys'
 ])
 
 app.config(ApplicationConfig).run(ApplicationRun)

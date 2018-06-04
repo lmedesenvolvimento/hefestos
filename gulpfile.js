@@ -16,6 +16,7 @@ gulp.task('vendor', () => {
         './node_modules/@fancyapps/fancybox/dist/jquery.fancybox.js',
         './lib/turn.js',
         './lib/jquery.zoom.js',
+        './node_modules/aplayer/dist/APlayer.min.js',
         './node_modules/plyr/dist/plyr.js',
         './node_modules/angular/angular.js',
         './node_modules/angular-i18n/angular-locale_pt-br.js',
@@ -31,6 +32,7 @@ gulp.task('vendor', () => {
         './node_modules/textangular/dist/textAngular-rangy.min.js',
         './node_modules/textangular/dist/textAngular-sanitize.min.js',
         './node_modules/textangular/dist/textAngular.min.js',
+        './node_modules/angular-hotkeys/build/hotkeys.min.js',
     ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('./js/'));

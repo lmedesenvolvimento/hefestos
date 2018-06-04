@@ -48,7 +48,8 @@ var app = angular.module('application', [
   'angular-carousel',
   'ui.router',
   'ui.router.state.events',
-  'textAngular'
+  'textAngular',
+  'cfp.hotkeys'
 ])
 
 app.config(ApplicationConfig).run(ApplicationRun)
@@ -196,32 +197,6 @@ var uabAudioButton = function(){
 uabAudioButton.$inject = []
 
 angular.module('application').directive('uabAudioButton', uabAudioButton)
-var uabColorsCtrl = function($rootScope, $mdColorPalette){
-  var self = this
-  var tema = $rootScope.$global.manifest.tema
-
-  var primario = tema.primario.split('-');
-  var contraste = tema.contraste.split('-');
-
-  self.colors = {
-    primary: $mdColorPalette[primario[0]][primario[1] || "500" ],
-    accent: $mdColorPalette[contraste[0]][contraste[1] || "500"]
-  }
-
-  console.log(self.colors)
-
-  return self
-}
-
-uabColorsCtrl.$inject = ['$rootScope','$mdColorPalette']
-
-var uabColors = {
-  controller: uabColorsCtrl,
-  templateUrl: "templates/uab-colors.html"
-};
-
-angular.module('application').component('uabColors', uabColors)
-
 var uabDialogTriggerCtrl = function($element, $scope, $mdDialog, $compile){
   $element.on('click', function(e){
     var content = $element.closest('uab-dialog-group').find($scope.uabDialogTrigger)
@@ -830,6 +805,63 @@ function activeTab(element, tabId){
   $(tab).addClass('active');
   $(tab).scrollTop(0);
 };
+var Aplayer = function(){
+  var self = {
+    audios: [],
+    visible: false,
+    instance: null
+  }
+
+  self.toggle = function(){
+    self.visible = !self.visible;
+  }
+
+  self.hide = function(){
+    self.visible = false;
+  }
+
+  return self;
+}
+
+Aplayer.$inject = []
+
+angular.module('application').factory('Aplayer',  Aplayer)
+
+var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
+  var self = this
+
+  self.$onInit = function(){
+    $timeout(angular.bind(self,createAplayerInstance, Aplayer, Colors), 2000);
+  }
+
+  return self
+}
+
+uabAplayerCtrl.$inject = ['$rootScope', '$timeout', 'Aplayer', 'Colors']
+
+var uabAplayer = {
+  controller: uabAplayerCtrl,
+  template: "<div id='uab-aplayer'></div>",
+  bindings: {
+    audios: '='
+  }
+}
+
+angular.module('application').component('uabAplayer', uabAplayer)
+
+
+var createAplayerInstance = function(Aplayer, Colors){
+  Aplayer.instance = new APlayer({
+    container: document.getElementById('uab-aplayer'),
+    theme: Colors.primary.hex,
+    mini: true,
+    audio: [{
+      name: 'Lorens',
+      artist: 'Dunne Lorens',
+      url: 'https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3',
+    }]
+  })
+}
 var Annotations = function($mdSidenav){
   var self = this
 
@@ -840,6 +872,10 @@ var Annotations = function($mdSidenav){
     self.visible = !self.visible
   }
 
+  self.hide = function(){
+    self.visible = false
+  }
+
   return self
 }
 
@@ -847,7 +883,7 @@ Annotations.$inject = ['$mdSidenav']
 
 angular.module('application').factory('Annotations',  Annotations)
 
-var uabAnnotationsCtrl = function($rootScope, Annotations){
+var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
   var self = {
     taToolbar: [
       ['h1', 'h2', 'bold', 'italics'],
@@ -879,6 +915,15 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
     self.$newComment.text = ''
   }
 
+  // Hotkeys
+  hotkeys.add({
+    combo: 'esc',
+    description: 'Close Annotation',
+    callback: function() {
+      Annotations.hide();
+    }
+  });
+
   $rootScope.$on('topic:change', function(event, topic){
     self.topic = topic
   })
@@ -886,7 +931,7 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
   return self
 }
 
-uabAnnotationsCtrl.$inject = ['$rootScope','Annotations']
+uabAnnotationsCtrl.$inject = ['$rootScope','hotkeys','Annotations']
 
 var uabAnnotations = {
   controller: uabAnnotationsCtrl,
@@ -894,6 +939,46 @@ var uabAnnotations = {
 }
 
 angular.module('application').component('uabAnnotations', uabAnnotations)
+
+var uabColorsCtrl = function($rootScope, $mdColorPalette, Colors){
+  var self = this
+  var tema = $rootScope.$global.manifest.tema
+
+  var primario = tema.primario.split('-');
+  var contraste = tema.contraste.split('-');
+
+  self.colors = {
+    primary: $mdColorPalette[primario[0]][primario[1] || "500" ],
+    accent: $mdColorPalette[contraste[0]][contraste[1] || "500"]
+  }
+
+  Colors.primary = self.colors.primary
+  Colors.accent = self.colors.accent
+
+  return self
+}
+
+uabColorsCtrl.$inject = ['$rootScope', '$mdColorPalette', 'Colors']
+
+var uabColors = {
+  controller: uabColorsCtrl,
+  templateUrl: "templates/uab-colors.html"
+};
+
+angular.module('application').component('uabColors', uabColors)
+
+var Colors = function(){
+  var self = {
+    primary: null,
+    accent: null
+  }
+
+  return self;
+}
+
+Colors.$inject = []
+
+angular.module('application').factory('Colors',  Colors)
 
 var uabSidenavCtrl = function(Sidenav){
   var self = this

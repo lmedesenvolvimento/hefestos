@@ -1,3 +1,4 @@
+@import url(../node_modules/aplayer/dist/APlayer.min.css);
 @import url("https://fonts.googleapis.com/css?family=Montserrat:700");
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 .wrapper, .container, .white-paper, uab-footer {
@@ -26092,6 +26093,12 @@ md-tabs md-pagination-wrapper md-tab-item {
       background-color: rgba(0, 0, 0, 0.3);
       padding: 16px 24px;
       text-align: center; }
+
+uab-aplayer {
+  position: fixed;
+  left: 4px;
+  top: 260px;
+  z-index: 6; }
 
 .fancybox-active {
   height: inherit; }
