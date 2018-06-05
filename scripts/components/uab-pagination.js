@@ -1,4 +1,4 @@
-var uabPaginationCtrl = function($rootScope, $timeout){
+var uabPaginationCtrl = function($rootScope, $timeout, Aplayer){
     var self = this;
 
 
@@ -8,6 +8,9 @@ var uabPaginationCtrl = function($rootScope, $timeout){
 
         self.nextTopic = hasIndex;
 
+        // sincronizando player de aulas, avança uma audio aula
+        self.nextTopic ? Aplayer.skipForward() : false
+
         return angular.isDefined(hasIndex) ? true : false;
     }
 
@@ -16,6 +19,9 @@ var uabPaginationCtrl = function($rootScope, $timeout){
         var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
 
         self.prevTopic = hasIndex;
+
+        // sincronizando player de aulas, retorna uma audio aula
+        self.prevTopic ? Aplayer.skipBack() : false
 
         return angular.isDefined(hasIndex) ? true : false;
     }
@@ -40,7 +46,7 @@ var uabPaginationCtrl = function($rootScope, $timeout){
     return self;
 }
 
-uabPaginationCtrl.$inject = ['$rootScope','$timeout']
+uabPaginationCtrl.$inject = ['$rootScope','$timeout','Aplayer']
 
 angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,

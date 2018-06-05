@@ -345,7 +345,7 @@ MAX_FONT_SIZE = 20.5; // 22px
 MIN_FONT_SIZE = 8.5; // 14px
 DEFAULT_FONT_SIZE = 12.5; // 18.5px
 
-var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
+var uabHeaderCtrl = function($rootScope, Sidenav, Annotations, Aplayer){
   var self = this;
 
   self.toggleSidenav = function(){
@@ -355,6 +355,10 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
   self.toggleAnnotations = function(){
     Annotations.toggle()
   };
+
+  self.toggleAplayer = function(){
+    Aplayer.instance ? Aplayer.toggle() : false
+  }
 
   self.increaseText = function(){
     var font_size = $("body").css("font-size").replace('px','');
@@ -374,7 +378,6 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
 
   // @private
   floatToPx = function(number){
-    console.log(number);
     return number + "px";
   }
 
@@ -385,7 +388,7 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
   return self;
 }
 
-uabHeaderCtrl.$inject = ['$rootScope','Sidenav','Annotations']
+uabHeaderCtrl.$inject = ['$rootScope','Sidenav','Annotations','Aplayer']
 
 var uabHeader = {
   controller: uabHeaderCtrl,
@@ -586,7 +589,7 @@ angular.module('application').component('uabInputText',uabInputText)
 
 
 
-var uabPaginationCtrl = function($rootScope, $timeout){
+var uabPaginationCtrl = function($rootScope, $timeout, Aplayer){
     var self = this;
 
 
@@ -596,6 +599,9 @@ var uabPaginationCtrl = function($rootScope, $timeout){
 
         self.nextTopic = hasIndex;
 
+        // sincronizando player de aulas, avança uma audio aula
+        self.nextTopic ? Aplayer.skipForward() : false
+
         return angular.isDefined(hasIndex) ? true : false;
     }
 
@@ -604,6 +610,9 @@ var uabPaginationCtrl = function($rootScope, $timeout){
         var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
 
         self.prevTopic = hasIndex;
+
+        // sincronizando player de aulas, retorna uma audio aula
+        self.prevTopic ? Aplayer.skipBack() : false
 
         return angular.isDefined(hasIndex) ? true : false;
     }
@@ -628,7 +637,7 @@ var uabPaginationCtrl = function($rootScope, $timeout){
     return self;
 }
 
-uabPaginationCtrl.$inject = ['$rootScope','$timeout']
+uabPaginationCtrl.$inject = ['$rootScope','$timeout','Aplayer']
 
 angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
@@ -805,63 +814,6 @@ function activeTab(element, tabId){
   $(tab).addClass('active');
   $(tab).scrollTop(0);
 };
-var Aplayer = function(){
-  var self = {
-    audios: [],
-    visible: false,
-    instance: null
-  }
-
-  self.toggle = function(){
-    self.visible = !self.visible;
-  }
-
-  self.hide = function(){
-    self.visible = false;
-  }
-
-  return self;
-}
-
-Aplayer.$inject = []
-
-angular.module('application').factory('Aplayer',  Aplayer)
-
-var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
-  var self = this
-
-  self.$onInit = function(){
-    $timeout(angular.bind(self,createAplayerInstance, Aplayer, Colors), 2000);
-  }
-
-  return self
-}
-
-uabAplayerCtrl.$inject = ['$rootScope', '$timeout', 'Aplayer', 'Colors']
-
-var uabAplayer = {
-  controller: uabAplayerCtrl,
-  template: "<div id='uab-aplayer'></div>",
-  bindings: {
-    audios: '='
-  }
-}
-
-angular.module('application').component('uabAplayer', uabAplayer)
-
-
-var createAplayerInstance = function(Aplayer, Colors){
-  Aplayer.instance = new APlayer({
-    container: document.getElementById('uab-aplayer'),
-    theme: Colors.primary.hex,
-    mini: true,
-    audio: [{
-      name: 'Lorens',
-      artist: 'Dunne Lorens',
-      url: 'https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3',
-    }]
-  })
-}
 var Annotations = function($mdSidenav){
   var self = this
 
@@ -940,6 +892,89 @@ var uabAnnotations = {
 
 angular.module('application').component('uabAnnotations', uabAnnotations)
 
+var Aplayer = function(){
+  var self = {
+    audios: [],
+    visible: false,
+    instance: null
+  }
+
+  self.toggle = function(){
+    self.visible = !self.visible;
+    
+    if(self.visible){
+      $(self.instance.container).removeClass('hide')
+      // listen lesson
+      self.instance.play()
+    } else{
+      $(self.instance.container).addClass('hide')
+      // stop listen lesson
+      self.instance.pause()
+      self.instance.skipBack(0) //return to begin audio
+    }
+  }
+
+  self.skipBack = function(){
+    self.instance.skipBack()
+  }
+
+  self.skipForward = function(){
+    self.instance.skipForward()
+  }
+
+  self.hide = function(){
+    $(self.instance.container).addClass('hide')
+  }
+
+  return self;
+}
+
+Aplayer.$inject = []
+
+angular.module('application').factory('Aplayer',  Aplayer)
+
+var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
+  var self = this
+
+  self.$onInit = function(){
+    $timeout(angular.bind(self, createAplayerInstance, Aplayer, Colors), 2000);
+  }
+
+  return self
+}
+
+uabAplayerCtrl.$inject = ['$rootScope', '$timeout', 'Aplayer', 'Colors']
+
+var uabAplayer = {
+  controller: uabAplayerCtrl,
+  template: "<div id='uab-aplayer'></div>",
+  bindings: {
+    topics: '='
+  }
+}
+
+angular.module('application').component('uabAplayer', uabAplayer)
+
+
+var createAplayerInstance = function(Aplayer, Colors){
+  var audios = this.topics.map(mapTopics)
+
+  Aplayer.instance = new APlayer({
+    container: document.getElementById('uab-aplayer'),
+    theme: Colors.primary.hex,
+    mini: true,
+    audio: audios
+  })
+
+  Aplayer.hide()
+}
+
+var mapTopics = function(t, index){
+  return {
+    name: t.nome,
+    url: t.audio
+  }
+}
 var uabColorsCtrl = function($rootScope, $mdColorPalette, Colors){
   var self = this
   var tema = $rootScope.$global.manifest.tema
