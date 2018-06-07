@@ -12,6 +12,7 @@
   <div id='root' layout="column" layout-fill>
     <uab-header></uab-header>
     <uab-sidenav></uab-sidenav>
+    <uab-aplayer topics="$root.$global.manifest.topicos"></uab-aplayer>
     <div layout="row" flex>
       <md-content class="main" layout-padding flex>
         <div class="white-paper">
@@ -33,7 +34,7 @@
           </div>
           <div class="discipline">{{ t.nome }}</div>
         </header>
-        <div ng-bind-html="app.renderHTML(t.data)"></div>
+        <div ng-bind-html="app.renderHTML(t.data)"></div>        
       </li>
     </ul>
   </div>

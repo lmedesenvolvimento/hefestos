@@ -48,7 +48,8 @@ var app = angular.module('application', [
   'angular-carousel',
   'ui.router',
   'ui.router.state.events',
-  'textAngular'
+  'textAngular',
+  'cfp.hotkeys'
 ])
 
 app.config(ApplicationConfig).run(ApplicationRun)
@@ -196,32 +197,6 @@ var uabAudioButton = function(){
 uabAudioButton.$inject = []
 
 angular.module('application').directive('uabAudioButton', uabAudioButton)
-var uabColorsCtrl = function($rootScope, $mdColorPalette){
-  var self = this
-  var tema = $rootScope.$global.manifest.tema
-
-  var primario = tema.primario.split('-');
-  var contraste = tema.contraste.split('-');
-
-  self.colors = {
-    primary: $mdColorPalette[primario[0]][primario[1] || "500" ],
-    accent: $mdColorPalette[contraste[0]][contraste[1] || "500"]
-  }
-
-  console.log(self.colors)
-
-  return self
-}
-
-uabColorsCtrl.$inject = ['$rootScope','$mdColorPalette']
-
-var uabColors = {
-  controller: uabColorsCtrl,
-  templateUrl: "templates/uab-colors.html"
-};
-
-angular.module('application').component('uabColors', uabColors)
-
 var uabDialogTriggerCtrl = function($element, $scope, $mdDialog, $compile){
   $element.on('click', function(e){
     var content = $element.closest('uab-dialog-group').find($scope.uabDialogTrigger)
@@ -365,12 +340,29 @@ var uabFooter = {
 
 angular.module('application').component('uabFooter', uabFooter)
 
+var uabGetAudio = {
+  template: ' \
+    <a md-button ng-show="$root.$mdMedia(\'gt-sm\')" target="blank" href="{{$ctrl.href}}" download="{{ $ctrl.href }}"> \
+      Baixar Audio \
+    </a>\
+    <a md-button class="md-icon-button" ng-if="$root.$mdMedia(\'xs\')" target="blank" href="{{$ctrl.href}}" download="{{ $ctrl.href }}"> \
+      <md-icon md-font-icon="icon-get_app" class="icon-24"></md-icon> \
+      <md-tooltip md-direction="top">Baixar Audio Aula</md-tooltip> \
+    </a> \
+  ',
+  bindings: {
+    href: "@"
+  }
+}
+
+angular.module('application').component('uabGetAudio', uabGetAudio)
+
 // Constantes
 MAX_FONT_SIZE = 20.5; // 22px
 MIN_FONT_SIZE = 8.5; // 14px
 DEFAULT_FONT_SIZE = 12.5; // 18.5px
 
-var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
+var uabHeaderCtrl = function($rootScope, Sidenav, Annotations, Aplayer){
   var self = this;
 
   self.toggleSidenav = function(){
@@ -380,6 +372,10 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
   self.toggleAnnotations = function(){
     Annotations.toggle()
   };
+
+  self.toggleAplayer = function(){
+    Aplayer.instance ? Aplayer.toggle() : false
+  }
 
   self.increaseText = function(){
     var font_size = $("body").css("font-size").replace('px','');
@@ -399,7 +395,6 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
 
   // @private
   floatToPx = function(number){
-    console.log(number);
     return number + "px";
   }
 
@@ -410,7 +405,7 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations){
   return self;
 }
 
-uabHeaderCtrl.$inject = ['$rootScope','Sidenav','Annotations']
+uabHeaderCtrl.$inject = ['$rootScope','Sidenav','Annotations','Aplayer']
 
 var uabHeader = {
   controller: uabHeaderCtrl,
@@ -611,7 +606,7 @@ angular.module('application').component('uabInputText',uabInputText)
 
 
 
-var uabPaginationCtrl = function($rootScope, $timeout){
+var uabPaginationCtrl = function($rootScope, $timeout, Aplayer){
     var self = this;
 
 
@@ -621,6 +616,9 @@ var uabPaginationCtrl = function($rootScope, $timeout){
 
         self.nextTopic = hasIndex;
 
+        // sincronizando player de aulas, avança uma audio aula
+        self.nextTopic ? Aplayer.skipForward() : false
+
         return angular.isDefined(hasIndex) ? true : false;
     }
 
@@ -629,6 +627,9 @@ var uabPaginationCtrl = function($rootScope, $timeout){
         var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
 
         self.prevTopic = hasIndex;
+
+        // sincronizando player de aulas, retorna uma audio aula
+        self.prevTopic ? Aplayer.skipBack() : false
 
         return angular.isDefined(hasIndex) ? true : false;
     }
@@ -653,7 +654,7 @@ var uabPaginationCtrl = function($rootScope, $timeout){
     return self;
 }
 
-uabPaginationCtrl.$inject = ['$rootScope','$timeout']
+uabPaginationCtrl.$inject = ['$rootScope','$timeout','Aplayer']
 
 angular.module("application").component("uabPagination",{
     controller: uabPaginationCtrl,
@@ -840,6 +841,10 @@ var Annotations = function($mdSidenav){
     self.visible = !self.visible
   }
 
+  self.hide = function(){
+    self.visible = false
+  }
+
   return self
 }
 
@@ -847,7 +852,7 @@ Annotations.$inject = ['$mdSidenav']
 
 angular.module('application').factory('Annotations',  Annotations)
 
-var uabAnnotationsCtrl = function($rootScope, Annotations){
+var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
   var self = {
     taToolbar: [
       ['h1', 'h2', 'bold', 'italics'],
@@ -879,6 +884,15 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
     self.$newComment.text = ''
   }
 
+  // Hotkeys
+  hotkeys.add({
+    combo: 'esc',
+    description: 'Close Annotation',
+    callback: function() {
+      Annotations.hide();
+    }
+  });
+
   $rootScope.$on('topic:change', function(event, topic){
     self.topic = topic
   })
@@ -886,7 +900,7 @@ var uabAnnotationsCtrl = function($rootScope, Annotations){
   return self
 }
 
-uabAnnotationsCtrl.$inject = ['$rootScope','Annotations']
+uabAnnotationsCtrl.$inject = ['$rootScope','hotkeys','Annotations']
 
 var uabAnnotations = {
   controller: uabAnnotationsCtrl,
@@ -894,6 +908,129 @@ var uabAnnotations = {
 }
 
 angular.module('application').component('uabAnnotations', uabAnnotations)
+
+var Aplayer = function(){
+  var self = {
+    audios: [],
+    visible: false,
+    instance: null
+  }
+
+  self.toggle = function(){
+    self.visible = !self.visible;
+    
+    if(self.visible){
+      $(self.instance.container).removeClass('hide')
+      // listen lesson
+      self.instance.play()
+    } else{
+      $(self.instance.container).addClass('hide')
+      // stop listen lesson
+      self.instance.pause()
+      self.instance.skipBack(0) //return to begin audio
+    }
+  }
+
+  self.skipBack = function(){
+    self.instance.skipBack()
+  }
+
+  self.skipForward = function(){
+    self.instance.skipForward()
+  }
+
+  self.hide = function(){
+    $(self.instance.container).addClass('hide')
+  }
+
+  return self;
+}
+
+Aplayer.$inject = []
+
+angular.module('application').factory('Aplayer',  Aplayer)
+
+var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
+  var self = this
+
+  self.$onInit = function(){
+    $timeout(angular.bind(self, createAplayerInstance, Aplayer, Colors), 2000);
+  }
+
+  return self
+}
+
+uabAplayerCtrl.$inject = ['$rootScope', '$timeout', 'Aplayer', 'Colors']
+
+var uabAplayer = {
+  controller: uabAplayerCtrl,
+  template: "<div id='uab-aplayer'></div>",
+  bindings: {
+    topics: '='
+  }
+}
+
+angular.module('application').component('uabAplayer', uabAplayer)
+
+
+var createAplayerInstance = function(Aplayer, Colors){
+  var audios = this.topics.map(mapTopics)
+
+  Aplayer.instance = new APlayer({
+    container: document.getElementById('uab-aplayer'),
+    theme: Colors.primary.hex,
+    mini: true,
+    audio: audios
+  })
+
+  Aplayer.hide()
+}
+
+var mapTopics = function(t, index){
+  return {
+    name: t.nome,
+    url: t.audio
+  }
+}
+var uabColorsCtrl = function($rootScope, $mdColorPalette, Colors){
+  var self = this
+  var tema = $rootScope.$global.manifest.tema
+
+  var primario = tema.primario.split('-');
+  var contraste = tema.contraste.split('-');
+
+  self.colors = {
+    primary: $mdColorPalette[primario[0]][primario[1] || "500" ],
+    accent: $mdColorPalette[contraste[0]][contraste[1] || "500"]
+  }
+
+  Colors.primary = self.colors.primary
+  Colors.accent = self.colors.accent
+
+  return self
+}
+
+uabColorsCtrl.$inject = ['$rootScope', '$mdColorPalette', 'Colors']
+
+var uabColors = {
+  controller: uabColorsCtrl,
+  templateUrl: "templates/uab-colors.html"
+};
+
+angular.module('application').component('uabColors', uabColors)
+
+var Colors = function(){
+  var self = {
+    primary: null,
+    accent: null
+  }
+
+  return self;
+}
+
+Colors.$inject = []
+
+angular.module('application').factory('Colors',  Colors)
 
 var uabSidenavCtrl = function(Sidenav){
   var self = this

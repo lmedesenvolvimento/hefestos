@@ -37,9 +37,17 @@
         <md-tooltip>Versão Impressa</md-tooltip>
         <md-icon md-font-icon="icon-print"></md-icon>
       </md-button>
+
+      <md-button class="md-icon-button" ng-click="$ctrl.toggleAplayer()">
+        <md-tooltip>Audio Aula</md-tooltip>
+        <md-icon md-font-icon="icon-play_circle_outline"></md-icon>
+      </md-button>
       <span flex></span>
+
       <span class="md-toolbar-tools-text">{{($root.$global.current_topic.position + 1)}} de {{ $root.$global.manifest.topicos.length }} páginas</span>
+
       <span flex="5"></span>
+
       <md-button class="md-icon-button" ng-click="$ctrl.toggleAnnotations()">
         <md-tooltip>Minhas Anotações</md-tooltip>
         <md-icon md-font-icon="icon-chat"></md-icon>

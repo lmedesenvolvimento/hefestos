@@ -10,23 +10,28 @@
         {
             "nome": "Tipografia",
             "local": "topicos/tipografia.html",
+            "audio": "https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3",
             "default": true
         },
         {
             "nome": "Grid",
-            "local": "topicos/grid.html"
+            "local": "topicos/grid.html",
+            "audio": "audios/grid.mp3"
         },
         {
             "nome": "Componetes",
-            "local": "topicos/componentes.html"
+            "local": "topicos/componentes.html",
+            "audio": "https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3"
         },
         {
             "nome": "Formulários",
-            "local": "topicos/formularios.html"
+            "local": "topicos/formularios.html",
+            "audio": "https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3"
         },
         {
             "nome": "Multimídia",
-            "local": "topicos/multimidia.html"
+            "local": "topicos/multimidia.html",
+            "audio": "https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3"
         }
     ],
     "pdf": "pdf/impresso.pdf",    
