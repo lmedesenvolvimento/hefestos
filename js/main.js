@@ -374,7 +374,10 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations, Aplayer){
   };
 
   self.toggleAplayer = function(){
-    Aplayer.instance ? Aplayer.toggle() : false
+    if(Aplayer.instance){
+      Aplayer.toggle();
+      self.AplayerPlaying = Aplayer.playing;
+    }
   }
 
   self.increaseText = function(){
@@ -399,8 +402,16 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations, Aplayer){
   }
 
   $rootScope.$on("$stateChangeSuccess", function(){
-    Sidenav.close()
+    Sidenav.close();
   })
+
+  $rootScope.$on('aplayer:update', function(event, data){
+    self.AplayerPlaying = false;
+  });
+
+  $rootScope.$on('aplayer:play', function(event, data){
+    self.AplayerPlaying = true;
+  });
 
   return self;
 }
@@ -616,9 +627,6 @@ var uabPaginationCtrl = function($rootScope, $timeout, Aplayer){
 
         self.nextTopic = hasIndex;
 
-        // sincronizando player de aulas, avança uma audio aula
-        self.nextTopic ? Aplayer.skipForward() : false
-
         return angular.isDefined(hasIndex) ? true : false;
     }
 
@@ -627,9 +635,6 @@ var uabPaginationCtrl = function($rootScope, $timeout, Aplayer){
         var hasIndex = $rootScope.$global.manifest.topicos[currentPosition];
 
         self.prevTopic = hasIndex;
-
-        // sincronizando player de aulas, retorna uma audio aula
-        self.prevTopic ? Aplayer.skipBack() : false
 
         return angular.isDefined(hasIndex) ? true : false;
     }
@@ -909,11 +914,12 @@ var uabAnnotations = {
 
 angular.module('application').component('uabAnnotations', uabAnnotations)
 
-var Aplayer = function(){
+var Aplayer = function($rootScope, $mdToast){
   var self = {
     audios: [],
     visible: false,
-    instance: null
+    instance: null,
+    playing: false
   }
 
   self.toggle = function(){
@@ -923,30 +929,42 @@ var Aplayer = function(){
       $(self.instance.container).removeClass('hide')
       // listen lesson
       self.instance.play()
+      self.playing = true
     } else{
       $(self.instance.container).addClass('hide')
       // stop listen lesson
-      self.instance.pause()
-      self.instance.skipBack(0) //return to begin audio
+      self.instance.pause()      
+      self.playing = false
     }
   }
-
-  self.skipBack = function(){
-    self.instance.skipBack()
-  }
-
-  self.skipForward = function(){
-    self.instance.skipForward()
+  
+  self.updateTrack = function(audio){
+    promise = self.instance.setAudio(audio)
+    console.log(self.instance)
   }
 
   self.hide = function(){
     $(self.instance.container).addClass('hide')
   }
 
+  $rootScope.$on('aplayer:update', function(event, data){
+    self.updateTrack(data.audio);
+
+    if(self.playing){
+      $mdToast.showSimple("Atualizando Faixa!");
+    }
+
+    self.playing = false;
+  })
+
+  $rootScope.$on('aplayer:play', function(event, data){
+    self.playing = true;
+  })
+
   return self;
 }
 
-Aplayer.$inject = []
+Aplayer.$inject = ['$rootScope','$mdToast']
 
 angular.module('application').factory('Aplayer',  Aplayer)
 
@@ -954,7 +972,7 @@ var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
   var self = this
 
   self.$onInit = function(){
-    $timeout(angular.bind(self, createAplayerInstance, Aplayer, Colors), 2000);
+    $timeout(angular.bind(self, createAplayerInstance, $rootScope, Aplayer, Colors), 2000);
   }
 
   return self
@@ -973,7 +991,7 @@ var uabAplayer = {
 angular.module('application').component('uabAplayer', uabAplayer)
 
 
-var createAplayerInstance = function(Aplayer, Colors){
+var createAplayerInstance = function($rootScope, Aplayer, Colors){
   var audios = this.topics.map(mapTopics)
 
   Aplayer.instance = new APlayer({
@@ -981,6 +999,10 @@ var createAplayerInstance = function(Aplayer, Colors){
     theme: Colors.primary.hex,
     mini: true,
     audio: audios
+  })
+  
+  Aplayer.instance.on('play', function(){
+    $rootScope.$emit('aplayer:play')
   })
 
   Aplayer.hide()

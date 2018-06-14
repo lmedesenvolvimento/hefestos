@@ -1,6 +1,7 @@
 uab-aplayer{
+  visibility: hidden;
   position: fixed;
   left: 4px;
   top: 260px;
-  z-index: 6;
+  z-index: -6;
 }

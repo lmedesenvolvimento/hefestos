@@ -2,7 +2,7 @@ var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
   var self = this
 
   self.$onInit = function(){
-    $timeout(angular.bind(self, createAplayerInstance, Aplayer, Colors), 2000);
+    $timeout(angular.bind(self, createAplayerInstance, $rootScope, Aplayer, Colors), 2000);
   }
 
   return self
@@ -21,7 +21,7 @@ var uabAplayer = {
 angular.module('application').component('uabAplayer', uabAplayer)
 
 
-var createAplayerInstance = function(Aplayer, Colors){
+var createAplayerInstance = function($rootScope, Aplayer, Colors){
   var audios = this.topics.map(mapTopics)
 
   Aplayer.instance = new APlayer({
@@ -29,6 +29,10 @@ var createAplayerInstance = function(Aplayer, Colors){
     theme: Colors.primary.hex,
     mini: true,
     audio: audios
+  })
+  
+  Aplayer.instance.on('play', function(){
+    $rootScope.$emit('aplayer:play')
   })
 
   Aplayer.hide()

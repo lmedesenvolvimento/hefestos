@@ -10,7 +10,7 @@
         {
             "nome": "Tipografia",
             "local": "topicos/tipografia.html",
-            "audio": "https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3",
+            "audio": "audios/Abstract - I Do This (ft. Roze) Prod By Drumma Battalion.mp3",
             "default": true
         },
         {
@@ -26,12 +26,12 @@
         {
             "nome": "Formulários",
             "local": "topicos/formularios.html",
-            "audio": "https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3"
+            "audio": "audios/Abstract - Neverland (ft. Ruth B) (Prod. Blulake).mp3"
         },
         {
             "nome": "Multimídia",
             "local": "topicos/multimidia.html",
-            "audio": "https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3"
+            "audio": "audios/Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion).mp3"
         }
     ],
     "pdf": "pdf/impresso.pdf",    

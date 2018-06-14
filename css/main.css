@@ -26711,10 +26711,11 @@ md-tabs md-pagination-wrapper md-tab-item {
       text-align: center; }
 
 uab-aplayer {
+  visibility: hidden;
   position: fixed;
   left: 4px;
   top: 260px;
-  z-index: 6; }
+  z-index: -6; }
 
 .fancybox-active {
   height: inherit; }

@@ -15,7 +15,10 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations, Aplayer){
   };
 
   self.toggleAplayer = function(){
-    Aplayer.instance ? Aplayer.toggle() : false
+    if(Aplayer.instance){
+      Aplayer.toggle();
+      self.AplayerPlaying = Aplayer.playing;
+    }
   }
 
   self.increaseText = function(){
@@ -40,8 +43,16 @@ var uabHeaderCtrl = function($rootScope, Sidenav, Annotations, Aplayer){
   }
 
   $rootScope.$on("$stateChangeSuccess", function(){
-    Sidenav.close()
+    Sidenav.close();
   })
+
+  $rootScope.$on('aplayer:update', function(event, data){
+    self.AplayerPlaying = false;
+  });
+
+  $rootScope.$on('aplayer:play', function(event, data){
+    self.AplayerPlaying = true;
+  });
 
   return self;
 }

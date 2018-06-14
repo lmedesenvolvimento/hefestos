@@ -147,3 +147,12 @@ uab-input-checkbox-button{
     margin-right: 16px;
   }  
 }
+
+// Quadros
+uab-quadro{
+  &::before{
+    @include card-title;
+    content: attr(title);
+    margin-bottom: 8px;
+  }
+}
