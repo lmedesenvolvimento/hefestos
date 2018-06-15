@@ -34,7 +34,8 @@
             "audio": "audios/Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion).mp3"
         }
     ],
-    "pdf": "pdf/impresso.pdf",    
+    "pdf": "pdf/impresso.pdf",
+    "audio": "audios/Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion).mp3",
     "tema":{
       "primario": "purple-300",
       "contraste": "orange"

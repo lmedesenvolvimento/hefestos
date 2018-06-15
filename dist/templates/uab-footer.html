@@ -3,7 +3,7 @@
     <div class="container-fluid" layout="row" layout-align="center center" flex>
       <a md-button ng-click="$ctrl.toTop()">Topo</a>
       <uab-qr-code></uab-qr-code>
-      <uab-get-audio href="{{$root.$global.current_topic.audio}}"></uab-get-audio>
+      <uab-get-audio href="{{$root.$global.manifest.audio}}"></uab-get-audio>
       <uab-pagination as-text="true"></uab-pagination>
     </div>
   </div>
