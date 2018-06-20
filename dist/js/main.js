@@ -673,7 +673,7 @@ var uabQrCodeCtrl = function($rootScope, $controller, $mdDialog){
   var self = this
 
   self.trigger = function(){
-    var url = window.location.origin + window.location.pathname + "/" + $rootScope.$global.manifest.pdf
+    var url = window.location.origin + window.location.pathname + $rootScope.$global.manifest.pdf
     $mdDialog.show({
       templateUrl: "templates/dialogs/qr-code.html",
       controller: "SimpleDialogCtrl",
