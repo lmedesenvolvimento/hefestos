@@ -1,4 +1,4 @@
-var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav) {
+var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav, Hotkeys) {
   var self = this;
 
   
@@ -24,6 +24,6 @@ var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav) {
   return self;
 };
 
-ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', '$sce', 'Sidenav']
+ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', '$sce', 'Sidenav','Hotkeys']
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);

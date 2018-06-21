@@ -111,6 +111,317 @@ var taConfig = function ($provide) {
 taConfig.$inject = ['$provide'];
 
 angular.module('application').config(taConfig);
+var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
+  var self = {
+    toContent: function(){
+      var content = document.getElementById("content")
+      // goto content
+      $('.main').scrollTop(0)
+      // force focus
+      content.focus()
+    },
+    toFooter: function(){
+      var footer = document.getElementById("footer")
+      // goto footer
+      $('.main').scrollTop($('main').height())
+      // force focus
+      footer.focus()
+    },
+    toMenu: function(){
+      Sidenav.toggle()
+    },
+    toHightContrast: function(event){
+      $("body").toggleClass("hc")
+    }
+  }
+  
+  // configure hotkeys
+  hotkeys.add({
+    combo: 'alt+1,alt+shift+1',
+    description: 'Ir para o começo',
+    callback: angular.bind(this, self.toContent)
+  })
+  
+  hotkeys.add({
+    combo: 'alt+2,alt+shift+2',
+    description: 'Ir para o menu',
+    callback: angular.bind(this, self.toMenu)
+  })
+
+  hotkeys.add({
+    combo: 'alt+4,alt+shift+4',
+    description: 'Ir para o Rodapé',
+    callback: angular.bind(this, self.toFooter)
+  })
+
+  hotkeys.add({
+    combo: 'alt+5,alt+shift+5',
+    description: 'Modo alto contraste',
+    callback: angular.bind(this, self.toHightContrast)
+  })
+
+  return self;
+}
+
+Hotkeys.$inject = ['$location', '$anchorScroll', 'hotkeys', 'Sidenav'];
+
+angular.module('application').factory('Hotkeys', Hotkeys);
+var Annotations = function($mdSidenav){
+  var self = this
+
+  self.visible = false
+  self.data = []
+
+  self.toggle = function(){
+    self.visible = !self.visible
+  }
+
+  self.hide = function(){
+    self.visible = false
+  }
+
+  return self
+}
+
+Annotations.$inject = ['$mdSidenav']
+
+angular.module('application').factory('Annotations',  Annotations)
+
+var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
+  var self = {
+    taToolbar: [
+      ['h1', 'h2', 'bold', 'italics'],
+    ]
+  }
+
+  self.$annotations = Annotations
+
+  self.$newComment = {
+    text: ''
+  }
+
+  self.comments = []
+
+  self.$onInit = function(){
+    self.topic = $rootScope.$global.current_topic
+  }
+
+  self.toggle = function(){
+    Annotations.toggle()
+  }
+
+  self.sendComment = function(){
+    self.comments.push({
+      text: self.$newComment.text,
+      created_at: new Date()
+    })
+
+    self.$newComment.text = ''
+  }
+
+  // Hotkeys
+  hotkeys.add({
+    combo: 'esc',
+    description: 'Close Annotation',
+    callback: function() {
+      Annotations.hide();
+    }
+  });
+
+  $rootScope.$on('topic:change', function(event, topic){
+    self.topic = topic
+  })
+
+  return self
+}
+
+uabAnnotationsCtrl.$inject = ['$rootScope','hotkeys','Annotations']
+
+var uabAnnotations = {
+  controller: uabAnnotationsCtrl,
+  templateUrl: "templates/uab-annotations.html"
+}
+
+angular.module('application').component('uabAnnotations', uabAnnotations)
+
+var Aplayer = function($rootScope, $mdToast){
+  var self = {
+    audios: [],
+    visible: false,
+    instance: null,
+    playing: false
+  }
+
+  self.toggle = function(){
+    self.visible = !self.visible;
+    
+    if(self.visible){
+      $(self.instance.container).removeClass('hide')
+      // listen lesson
+      self.instance.play()
+      self.playing = true
+    } else{
+      $(self.instance.container).addClass('hide')
+      // stop listen lesson
+      self.instance.pause()      
+      self.playing = false
+    }
+  }
+  
+  self.updateTrack = function(audio){
+    promise = self.instance.setAudio(audio)
+    console.log(self.instance)
+  }
+
+  self.hide = function(){
+    $(self.instance.container).addClass('hide')
+  }
+
+  $rootScope.$on('aplayer:update', function(event, data){
+    self.updateTrack(data.audio);
+
+    if(self.playing){
+      $mdToast.showSimple("Atualizando Faixa!");
+    }
+
+    self.playing = false;
+  })
+
+  $rootScope.$on('aplayer:play', function(event, data){
+    self.playing = true;
+  })
+
+  return self;
+}
+
+Aplayer.$inject = ['$rootScope','$mdToast']
+
+angular.module('application').factory('Aplayer',  Aplayer)
+
+var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
+  var self = this
+
+  self.$onInit = function(){
+    $timeout(angular.bind(self, createAplayerInstance, $rootScope, Aplayer, Colors), 2000);
+  }
+
+  return self
+}
+
+uabAplayerCtrl.$inject = ['$rootScope', '$timeout', 'Aplayer', 'Colors']
+
+var uabAplayer = {
+  controller: uabAplayerCtrl,
+  template: "<div id='uab-aplayer'></div>",
+  bindings: {
+    topics: '='
+  }
+}
+
+angular.module('application').component('uabAplayer', uabAplayer)
+
+
+var createAplayerInstance = function($rootScope, Aplayer, Colors){
+  var audios = this.topics.map(mapTopics)
+
+  Aplayer.instance = new APlayer({
+    container: document.getElementById('uab-aplayer'),
+    theme: Colors.primary.hex,
+    mini: true,
+    audio: audios
+  })
+  
+  Aplayer.instance.on('play', function(){
+    $rootScope.$emit('aplayer:play')
+  })
+
+  Aplayer.hide()
+}
+
+var mapTopics = function(t, index){
+  return {
+    name: t.nome,
+    url: t.audio
+  }
+}
+var uabColorsCtrl = function($rootScope, $mdColorPalette, Colors){
+  var self = this
+  var tema = $rootScope.$global.manifest.tema
+
+  var primario = tema.primario.split('-');
+  var contraste = tema.contraste.split('-');
+
+  self.colors = {
+    primary: $mdColorPalette[primario[0]][primario[1] || "500" ],
+    accent: $mdColorPalette[contraste[0]][contraste[1] || "500"]
+  }
+
+  Colors.primary = self.colors.primary
+  Colors.accent = self.colors.accent
+
+  return self
+}
+
+uabColorsCtrl.$inject = ['$rootScope', '$mdColorPalette', 'Colors']
+
+var uabColors = {
+  controller: uabColorsCtrl,
+  templateUrl: "templates/uab-colors.html"
+};
+
+angular.module('application').component('uabColors', uabColors)
+
+var Colors = function(){
+  var self = {
+    primary: null,
+    accent: null
+  }
+
+  return self;
+}
+
+Colors.$inject = []
+
+angular.module('application').factory('Colors',  Colors)
+
+var uabSidenavCtrl = function(Sidenav){
+  var self = this
+
+  self.close = function(){
+    Sidenav.close()
+  }
+
+  return self
+}
+
+uabSidenavCtrl.$inject = ['Sidenav']
+
+var uabSidenav = {
+  controller: uabSidenavCtrl,
+  templateUrl: "templates/uab-sidenav.html"
+}
+
+angular.module('application').component('uabSidenav', uabSidenav)
+
+var Sidenav = function($mdSidenav){
+  return {
+    $id: "uab-sidenav",
+    open: function(){
+      return $mdSidenav(this.$id).open()
+    },
+    close: function(){
+      return $mdSidenav(this.$id).close()
+    },
+    toggle: function(){
+      return $mdSidenav(this.$id).toggle()
+    },
+  }
+}
+
+Sidenav.$inject = ['$mdSidenav']
+
+angular.module('application').factory('Sidenav', Sidenav)
+
 var lazyImgDirective = function(){
   return {
     restrict: "A",
@@ -837,262 +1148,6 @@ function activeTab(element, tabId){
   $(tab).addClass('active');
   $(tab).scrollTop(0);
 };
-var Annotations = function($mdSidenav){
-  var self = this
-
-  self.visible = false
-  self.data = []
-
-  self.toggle = function(){
-    self.visible = !self.visible
-  }
-
-  self.hide = function(){
-    self.visible = false
-  }
-
-  return self
-}
-
-Annotations.$inject = ['$mdSidenav']
-
-angular.module('application').factory('Annotations',  Annotations)
-
-var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
-  var self = {
-    taToolbar: [
-      ['h1', 'h2', 'bold', 'italics'],
-    ]
-  }
-
-  self.$annotations = Annotations
-
-  self.$newComment = {
-    text: ''
-  }
-
-  self.comments = []
-
-  self.$onInit = function(){
-    self.topic = $rootScope.$global.current_topic
-  }
-
-  self.toggle = function(){
-    Annotations.toggle()
-  }
-
-  self.sendComment = function(){
-    self.comments.push({
-      text: self.$newComment.text,
-      created_at: new Date()
-    })
-
-    self.$newComment.text = ''
-  }
-
-  // Hotkeys
-  hotkeys.add({
-    combo: 'esc',
-    description: 'Close Annotation',
-    callback: function() {
-      Annotations.hide();
-    }
-  });
-
-  $rootScope.$on('topic:change', function(event, topic){
-    self.topic = topic
-  })
-
-  return self
-}
-
-uabAnnotationsCtrl.$inject = ['$rootScope','hotkeys','Annotations']
-
-var uabAnnotations = {
-  controller: uabAnnotationsCtrl,
-  templateUrl: "templates/uab-annotations.html"
-}
-
-angular.module('application').component('uabAnnotations', uabAnnotations)
-
-var Aplayer = function($rootScope, $mdToast){
-  var self = {
-    audios: [],
-    visible: false,
-    instance: null,
-    playing: false
-  }
-
-  self.toggle = function(){
-    self.visible = !self.visible;
-    
-    if(self.visible){
-      $(self.instance.container).removeClass('hide')
-      // listen lesson
-      self.instance.play()
-      self.playing = true
-    } else{
-      $(self.instance.container).addClass('hide')
-      // stop listen lesson
-      self.instance.pause()      
-      self.playing = false
-    }
-  }
-  
-  self.updateTrack = function(audio){
-    promise = self.instance.setAudio(audio)
-    console.log(self.instance)
-  }
-
-  self.hide = function(){
-    $(self.instance.container).addClass('hide')
-  }
-
-  $rootScope.$on('aplayer:update', function(event, data){
-    self.updateTrack(data.audio);
-
-    if(self.playing){
-      $mdToast.showSimple("Atualizando Faixa!");
-    }
-
-    self.playing = false;
-  })
-
-  $rootScope.$on('aplayer:play', function(event, data){
-    self.playing = true;
-  })
-
-  return self;
-}
-
-Aplayer.$inject = ['$rootScope','$mdToast']
-
-angular.module('application').factory('Aplayer',  Aplayer)
-
-var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
-  var self = this
-
-  self.$onInit = function(){
-    $timeout(angular.bind(self, createAplayerInstance, $rootScope, Aplayer, Colors), 2000);
-  }
-
-  return self
-}
-
-uabAplayerCtrl.$inject = ['$rootScope', '$timeout', 'Aplayer', 'Colors']
-
-var uabAplayer = {
-  controller: uabAplayerCtrl,
-  template: "<div id='uab-aplayer'></div>",
-  bindings: {
-    topics: '='
-  }
-}
-
-angular.module('application').component('uabAplayer', uabAplayer)
-
-
-var createAplayerInstance = function($rootScope, Aplayer, Colors){
-  var audios = this.topics.map(mapTopics)
-
-  Aplayer.instance = new APlayer({
-    container: document.getElementById('uab-aplayer'),
-    theme: Colors.primary.hex,
-    mini: true,
-    audio: audios
-  })
-  
-  Aplayer.instance.on('play', function(){
-    $rootScope.$emit('aplayer:play')
-  })
-
-  Aplayer.hide()
-}
-
-var mapTopics = function(t, index){
-  return {
-    name: t.nome,
-    url: t.audio
-  }
-}
-var uabColorsCtrl = function($rootScope, $mdColorPalette, Colors){
-  var self = this
-  var tema = $rootScope.$global.manifest.tema
-
-  var primario = tema.primario.split('-');
-  var contraste = tema.contraste.split('-');
-
-  self.colors = {
-    primary: $mdColorPalette[primario[0]][primario[1] || "500" ],
-    accent: $mdColorPalette[contraste[0]][contraste[1] || "500"]
-  }
-
-  Colors.primary = self.colors.primary
-  Colors.accent = self.colors.accent
-
-  return self
-}
-
-uabColorsCtrl.$inject = ['$rootScope', '$mdColorPalette', 'Colors']
-
-var uabColors = {
-  controller: uabColorsCtrl,
-  templateUrl: "templates/uab-colors.html"
-};
-
-angular.module('application').component('uabColors', uabColors)
-
-var Colors = function(){
-  var self = {
-    primary: null,
-    accent: null
-  }
-
-  return self;
-}
-
-Colors.$inject = []
-
-angular.module('application').factory('Colors',  Colors)
-
-var uabSidenavCtrl = function(Sidenav){
-  var self = this
-
-  self.close = function(){
-    Sidenav.close()
-  }
-
-  return self
-}
-
-uabSidenavCtrl.$inject = ['Sidenav']
-
-var uabSidenav = {
-  controller: uabSidenavCtrl,
-  templateUrl: "templates/uab-sidenav.html"
-}
-
-angular.module('application').component('uabSidenav', uabSidenav)
-
-var Sidenav = function($mdSidenav){
-  return {
-    $id: "uab-sidenav",
-    open: function(){
-      return $mdSidenav(this.$id).open()
-    },
-    close: function(){
-      return $mdSidenav(this.$id).close()
-    },
-    toggle: function(){
-      return $mdSidenav(this.$id).toggle()
-    },
-  }
-}
-
-Sidenav.$inject = ['$mdSidenav']
-
-angular.module('application').factory('Sidenav', Sidenav)
-
 var dataFancyBox = function(){
   return {
     restrict: "A",
@@ -1178,7 +1233,7 @@ var onIframeLoad = function(element){
 
   $(window).resize(angular.bind(this, onIframeLoad, element))
 }
-var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav) {
+var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav, Hotkeys) {
   var self = this;
 
   
@@ -1204,7 +1259,7 @@ var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav) {
   return self;
 };
 
-ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', '$sce', 'Sidenav']
+ApplicationCtrl.$inject = ['$rootScope', '$mdMedia', '$mdToast', '$sce', 'Sidenav','Hotkeys']
 
 angular.module("application").controller("ApplicationCtrl", ApplicationCtrl);
 

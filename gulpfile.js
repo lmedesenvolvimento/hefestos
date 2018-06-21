@@ -52,6 +52,7 @@ gulp.task('javascript', () => {
     return gulp.src([
         './scripts/index.js',
         './scripts/config.js',
+        './scripts/services/**/*.js',
         './scripts/components/**/*.js',
         './scripts/directives/**/*.js',
         './scripts/controllers/**/*.js',
