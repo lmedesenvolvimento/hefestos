@@ -16,7 +16,7 @@
     <div layout="row" flex>
       <md-content class="main" layout-padding flex>
         <div class="white-paper">
-          <h2 class="cabecalho">{{$root.$global.current_topic.nome}}</h2>
+          <h2 id="content" class="cabecalho">{{$root.$global.current_topic.nome}}</h2>
           <main ui-view autoscroll='true'></main>
         </div>
         <uab-footer></uab-footer>
