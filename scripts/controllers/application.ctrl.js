@@ -1,6 +1,5 @@
 var ApplicationCtrl = function ($rootScope, $mdMedia, $mdToast, $sce, Sidenav, Hotkeys) {
   var self = this;
-
   
   self.renderHTML = function(text){
     return $sce.trustAsHtml(text);

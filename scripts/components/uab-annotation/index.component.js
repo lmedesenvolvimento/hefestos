@@ -1,4 +1,10 @@
 var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
+  try{
+    document.domain != "" ?  document.domain = "virtual.ufc.br" : false
+  } catch(e){
+    false
+  }
+
   var self = {
     taToolbar: [
       ['h1', 'h2', 'bold', 'italics'],
@@ -15,6 +21,7 @@ var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
 
   self.$onInit = function(){
     self.topic = $rootScope.$global.current_topic
+    loadComments();
   }
 
   self.toggle = function(){
@@ -28,6 +35,25 @@ var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
     })
 
     self.$newComment.text = ''
+    // Sincronizando com o Solar
+    saveComments()
+  }
+  
+  // private
+  var loadComments = function(){
+    var id = S(self.topic.nome).camelize().s
+    var response = window.parent.find_note("Tópico " + id);
+    
+    if(response){
+      self.comments = JSON.parse(response);
+    }
+
+    console.log(response);
+  }
+
+  var saveComments = function(){
+    var id = S(self.topic.nome).camelize().s
+    window.parent.create_or_update_note("Tópico " + id + "," + JSON.stringify(self.comments));
   }
 
   // Hotkeys
@@ -41,6 +67,7 @@ var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
 
   $rootScope.$on('topic:change', function(event, topic){
     self.topic = topic
+    loadComments()
   })
 
   return self
