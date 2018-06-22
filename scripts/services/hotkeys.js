@@ -24,25 +24,25 @@ var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
   
   // configure hotkeys
   hotkeys.add({
-    combo: 'alt+1,alt+shift+1',
+    combo: ['alt+1','alt+shift+1'],
     description: 'Ir para o começo',
     callback: angular.bind(this, self.toContent)
   })
   
   hotkeys.add({
-    combo: 'alt+2,alt+shift+2',
+    combo: ['alt+2','alt+shift+2'],
     description: 'Ir para o menu',
     callback: angular.bind(this, self.toMenu)
   })
 
   hotkeys.add({
-    combo: 'alt+4,alt+shift+4',
+    combo: ['alt+4','alt+shift+4'],
     description: 'Ir para o Rodapé',
     callback: angular.bind(this, self.toFooter)
   })
 
   hotkeys.add({
-    combo: 'alt+5,alt+shift+5',
+    combo: ['alt+5','alt+shift+5'],
     description: 'Modo alto contraste',
     callback: angular.bind(this, self.toHightContrast)
   })
