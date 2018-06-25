@@ -1,3 +1,4 @@
+// Visibility
 .invisible{
   overflow: hidden;
   visibility: hidden;
@@ -7,7 +8,11 @@
   padding: 0px;
 }
 
+.visible-print{
+  display: none;
+}
 
+// Align
 .text-center{
   text-align: center;
 }
@@ -20,6 +25,11 @@
   text-align: right;
 }
 
+.truncate{
+  @include ellipsis;
+}
+
+// Icons
 .uab-icon{
   font-size: 48px;
   &::before{
@@ -39,6 +49,7 @@ body.hc > #root{
   }
 }
 
+// Animations
 uab-svg-animation{
   display: flex;
   align-items: center;
@@ -67,10 +78,11 @@ uab-svg-animation iframe{
   flex-direction: column;
 }
 
-.truncate{
-  @include ellipsis;
-}
 
-.visible-print{
-  display: none;
+// List
+.list-unstyled{
+  padding-left: 0px;
+  li{
+    list-style: none;
+  }
 }

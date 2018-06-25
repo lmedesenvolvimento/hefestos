@@ -23,8 +23,9 @@ var Aplayer = function($rootScope, $mdToast){
   }
   
   self.updateTrack = function(audio){
-    promise = self.instance.setAudio(audio)
-    console.log(self.instance)
+    try{
+      promise = self.instance.setAudio(audio)
+    } catch(e){null}
   }
 
   self.hide = function(){

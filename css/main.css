@@ -20973,6 +20973,9 @@ div.rn-carousel-indicator span {
   min-height: 0px;
   padding: 0px; }
 
+.visible-print {
+  display: none; }
+
 .text-center {
   text-align: center; }
 
@@ -20981,6 +20984,14 @@ div.rn-carousel-indicator span {
 
 .text-right {
   text-align: right; }
+
+.truncate {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
 
 .uab-icon {
   font-size: 48px; }
@@ -21025,16 +21036,10 @@ uab-svg-animation iframe {
   -ms-flex-direction: column;
   flex-direction: column; }
 
-.truncate {
-  display: inline-block;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: normal; }
-
-.visible-print {
-  display: none; }
+.list-unstyled {
+  padding-left: 0px; }
+  .list-unstyled li {
+    list-style: none; }
 
 html, body {
   background: #eeeeee; }

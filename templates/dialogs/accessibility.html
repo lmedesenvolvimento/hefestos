@@ -1,0 +1,47 @@
+<md-dialog class="qr-code-dialog">
+  <md-dialog-heading>    
+    <div class="md-title truncate" aria-label="{{title}}"><h2>{{title}}</h2></div>
+  </md-dialog-heading>
+  <md-dialog-content>
+      <div>Para utilizar as teclas de atalho, existem comandos específicos de cada navegador:</div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2 col-xs-4">
+            <ul class="list-unstyled">
+              <li>
+                <strong>Ir para o Conteúdo</strong>
+                Google Chrome: Alt + 1 <br>
+                Mozilla Firefox: Alt + Shift + 1 <br>
+              </li>
+              <li>
+                <strong>Ir para o menu</strong>
+                Google Chrome: Alt + 2 <br>
+                Mozilla Firefox: Alt + Shift + 2 <br>
+              </li>
+              <li>
+                <strong>Ir para o Rodapé</strong>
+                Google Chrome: Alt + 4 <br>
+                Mozilla Firefox: Alt + Shift + 4 <br>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2 col-xs-4">
+            <ul class="list-unstyled">
+              <li>
+                <strong>Modo alto contraste</strong>
+                Google Chrome: Alt + 5 <br>
+                Mozilla Firefox: Alt + Shift + 5 <br>
+              </li>
+              <li>
+                <strong>Ir para o Menu de Acessibilidade</strong>
+                Google Chrome: Alt + 8 <br>
+                Mozilla Firefox: Alt + Shift + 8 <br>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <md-dialog-actions>
+        <md-button ng-click="close()" class="md-primary">Fechar</md-button>
+      </md-dialog-actions>
+</md-dialog>

@@ -1,4 +1,4 @@
-var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
+var Hotkeys = function($mdDialog, hotkeys, Sidenav){
   var self = {
     toContent: function(){
       var content = document.getElementById("content")
@@ -17,8 +17,19 @@ var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
     toMenu: function(){
       Sidenav.toggle()
     },
-    toHightContrast: function(event){
+    toHightContrast: function(){
       $("body").toggleClass("hc")
+    },
+    toAccessibilityMenu: function(){
+      dialog = $mdDialog.show({
+        controller: "SimpleDialogCtrl",
+        controllerAs: "dialog",
+        templateUrl: "templates/dialogs/accessibility.html",
+        locals: {          
+          title: "Acessibilidade",
+          text: null
+        }
+      })
     }
   }
   
@@ -43,6 +54,12 @@ var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
 
   hotkeys.add({
     combo: ['alt+5','alt+shift+5'],
+    description: 'Ir para o Menu de Acessibilidade',
+    callback: angular.bind(this, self.toAccessibilityMenu)
+  })
+
+  hotkeys.add({
+    combo: ['alt+8','alt+shift+8'],
     description: 'Modo alto contraste',
     callback: angular.bind(this, self.toHightContrast)
   })
@@ -50,6 +67,6 @@ var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
   return self;
 }
 
-Hotkeys.$inject = ['$location', '$anchorScroll', 'hotkeys', 'Sidenav'];
+Hotkeys.$inject = ['$mdDialog', 'hotkeys', 'Sidenav'];
 
 angular.module('application').factory('Hotkeys', Hotkeys);
