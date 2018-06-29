@@ -29,6 +29,24 @@
   @include ellipsis;
 }
 
+// Margins
+
+.margin-left{
+ margin-left: 16px; 
+}
+
+.margin-right{
+ margin-right: 16px; 
+}
+
+.margin-top{
+ margin-top: 16px; 
+}
+
+.margin-bottom{
+ margin-bottom: 16px; 
+}
+
 // Icons
 .uab-icon{
   font-size: 48px;

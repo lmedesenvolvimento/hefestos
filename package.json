@@ -34,7 +34,8 @@
     "plyr": "^2.0.18",
     "purecss-sass": "^1.0.0",
     "string": "^3.3.3",
-    "textangular": "1.5.16"
+    "textangular": "1.5.16",
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "del": "^3.0.0",

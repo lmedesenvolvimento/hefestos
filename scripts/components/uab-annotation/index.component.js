@@ -1,4 +1,4 @@
-var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
+var uabAnnotationsCtrl = function($rootScope, $mdToast, hotkeys, Annotations){
   try{
     document.domain != "" ?  document.domain = "virtual.ufc.br" : false
   } catch(e){
@@ -17,7 +17,9 @@ var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
     text: ''
   }
 
-  self.comments = []
+  // self.comments = []
+  
+  self.comment = ''
 
   self.$onInit = function(){
     self.topic = $rootScope.$global.current_topic
@@ -29,31 +31,41 @@ var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
   }
 
   self.sendComment = function(){
-    self.comments.push({
-      text: self.$newComment.text,
-      created_at: new Date()
-    })
-
-    self.$newComment.text = ''
+    // self.comment = self.$newComment.text
+    // self.$newComment.text = ''
     // Sincronizando com o Solar
     saveComments()
   }
   
   // private
-  var loadComments = function(){
-    var id = S(self.topic.nome).camelize().s
-    var response = window.parent.find_note("Tópico " + id);
+  window.loadComments = function(){
+    var response = null
+
+    try {
+      var id = S(self.topic.nome).camelize().s
+      response = window.parent.find_note("Tópico " + id);
+      console.log(response);
+    } catch(e){
+      console.log("Funcionalidade presente apenas no ambiente Solar")
+    }
     
     if(response){
-      self.comments = JSON.parse(response);
+      self.comment = response;
+    } else{
+      self.comment = ''
     }
 
-    console.log(response);
+    return self.comment
   }
 
-  var saveComments = function(){
-    var id = S(self.topic.nome).camelize().s
-    window.parent.create_or_update_note("Tópico " + id + "," + JSON.stringify(self.comments));
+  window.saveComments = function(){
+    try {
+      var id = S(self.topic.nome).camelize().s
+      window.parent.create_or_update_note("Tópico " + id, self.comment)
+    } catch(e){
+      console.log("Funcionalidade presente apenas no ambiente Solar")
+    }
+    $mdToast.showSimple("Comentário salvo!")
   }
 
   // Hotkeys
@@ -73,7 +85,7 @@ var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
   return self
 }
 
-uabAnnotationsCtrl.$inject = ['$rootScope','hotkeys','Annotations']
+uabAnnotationsCtrl.$inject = ['$rootScope','$mdToast','hotkeys','Annotations']
 
 var uabAnnotations = {
   controller: uabAnnotationsCtrl,

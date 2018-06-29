@@ -25,10 +25,26 @@ uab-annotations{
     }
   }
   footer{
-    background-color: #f4f4f4;
+    background-color: #ffffff;
     padding: 16px 0px;
     md-input-container{
       margin: 18px 18px;
+    }
+    text-angular{
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100%;
+      max-height: 100%;
+      .ta-scroll-window{
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+        .ta-bind{
+          max-height: 400px;
+        }
+      }
     }
   }
 }

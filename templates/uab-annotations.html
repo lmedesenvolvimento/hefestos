@@ -11,20 +11,20 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-content layout-padding flex>
-    <div class="comment" ng-repeat="c in $ctrl.comments">
-      <div ta-bind ng-model="c.text"></div>
-      <small class="md-subtitle">{{ c.created_at | date:'medium' }}</small>
+  <!-- <md-content layout-padding flex>
+    <div class="comment">
+      <div ta-bind ng-model="$ctrl.comment"></div>
     </div>
-  </md-content>
-  <footer>
-    <div layout="row" layout-align="start center">
+  </md-content> -->
+  <footer layout="column" flex>
       <md-input-container flex>
-        <text-angular ng-model="$ctrl.$newComment.text" ta-toolbar="$ctrl.taToolbar" aria-label="Inserir novo Comentário"></text-angular>
+        <text-angular ng-model="$ctrl.comment" ta-toolbar="$ctrl.taToolbar" aria-label="Inserir novo Comentário"></text-angular>
       </md-input-container>
-      <md-button class="md-icon-button" ng-click="$ctrl.sendComment()">
-        <md-icon md-font-icon="icon-send icon-24"><md-icon>
-      </md-button>
-    </div>
+      <div layout="row" layout-align="end center">
+        <md-button ng-click="$ctrl.sendComment()">
+          Salvar Comentário
+          <md-icon md-font-icon="icon-send icon-24 margin-left"></md-icon>
+        </md-button>
+      </div>
   </footer>
 </md-sidenav>

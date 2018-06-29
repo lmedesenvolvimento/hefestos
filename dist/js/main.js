@@ -111,7 +111,7 @@ var taConfig = function ($provide) {
 taConfig.$inject = ['$provide'];
 
 angular.module('application').config(taConfig);
-var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
+var Hotkeys = function($mdDialog, hotkeys, Sidenav){
   var self = {
     toContent: function(){
       var content = document.getElementById("content")
@@ -130,8 +130,19 @@ var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
     toMenu: function(){
       Sidenav.toggle()
     },
-    toHightContrast: function(event){
+    toHightContrast: function(){
       $("body").toggleClass("hc")
+    },
+    toAccessibilityMenu: function(){
+      dialog = $mdDialog.show({
+        controller: "SimpleDialogCtrl",
+        controllerAs: "dialog",
+        templateUrl: "templates/dialogs/accessibility.html",
+        locals: {          
+          title: "Acessibilidade",
+          text: null
+        }
+      })
     }
   }
   
@@ -156,6 +167,12 @@ var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
 
   hotkeys.add({
     combo: ['alt+5','alt+shift+5'],
+    description: 'Ir para o Menu de Acessibilidade',
+    callback: angular.bind(this, self.toAccessibilityMenu)
+  })
+
+  hotkeys.add({
+    combo: ['alt+8','alt+shift+8'],
     description: 'Modo alto contraste',
     callback: angular.bind(this, self.toHightContrast)
   })
@@ -163,114 +180,9 @@ var Hotkeys = function($location, $anchorScroll, hotkeys, Sidenav){
   return self;
 }
 
-Hotkeys.$inject = ['$location', '$anchorScroll', 'hotkeys', 'Sidenav'];
+Hotkeys.$inject = ['$mdDialog', 'hotkeys', 'Sidenav'];
 
 angular.module('application').factory('Hotkeys', Hotkeys);
-var Annotations = function($mdSidenav){
-  var self = this
-
-  self.visible = false
-  self.data = []
-
-  self.toggle = function(){
-    self.visible = !self.visible
-  }
-
-  self.hide = function(){
-    self.visible = false
-  }
-
-  return self
-}
-
-Annotations.$inject = ['$mdSidenav']
-
-angular.module('application').factory('Annotations',  Annotations)
-
-var uabAnnotationsCtrl = function($rootScope, hotkeys, Annotations){
-  try{
-    document.domain != "" ?  document.domain = "virtual.ufc.br" : false
-  } catch(e){
-    false
-  }
-
-  var self = {
-    taToolbar: [
-      ['h1', 'h2', 'bold', 'italics'],
-    ]
-  }
-
-  self.$annotations = Annotations
-
-  self.$newComment = {
-    text: ''
-  }
-
-  self.comments = []
-
-  self.$onInit = function(){
-    self.topic = $rootScope.$global.current_topic
-    loadComments();
-  }
-
-  self.toggle = function(){
-    Annotations.toggle()
-  }
-
-  self.sendComment = function(){
-    self.comments.push({
-      text: self.$newComment.text,
-      created_at: new Date()
-    })
-
-    self.$newComment.text = ''
-    // Sincronizando com o Solar
-    saveComments()
-  }
-  
-  // private
-  var loadComments = function(){
-    var id = S(self.topic.nome).camelize().s
-    var response = window.parent.find_note("Tópico " + id);
-    
-    if(response){
-      self.comments = JSON.parse(response);
-    }
-
-    console.log(response);
-  }
-
-  var saveComments = function(){
-    var id = S(self.topic.nome).camelize().s
-    window.parent.create_or_update_note("Tópico " + id + "," + JSON.stringify(self.comments));
-  }
-
-  // Hotkeys
-  hotkeys.add({
-    combo: 'esc',
-    description: 'Close Annotation',
-    callback: function() {
-      Annotations.hide();
-    }
-  });
-
-  $rootScope.$on('topic:change', function(event, topic){
-    self.topic = topic
-    loadComments()
-  })
-
-  return self
-}
-
-uabAnnotationsCtrl.$inject = ['$rootScope','hotkeys','Annotations']
-
-var uabAnnotations = {
-  controller: uabAnnotationsCtrl,
-  templateUrl: "templates/uab-annotations.html"
-}
-
-angular.module('application').component('uabAnnotations', uabAnnotations)
-
 var Aplayer = function($rootScope, $mdToast){
   var self = {
     audios: [],
@@ -296,8 +208,9 @@ var Aplayer = function($rootScope, $mdToast){
   }
   
   self.updateTrack = function(audio){
-    promise = self.instance.setAudio(audio)
-    console.log(self.instance)
+    try{
+      promise = self.instance.setAudio(audio)
+    } catch(e){null}
   }
 
   self.hide = function(){
@@ -371,6 +284,123 @@ var mapTopics = function(t, index){
     url: t.audio
   }
 }
+var Annotations = function($mdSidenav){
+  var self = this
+
+  self.visible = false
+  self.data = []
+
+  self.toggle = function(){
+    self.visible = !self.visible
+  }
+
+  self.hide = function(){
+    self.visible = false
+  }
+
+  return self
+}
+
+Annotations.$inject = ['$mdSidenav']
+
+angular.module('application').factory('Annotations',  Annotations)
+
+var uabAnnotationsCtrl = function($rootScope, $mdToast, hotkeys, Annotations){
+  try{
+    document.domain != "" ?  document.domain = "virtual.ufc.br" : false
+  } catch(e){
+    false
+  }
+
+  var self = {
+    taToolbar: [
+      ['h1', 'h2', 'bold', 'italics'],
+    ]
+  }
+
+  self.$annotations = Annotations
+
+  self.$newComment = {
+    text: ''
+  }
+
+  // self.comments = []
+  
+  self.comment = ''
+
+  self.$onInit = function(){
+    self.topic = $rootScope.$global.current_topic
+    loadComments();
+  }
+
+  self.toggle = function(){
+    Annotations.toggle()
+  }
+
+  self.sendComment = function(){
+    // self.comment = self.$newComment.text
+    // self.$newComment.text = ''
+    // Sincronizando com o Solar
+    saveComments()
+  }
+  
+  // private
+  window.loadComments = function(){
+    var response = null
+
+    try {
+      var id = S(self.topic.nome).camelize().s
+      response = window.parent.find_note("Tópico " + id);
+      console.log(response);
+    } catch(e){
+      console.log("Funcionalidade presente apenas no ambiente Solar")
+    }
+    
+    if(response){
+      self.comment = response;
+    } else{
+      self.comment = ''
+    }
+
+    return self.comment
+  }
+
+  window.saveComments = function(){
+    try {
+      var id = S(self.topic.nome).camelize().s
+      window.parent.create_or_update_note("Tópico " + id, self.comment)
+    } catch(e){
+      console.log("Funcionalidade presente apenas no ambiente Solar")
+    }
+    $mdToast.showSimple("Comentário salvo!")
+  }
+
+  // Hotkeys
+  hotkeys.add({
+    combo: 'esc',
+    description: 'Close Annotation',
+    callback: function() {
+      Annotations.hide();
+    }
+  });
+
+  $rootScope.$on('topic:change', function(event, topic){
+    self.topic = topic
+    loadComments()
+  })
+
+  return self
+}
+
+uabAnnotationsCtrl.$inject = ['$rootScope','$mdToast','hotkeys','Annotations']
+
+var uabAnnotations = {
+  controller: uabAnnotationsCtrl,
+  templateUrl: "templates/uab-annotations.html"
+}
+
+angular.module('application').component('uabAnnotations', uabAnnotations)
+
 var uabColorsCtrl = function($rootScope, $mdColorPalette, Colors){
   var self = this
   var tema = $rootScope.$global.manifest.tema

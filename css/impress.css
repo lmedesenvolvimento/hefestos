@@ -807,6 +807,18 @@
   white-space: nowrap;
   word-wrap: normal; }
 
+.margin-left {
+  margin-left: 16px; }
+
+.margin-right {
+  margin-right: 16px; }
+
+.margin-top {
+  margin-top: 16px; }
+
+.margin-bottom {
+  margin-bottom: 16px; }
+
 .uab-icon {
   font-size: 48px; }
   .uab-icon::before {

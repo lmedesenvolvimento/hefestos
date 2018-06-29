@@ -20973,6 +20973,9 @@ div.rn-carousel-indicator span {
   min-height: 0px;
   padding: 0px; }
 
+.visible-print {
+  display: none; }
+
 .text-center {
   text-align: center; }
 
@@ -20981,6 +20984,26 @@ div.rn-carousel-indicator span {
 
 .text-right {
   text-align: right; }
+
+.truncate {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.margin-left {
+  margin-left: 16px; }
+
+.margin-right {
+  margin-right: 16px; }
+
+.margin-top {
+  margin-top: 16px; }
+
+.margin-bottom {
+  margin-bottom: 16px; }
 
 .uab-icon {
   font-size: 48px; }
@@ -21025,16 +21048,10 @@ uab-svg-animation iframe {
   -ms-flex-direction: column;
   flex-direction: column; }
 
-.truncate {
-  display: inline-block;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: normal; }
-
-.visible-print {
-  display: none; }
+.list-unstyled {
+  padding-left: 0px; }
+  .list-unstyled li {
+    list-style: none; }
 
 html, body {
   background: #eeeeee; }
@@ -26337,10 +26354,30 @@ uab-annotations {
       color: #222;
       fill: #222; }
   uab-annotations footer {
-    background-color: #f4f4f4;
+    background-color: #ffffff;
     padding: 16px 0px; }
     uab-annotations footer md-input-container {
       margin: 18px 18px; }
+    uab-annotations footer text-angular {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100%;
+      max-height: 100%; }
+      uab-annotations footer text-angular .ta-scroll-window {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto; }
+        uab-annotations footer text-angular .ta-scroll-window .ta-bind {
+          max-height: 400px; }
 
 @media (max-width: 799px) {
   uab-annotations md-sidenav {
