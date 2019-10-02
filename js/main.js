@@ -183,107 +183,6 @@ var Hotkeys = function($mdDialog, hotkeys, Sidenav){
 Hotkeys.$inject = ['$mdDialog', 'hotkeys', 'Sidenav'];
 
 angular.module('application').factory('Hotkeys', Hotkeys);
-var Aplayer = function($rootScope, $mdToast){
-  var self = {
-    audios: [],
-    visible: false,
-    instance: null,
-    playing: false
-  }
-
-  self.toggle = function(){
-    self.visible = !self.visible;
-    
-    if(self.visible){
-      $(self.instance.container).removeClass('hide')
-      // listen lesson
-      self.instance.play()
-      self.playing = true
-    } else{
-      $(self.instance.container).addClass('hide')
-      // stop listen lesson
-      self.instance.pause()      
-      self.playing = false
-    }
-  }
-  
-  self.updateTrack = function(audio){
-    try{
-      promise = self.instance.setAudio(audio)
-    } catch(e){null}
-  }
-
-  self.hide = function(){
-    $(self.instance.container).addClass('hide')
-  }
-
-  $rootScope.$on('aplayer:update', function(event, data){
-    self.updateTrack(data.audio);
-
-    if(self.playing){
-      $mdToast.showSimple("Atualizando Faixa!");
-    }
-
-    self.playing = false;
-  })
-
-  $rootScope.$on('aplayer:play', function(event, data){
-    self.playing = true;
-  })
-
-  return self;
-}
-
-Aplayer.$inject = ['$rootScope','$mdToast']
-
-angular.module('application').factory('Aplayer',  Aplayer)
-
-var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
-  var self = this
-
-  self.$onInit = function(){
-    $timeout(angular.bind(self, createAplayerInstance, $rootScope, Aplayer, Colors), 2000);
-  }
-
-  return self
-}
-
-uabAplayerCtrl.$inject = ['$rootScope', '$timeout', 'Aplayer', 'Colors']
-
-var uabAplayer = {
-  controller: uabAplayerCtrl,
-  template: "<div id='uab-aplayer'></div>",
-  bindings: {
-    topics: '='
-  }
-}
-
-angular.module('application').component('uabAplayer', uabAplayer)
-
-
-var createAplayerInstance = function($rootScope, Aplayer, Colors){
-  var audios = this.topics.map(mapTopics)
-
-  Aplayer.instance = new APlayer({
-    container: document.getElementById('uab-aplayer'),
-    theme: Colors.primary.hex,
-    mini: true,
-    audio: audios
-  })
-  
-  Aplayer.instance.on('play', function(){
-    $rootScope.$emit('aplayer:play')
-  })
-
-  Aplayer.hide()
-}
-
-var mapTopics = function(t, index){
-  return {
-    name: t.nome,
-    url: t.audio
-  }
-}
 var Annotations = function($mdSidenav){
   var self = this
 
@@ -401,6 +300,107 @@ var uabAnnotations = {
 
 angular.module('application').component('uabAnnotations', uabAnnotations)
 
+var Aplayer = function($rootScope, $mdToast){
+  var self = {
+    audios: [],
+    visible: false,
+    instance: null,
+    playing: false
+  }
+
+  self.toggle = function(){
+    self.visible = !self.visible;
+    
+    if(self.visible){
+      $(self.instance.container).removeClass('hide')
+      // listen lesson
+      self.instance.play()
+      self.playing = true
+    } else{
+      $(self.instance.container).addClass('hide')
+      // stop listen lesson
+      self.instance.pause()      
+      self.playing = false
+    }
+  }
+  
+  self.updateTrack = function(audio){
+    try{
+      promise = self.instance.setAudio(audio)
+    } catch(e){null}
+  }
+
+  self.hide = function(){
+    $(self.instance.container).addClass('hide')
+  }
+
+  $rootScope.$on('aplayer:update', function(event, data){
+    self.updateTrack(data.audio);
+
+    if(self.playing){
+      $mdToast.showSimple("Atualizando Faixa!");
+    }
+
+    self.playing = false;
+  })
+
+  $rootScope.$on('aplayer:play', function(event, data){
+    self.playing = true;
+  })
+
+  return self;
+}
+
+Aplayer.$inject = ['$rootScope','$mdToast']
+
+angular.module('application').factory('Aplayer',  Aplayer)
+
+var uabAplayerCtrl = function($rootScope, $timeout, Aplayer, Colors){
+  var self = this
+
+  self.$onInit = function(){
+    $timeout(angular.bind(self, createAplayerInstance, $rootScope, Aplayer, Colors), 2000);
+  }
+
+  return self
+}
+
+uabAplayerCtrl.$inject = ['$rootScope', '$timeout', 'Aplayer', 'Colors']
+
+var uabAplayer = {
+  controller: uabAplayerCtrl,
+  template: "<div id='uab-aplayer'></div>",
+  bindings: {
+    topics: '='
+  }
+}
+
+angular.module('application').component('uabAplayer', uabAplayer)
+
+
+var createAplayerInstance = function($rootScope, Aplayer, Colors){
+  var audios = this.topics.map(mapTopics)
+
+  Aplayer.instance = new APlayer({
+    container: document.getElementById('uab-aplayer'),
+    theme: Colors.primary.hex,
+    mini: true,
+    audio: audios
+  })
+  
+  Aplayer.instance.on('play', function(){
+    $rootScope.$emit('aplayer:play')
+  })
+
+  Aplayer.hide()
+}
+
+var mapTopics = function(t, index){
+  return {
+    name: t.nome,
+    url: t.audio
+  }
+}
 var uabColorsCtrl = function($rootScope, $mdColorPalette, Colors){
   var self = this
   var tema = $rootScope.$global.manifest.tema
