@@ -29,7 +29,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-webserver": "^0.9.1",
     "ionicons": "^3.0.0",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "moment": "^2.20.1",
     "plyr": "^2.0.18",
     "purecss-sass": "^1.0.0",
